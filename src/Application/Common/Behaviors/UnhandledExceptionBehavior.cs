@@ -27,8 +27,7 @@ namespace Application.Common.Behaviors
             {
                 var requestName = typeof(TRequest).Name;
 
-                // TODO NOW: Change ProjectName
-                _logger.LogError(ex, "ProjectName Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
+                _logger.LogError(ex, "BasketLeague Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
 
                 throw;
             }

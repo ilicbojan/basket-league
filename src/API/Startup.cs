@@ -20,8 +20,6 @@ namespace API
 {
     public class Startup
     {
-        // TODO NOW: Change default connection in appsettings.json
-        // TODO NOW: Change UserSecretsId in API.csproj
         // TODO PRODUCTION: https://localhost:5001 Put in applicationUrl in PRODUCTION
         public Startup(IConfiguration configuration)
         {
@@ -46,7 +44,6 @@ namespace API
             {
                 options.AddPolicy("CorsPolicy", policy =>
                 {
-                    // TODO NOW: Change origin
                     policy
                         .AllowAnyHeader()
                         .AllowAnyMethod()
@@ -57,7 +54,6 @@ namespace API
 
             services.AddControllers(options =>
             {
-                // TODO NOW: Uncomment if you dont need authorize for all controllers
                 // Adding Authorize for all Controllers
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
@@ -67,8 +63,7 @@ namespace API
             // Register the Swagger generator
             services.AddSwaggerGen(c =>
             {
-                // TODO NOW: Change title
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjectName API", Version = "v1", });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket League API", Version = "v1", });
                 c.CustomSchemaIds(x => x.FullName);
             });
         }

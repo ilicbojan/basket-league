@@ -21,16 +21,13 @@ namespace Infrastructure
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                // TODO NOW: Uncomment for lazy loading and install nuget
-                // Microsoft.EntityFrameworkCore.Proxies
-                //options.UseLazyLoadingProxies();
+                options.UseLazyLoadingProxies();
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
             });
 
             services.AddDefaultIdentity<AppUser>(options =>
             {
-                // TODO NOW: Configure password
                 options.Password.RequireDigit = false;
                 options.Password.RequiredUniqueChars = 0;
                 options.Password.RequireNonAlphanumeric = false;
@@ -46,8 +43,6 @@ namespace Infrastructure
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddTransient<IIdentityService, IdentityService>();
 
-            // TODO NOW: Put TokenKey in user-secrets
-            // dotnet user-secrets set "TokenKey" "random long string" -p API/
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

@@ -33,8 +33,7 @@ namespace Application.Common.Behaviors
                 userName = await _identityService.GetUsernameAsync(userId);
             }
 
-            // TODO NOW: Change ProjectName
-            _logger.LogInformation("ProjectName Request: {Name} {@UserId} {@UserName} {@Request}",
+            _logger.LogInformation("BasketLeague Request: {Name} {@UserId} {@UserName} {@Request}",
                 requestName, userId, userName, request);
         }
     }

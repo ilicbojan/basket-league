@@ -50,8 +50,7 @@ namespace Application.Common.Behaviors
                     userName = await _identityService.GetUsernameAsync(userId);
                 }
 
-                // TODO NOW: Change ProjectName
-                _logger.LogWarning("ProjectName Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
+                _logger.LogWarning("BasketLeague Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
                     requestName, elapsedMilliseconds, userId, userName, request);
             }
 
