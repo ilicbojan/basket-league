@@ -55,8 +55,9 @@ namespace API
             services.AddControllers(options =>
             {
                 // Adding Authorize for all Controllers
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
+                // TODO: Uncomment when authentication and authorization is implemented
+                //var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                //options.Filters.Add(new AuthorizeFilter(policy));
             })
                 .AddNewtonsoftJson();
 
