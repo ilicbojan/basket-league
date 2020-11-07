@@ -55,6 +55,21 @@ namespace Infrastructure.Persistence
 
                 await userManager.AddToRoleAsync(admin, RoleEnum.Admin);
             }
+
+            if (!context.Leagues.Any())
+            {
+                context.Leagues.Add(new League
+                {
+                    Name = "Prva Liga",
+                    City = new City
+                    {
+                        Name = "Beograd",
+                        Country = new Country { Name = "Srbija" }
+                    }
+                });
+
+                await context.SaveChangesAsync();
+            }
         }
     }
 }
