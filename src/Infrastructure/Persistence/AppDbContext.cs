@@ -17,6 +17,7 @@ namespace Infrastructure.Persistence
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<League> Leagues { get; set; }
+        public DbSet<Season> Seasons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

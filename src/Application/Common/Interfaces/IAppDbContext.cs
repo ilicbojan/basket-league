@@ -11,6 +11,7 @@ namespace Application.Common.Interfaces
         DbSet<Country> Countries { get; set; }
         DbSet<City> Cities { get; set; }
         DbSet<League> Leagues { get; set; }
+        DbSet<Season> Seasons { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
