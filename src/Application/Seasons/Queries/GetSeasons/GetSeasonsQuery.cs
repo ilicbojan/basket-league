@@ -20,9 +20,9 @@ namespace Application.Seasons.Queries.GetSeasons
     public class GetSeasonsQueryHandler : IRequestHandler<GetSeasonsQuery, SeasonsVm>
     {
         private readonly IAppDbContext _context;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public GetSeasonsQueryHandler(IAppDbContext context, Mapper mapper)
+        public GetSeasonsQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

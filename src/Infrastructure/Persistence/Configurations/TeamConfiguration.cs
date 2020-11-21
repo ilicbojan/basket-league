@@ -7,16 +7,16 @@ using System.Text;
 
 namespace Infrastructure.Persistence.Configurations
 {
-    public class LeagueConfiguration : IEntityTypeConfiguration<League>
+    public class TeamConfiguration : IEntityTypeConfiguration<Team>
     {
-        public void Configure(EntityTypeBuilder<League> builder)
+        public void Configure(EntityTypeBuilder<Team> builder)
         {
             builder.Property(x => x.Id)
                 .IsRequired();
 
             builder.Property(x => x.Name)
-                .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsRequired();
 
             builder.HasIndex(x => x.Name)
                 .IsUnique();

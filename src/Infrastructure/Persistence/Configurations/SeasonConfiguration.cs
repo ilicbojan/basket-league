@@ -20,6 +20,9 @@ namespace Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.Year)
                 .IsRequired();
+
+            builder.HasIndex(x => x.Name)
+                .IsUnique();
         }
     }
 }
