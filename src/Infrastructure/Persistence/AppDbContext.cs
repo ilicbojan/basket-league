@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Reflection;
 
 namespace Infrastructure.Persistence
@@ -18,6 +19,9 @@ namespace Infrastructure.Persistence
         public DbSet<City> Cities { get; set; }
         public DbSet<League> Leagues { get; set; }
         public DbSet<Season> Seasons { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamSeason> TeamSeasons { get; set; }
+        public DbSet<Player> Players { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

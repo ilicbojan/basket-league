@@ -19,7 +19,10 @@ namespace Infrastructure.Persistence
                 var roles = new List<IdentityRole>
                 {
                     new IdentityRole { Name = RoleEnum.Admin},
-                    new IdentityRole { Name = RoleEnum.User}
+                    new IdentityRole { Name = RoleEnum.User},
+                    new IdentityRole { Name = RoleEnum.Player},
+                    new IdentityRole { Name = RoleEnum.Referee},
+                    new IdentityRole { Name = RoleEnum.Delegate}
                 };
 
                 foreach (var role in roles)
@@ -32,8 +35,8 @@ namespace Infrastructure.Persistence
             {
                 var users = new List<AppUser>
                 {
-                    new AppUser { Email = "admin@test.com", UserName = "admin" },
-                    new AppUser { Email = "user@test.com", UserName = "user" }
+                    new AppUser { Email = "admin@test.com", UserName = "admin", FirstName = "Admin", LastName = "Admin", PhoneNumber = "0651234567" },
+                    new AppUser { Email = "user@test.com", UserName = "user", FirstName = "User", LastName = "User", PhoneNumber = "0651234568" }
                 };
 
                 foreach (var user in users)

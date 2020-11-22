@@ -28,5 +28,19 @@ namespace Infrastructure.Identity
 
             return user.UserName;
         }
+
+        public async Task<string> CreateUserAsync(AppUser user, string password, string role)
+        {
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, role);
+
+                return user.Id;
+            }
+
+            throw new Exception("Problem creating user");
+        }
     }
 }

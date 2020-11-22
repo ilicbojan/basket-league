@@ -17,7 +17,7 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            // TODO NOW: dotnet ef migrations add InitialCreate -p Infrastructure/ -s API/ -o Persistence\Migrations
+            // TODO NOW: dotnet ef migrations add AddPlayerEntity -p .\src\Infrastructure -s .\src\API -o Persistence\Migrations
 
             services.AddDbContext<AppDbContext>(options =>
             {
