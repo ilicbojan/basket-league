@@ -16,6 +16,7 @@ namespace Application.Common.Interfaces
         DbSet<Team> Teams { get; set; }
         DbSet<TeamSeason> TeamSeasons { get; set; }
         DbSet<Player> Players { get; set; }
+        DbSet<Match> Matches { get; set; }
 
         DatabaseFacade Database { get; }
 

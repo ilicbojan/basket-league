@@ -1,4 +1,5 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,23 @@ namespace Infrastructure.Identity
             }
 
             throw new Exception("Problem creating user");
+        }
+
+        public async Task<bool> IsUserInRoleAsync(AppUser user, string roleName)
+        {
+            return await _userManager.IsInRoleAsync(user, roleName);
+        }
+
+        public async Task<bool> IsUserInRoleAsync(string userId, string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(AppUser), userId);
+            }
+
+            return await _userManager.IsInRoleAsync(user, roleName);
         }
     }
 }

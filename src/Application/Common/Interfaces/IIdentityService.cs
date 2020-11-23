@@ -10,5 +10,7 @@ namespace Application.Common.Interfaces
     {
         Task<string> GetUsernameAsync(string userId);
         Task<string> CreateUserAsync(AppUser user, string password, string role);
+        Task<bool> IsUserInRoleAsync(AppUser user, string roleName);
+        Task<bool> IsUserInRoleAsync(string userId, string roleName);
     }
 }

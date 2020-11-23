@@ -14,5 +14,6 @@ namespace Domain.Entities
         public virtual League League { get; set; }
 
         public virtual ICollection<TeamSeason> TeamSeasons { get; set; }
+        public virtual ICollection<Match> Matches { get; set; }
     }
 }

@@ -11,5 +11,7 @@ namespace Domain.Entities
         public string LastName { get; set; }
 
         public virtual Player Player { get; set; }
+        public virtual ICollection<Match> RefereeMatches { get; set; }
+        public virtual ICollection<Match> DelegateMatches { get; set; }
     }
 }
