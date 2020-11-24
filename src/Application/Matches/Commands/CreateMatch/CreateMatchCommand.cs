@@ -35,6 +35,8 @@ namespace Application.Matches.Commands.CreateMatch
             var date = DateTime.Parse(request.Date);
             var time = TimeSpan.Parse(request.Time);
 
+            // TODO: Create 3 matches
+
             var match = new Match
             {
                 Date = date,

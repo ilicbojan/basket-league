@@ -23,6 +23,8 @@ namespace Infrastructure.Persistence
         public DbSet<TeamSeason> TeamSeasons { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Match> Matches { get; set; }
+        public DbSet<MatchPlayer> MatchPlayers { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -8,7 +8,6 @@ namespace Domain.Enums
     {
         public const string Admin = "admin";
         public const string Player = "player";
-        public const string User = "user";
         public const string Referee = "referee";
         public const string Delegate = "delegate";
     }

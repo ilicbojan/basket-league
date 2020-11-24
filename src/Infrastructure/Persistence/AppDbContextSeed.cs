@@ -19,7 +19,6 @@ namespace Infrastructure.Persistence
                 var roles = new List<IdentityRole>
                 {
                     new IdentityRole { Name = RoleEnum.Admin},
-                    new IdentityRole { Name = RoleEnum.User},
                     new IdentityRole { Name = RoleEnum.Player},
                     new IdentityRole { Name = RoleEnum.Referee},
                     new IdentityRole { Name = RoleEnum.Delegate}
@@ -36,7 +35,8 @@ namespace Infrastructure.Persistence
                 var users = new List<AppUser>
                 {
                     new AppUser { Email = "admin@test.com", UserName = "admin", FirstName = "Admin", LastName = "Admin", PhoneNumber = "0651234567" },
-                    new AppUser { Email = "user@test.com", UserName = "user", FirstName = "User", LastName = "User", PhoneNumber = "0651234568" }
+                    new AppUser { Email = "sudija@test.com", UserName = "sudija", FirstName = "Sudija", LastName = "Sudija", PhoneNumber = "0651234568" },
+                    new AppUser { Email = "delegat@test.com", UserName = "delegat", FirstName = "Delegat", LastName = "Delegat", PhoneNumber = "0651234566" }
                 };
 
                 foreach (var user in users)
@@ -47,16 +47,13 @@ namespace Infrastructure.Persistence
 
             if (!context.UserRoles.Any())
             {
-                var users = await userManager.Users.ToListAsync();
-
-                foreach (var user in users)
-                {
-                    await userManager.AddToRoleAsync(user, RoleEnum.User);
-                }
-
                 var admin = await userManager.FindByNameAsync("admin");
+                var referee = await userManager.FindByNameAsync("sudija");
+                var deleg = await userManager.FindByNameAsync("delegat");
 
                 await userManager.AddToRoleAsync(admin, RoleEnum.Admin);
+                await userManager.AddToRoleAsync(referee, RoleEnum.Referee);
+                await userManager.AddToRoleAsync(deleg, RoleEnum.Delegate);
             }
 
             if (!context.Leagues.Any())

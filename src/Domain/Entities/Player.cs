@@ -14,5 +14,7 @@ namespace Domain.Entities
         public virtual AppUser User { get; set; }
         public int? TeamId { get; set; }
         public virtual Team Team { get; set; }
+
+        public virtual ICollection<MatchPlayer> PlayerMatches { get; set; }
     }
 }

@@ -13,7 +13,6 @@ namespace Domain.Entities
         public int HomePoints { get; set; }
         public int AwayPoints { get; set; }
 
-        // TODO: Add Lineup
         public int HomeTeamId { get; set; }
         public virtual Team HomeTeam { get; set; }
         public int AwayTeamId { get; set; }
@@ -24,5 +23,7 @@ namespace Domain.Entities
         public virtual AppUser Delegate { get; set; }
         public int SeasonId { get; set; }
         public virtual Season Season { get; set; }
+
+        public virtual ICollection<MatchPlayer> MatchPlayers { get; set; }
     }
 }
