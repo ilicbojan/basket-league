@@ -4,6 +4,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,11 +33,11 @@ namespace Application.Matches.Commands.CreateMatch
             RuleFor(x => x.HomeTeamId)
                 .NotEmpty().WithMessage("Domaci tim je obavezan")
                 .NotEqual(x => x.AwayTeamId).WithMessage("Domaci i gostujuci tim moraju biti razliciti")
-                .MustAsync(TeamExists).WithMessage("Izabrani domaci tim ne postoji");
+                .MustAsync(TeamExists).WithMessage("Izabrani domaci tim ne postoji ili nije u izabranoj sezoni");
 
             RuleFor(x => x.AwayTeamId)
                 .NotEmpty().WithMessage("Gostujuci tim je obavezan")
-                .MustAsync(TeamExists).WithMessage("Izabrani gostujuci tim ne postoji");
+                .MustAsync(TeamExists).WithMessage("Izabrani gostujuci tim ne postoji ili nije u izabranoj sezoni");
 
             RuleFor(x => x.RefereeId)
                 .NotEmpty().WithMessage("Sudija je obavezan")
@@ -55,19 +56,19 @@ namespace Application.Matches.Commands.CreateMatch
             // TODO: Check if teams are from same season
         }
 
-        public async Task<bool> TeamExists(int id, CancellationToken cancellationToken)
+        public async Task<bool> TeamExists(CreateMatchCommand command, int id, CancellationToken cancellationToken)
         {
-            return await _context.Teams.AnyAsync(c => c.Id == id);
+            return await _context.Teams.AnyAsync(x => x.Id == id && x.TeamSeasons.Any(t => t.SeasonId == command.SeasonId));
         }
 
         public async Task<bool> UserExists(string id, CancellationToken cancellationToken)
         {
-            return await _context.Users.AnyAsync(c => c.Id == id);
+            return await _context.Users.AnyAsync(x => x.Id == id);
         }
 
         public async Task<bool> SeasonExists(int id, CancellationToken cancellationToken)
         {
-            return await _context.Seasons.AnyAsync(c => c.Id == id);
+            return await _context.Seasons.AnyAsync(x => x.Id == id);
         }
 
         public async Task<bool> IsReferee(string id, CancellationToken cancellationToken)

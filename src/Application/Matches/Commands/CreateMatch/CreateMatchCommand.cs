@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Matches.Commands.CreateMatch
 {
-    public class CreateMatchCommand : IRequest<int>
+    public class CreateMatchCommand : IRequest
     {
         public string Date { get; set; }
         public string Time { get; set; }
@@ -21,7 +21,7 @@ namespace Application.Matches.Commands.CreateMatch
         public int SeasonId { get; set; }
     }
 
-    public class CreateMatchCommandHandler : IRequestHandler<CreateMatchCommand, int>
+    public class CreateMatchCommandHandler : IRequestHandler<CreateMatchCommand>
     {
         private readonly IAppDbContext _context;
 
@@ -30,32 +30,41 @@ namespace Application.Matches.Commands.CreateMatch
             _context = context;
         }
 
-        public async Task<int> Handle(CreateMatchCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateMatchCommand request, CancellationToken cancellationToken)
         {
             var date = DateTime.Parse(request.Date);
             var time = TimeSpan.Parse(request.Time);
 
-            // TODO: Create 3 matches
+            int numberOfMatches = 3;
+            var matches = new List<Match>();
+            var timeToAdd = TimeSpan.FromMinutes(20);
 
-            var match = new Match
+            for (int i = 0; i < numberOfMatches; i++)
             {
-                Date = date,
-                Time = time,
-                Round = request.Round,
-                HomePoints = 0,
-                AwayPoints = 0,
-                HomeTeamId = request.HomeTeamId,
-                AwayTeamId = request.AwayTeamId,
-                RefereeId = request.RefereeId,
-                DelegateId = request.DelegateId,
-                SeasonId = request.SeasonId
-            };
+                var match = new Match
+                {
+                    Date = date,
+                    Time = time,
+                    Round = request.Round,
+                    HomePoints = 0,
+                    AwayPoints = 0,
+                    HomeTeamId = request.HomeTeamId,
+                    AwayTeamId = request.AwayTeamId,
+                    RefereeId = request.RefereeId,
+                    DelegateId = request.DelegateId,
+                    SeasonId = request.SeasonId
+                };
 
-            _context.Matches.Add(match);
+                matches.Add(match);
+
+                time = time.Add(timeToAdd);
+            }
+
+            _context.Matches.AddRange(matches);
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return match.Id;
+            return Unit.Value;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Matches.Commands.CreateMatch;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace API.Controllers
     public class MatchesController : ApiController
     {
         [HttpPost]
-        public async Task<ActionResult<int>> Create(CreateMatchCommand command)
+        public async Task<ActionResult<Unit>> Create(CreateMatchCommand command)
         {
             return await Mediator.Send(command);
         }
