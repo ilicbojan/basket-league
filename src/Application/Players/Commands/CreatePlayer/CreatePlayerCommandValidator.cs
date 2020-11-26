@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,8 +36,8 @@ namespace Application.Players.Commands.CreatePlayer
 
             RuleFor(x => x.JerseyNumber)
                 .InclusiveBetween(1, 99).WithMessage("Broj na dresu mora biti izmedju 1 i 99")
-                .NotEmpty().WithMessage("Broj na dresu je obavezan");
-            // TODO: validation for unique JerseyNumber in one team
+                .NotEmpty().WithMessage("Broj na dresu je obavezan")
+                .MustAsync(BeUniqueJerseyNumber).WithMessage("Izabrani broj na dresu je zauzet");
 
             RuleFor(x => x.JMBG)
                 .Length(13).WithMessage("JBMG mora imati 13 cifara")
@@ -45,7 +46,8 @@ namespace Application.Players.Commands.CreatePlayer
 
             RuleFor(x => x.PhoneNumber)
                 .MaximumLength(40).WithMessage("Broj telefona ne sme biti duzi od 40 karaktera")
-                .NotEmpty().WithMessage("Broj telefona je obavezan");
+                .NotEmpty().WithMessage("Broj telefona je obavezan")
+                .MustAsync(BeUniquePhoneNumber).WithMessage("Broj telefona vec postoji");
 
             RuleFor(x => x.TeamId)
                 .MustAsync(TeamExists).WithMessage("Izabrani tim ne postoji");
@@ -59,6 +61,18 @@ namespace Application.Players.Commands.CreatePlayer
         public async Task<bool> BeUniqueJMBG(string jmbg, CancellationToken cancellationToken)
         {
             return await _context.Players.AllAsync(x => x.JMBG != jmbg);
+        }
+
+        public async Task<bool> BeUniqueJerseyNumber(CreatePlayerCommand command, int num, CancellationToken cancellationToken)
+        {
+            var team = await _context.Teams.FindAsync(command.TeamId);
+
+            return  team.Players.All(x => x.JerseyNumber != num);
+        }
+
+        public async Task<bool> BeUniquePhoneNumber(string phone, CancellationToken cancellationToken)
+        {
+            return await _context.Users.AllAsync(x => x.PhoneNumber != phone);
         }
 
         public async Task<bool> TeamExists(int? id, CancellationToken cancellationToken)

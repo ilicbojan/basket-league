@@ -52,8 +52,6 @@ namespace Application.Matches.Commands.CreateMatch
             RuleFor(x => x.SeasonId)
                 .NotEmpty().WithMessage("Sezona je obavezna")
                 .MustAsync(SeasonExists).WithMessage("Izabrana sezona ne postoji");
-
-            // TODO: Check if teams are from same season
         }
 
         public async Task<bool> TeamExists(CreateMatchCommand command, int id, CancellationToken cancellationToken)
