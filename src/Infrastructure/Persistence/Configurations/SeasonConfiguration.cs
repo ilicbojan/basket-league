@@ -11,6 +11,11 @@ namespace Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Season> builder)
         {
+            builder.HasOne(s => s.Field)
+                .WithMany(f => f.Seasons)
+                .HasForeignKey(s => s.FieldId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.Property(x => x.Id)
                 .IsRequired();
 
@@ -19,6 +24,9 @@ namespace Infrastructure.Persistence.Configurations
                 .IsRequired();
 
             builder.Property(x => x.Year)
+                .IsRequired();
+
+            builder.Property(x => x.FieldId)
                 .IsRequired();
 
             builder.HasIndex(x => x.Name)

@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,7 +33,8 @@ namespace Application.Lineups.Commands.CreateLineup
                 .GreaterThanOrEqualTo(3).WithMessage("Utakmicu ne moze igrati manje od 3 igraca");
 
             RuleForEach(x => x.PlayersIds)
-                .MustAsync(PlayerExists).WithMessage("Izabrani igrac ne postoji");
+                .MustAsync(PlayerExists).WithMessage("Izabrani igrac ne postoji")
+                .MustAsync(IsPlayerInLineup).WithMessage("Izabrani igrac se vec nalazi u postavi");
         }
 
         public async Task<bool> MatchExists(int id, CancellationToken cancellationToken)
@@ -48,6 +50,13 @@ namespace Application.Lineups.Commands.CreateLineup
         public async Task<bool> PlayerExists(CreateLineupCommand command, int id, CancellationToken cancellationToken)
         {
             return await _context.Players.AnyAsync(x => x.Id == id && x.TeamId == command.TeamId);
+        }
+
+        public async Task<bool> IsPlayerInLineup(CreateLineupCommand command, int id, CancellationToken cancellationToken)
+        {
+            var match = await _context.Matches.FindAsync(command.MatchId);
+
+            return match.MatchPlayers.All(x => x.PlayerId != id);
         }
     }
 }

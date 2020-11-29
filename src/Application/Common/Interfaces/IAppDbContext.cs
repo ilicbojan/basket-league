@@ -18,6 +18,7 @@ namespace Application.Common.Interfaces
         DbSet<Player> Players { get; set; }
         DbSet<Match> Matches { get; set; }
         DbSet<MatchPlayer> MatchPlayers { get; set; }
+        DbSet<Field> Fields { get; set; }
 
 
         DatabaseFacade Database { get; }
