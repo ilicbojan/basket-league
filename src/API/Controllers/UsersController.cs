@@ -1,5 +1,5 @@
 ﻿using Application.Users.Commands.CreateUser;
-using Application.Users.Queries.CurrentUser;
+using Application.Users.Queries.GetCurrentUser;
 using Application.Users.Queries.LoginUser;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,9 +18,9 @@ namespace API.Controllers
         }
 
         [HttpGet("current")]
-        public async Task<ActionResult<Application.Users.Queries.CurrentUser.UserVm>> Current()
+        public async Task<ActionResult<Application.Users.Queries.GetCurrentUser.UserVm>> Current()
         {
-            return await Mediator.Send(new CurrentUserQuery());
+            return await Mediator.Send(new GetCurrentUserQuery());
         }
 
         [HttpPost]

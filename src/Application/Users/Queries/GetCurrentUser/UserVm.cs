@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Users.Queries.CurrentUser
+namespace Application.Users.Queries.GetCurrentUser
 {
     public class UserVm : IMapFrom<AppUser>
     {

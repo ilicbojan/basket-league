@@ -6,24 +6,24 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Users.Queries.CurrentUser
+namespace Application.Users.Queries.GetCurrentUser
 {
-    public class CurrentUserQuery : IRequest<UserVm>
+    public class GetCurrentUserQuery : IRequest<UserVm>
     {
     }
 
-    public class CurrentUserQueryHandler : IRequestHandler<CurrentUserQuery, UserVm>
+    public class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery, UserVm>
     {
         private readonly IIdentityService _identityService;
         private readonly IJwtGenerator _jwtGenerator;
 
-        public CurrentUserQueryHandler(IIdentityService identityService, IJwtGenerator jwtGenerator)
+        public GetCurrentUserQueryHandler(IIdentityService identityService, IJwtGenerator jwtGenerator)
         {
             _identityService = identityService;
             _jwtGenerator = jwtGenerator;
         }
 
-        public async Task<UserVm> Handle(CurrentUserQuery request, CancellationToken cancellationToken)
+        public async Task<UserVm> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
         {
             var user = await _identityService.GetCurrentUserAsync();
 
