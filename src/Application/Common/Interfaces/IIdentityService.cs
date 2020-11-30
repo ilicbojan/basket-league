@@ -8,6 +8,8 @@ namespace Application.Common.Interfaces
 {
     public interface IIdentityService
     {
+        Task<AppUser> GetUserByEmailAsync(string email);
+        Task<AppUser> LoginUserAsync(string email, string password);
         Task<string> GetUsernameAsync(string userId);
         Task<string> CreateUserAsync(AppUser user, string password, string role);
         Task<bool> IsUserInRoleAsync(AppUser user, string roleName);
