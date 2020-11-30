@@ -27,6 +27,17 @@ namespace Infrastructure.Identity
             _currentUserService = currentUserService;
             _signInManager = signInManager;
         }
+        public async Task<AppUser> GetUserByIdAsync(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(AppUser), id);
+            }
+
+            return user;
+        }
 
         public async Task<AppUser> GetUserByEmailAsync(string email)
         {
@@ -36,6 +47,13 @@ namespace Infrastructure.Identity
             {
                 throw new NotFoundException(nameof(AppUser), email);
             }
+
+            return user;
+        }
+
+        public async Task<AppUser> GetCurrentUserAsync()
+        {
+            var user = await GetUserByIdAsync(_currentUserService.UserId);
 
             return user;
         }
