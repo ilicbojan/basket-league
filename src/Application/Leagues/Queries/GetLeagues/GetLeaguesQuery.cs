@@ -1,5 +1,4 @@
 ﻿using Application.Common.Interfaces;
-using Application.Leagues.Queries.Dtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;

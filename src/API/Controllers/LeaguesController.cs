@@ -1,5 +1,4 @@
 ﻿using Application.Leagues.Commands.CreateLeague;
-using Application.Leagues.Queries.Dtos;
 using Application.Leagues.Queries.GetLeagues;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

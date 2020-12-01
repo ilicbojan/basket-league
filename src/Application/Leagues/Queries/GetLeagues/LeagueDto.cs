@@ -1,7 +1,7 @@
 ﻿using Application.Common.Mappings;
 using Domain.Entities;
 
-namespace Application.Leagues.Queries.Dtos
+namespace Application.Leagues.Queries.GetLeagues
 {
     public class LeagueDto : IMapFrom<League>
     {

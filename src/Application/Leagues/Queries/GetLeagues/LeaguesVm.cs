@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Leagues.Queries.Dtos
+namespace Application.Leagues.Queries.GetLeagues
 {
     public class LeaguesVm
     {
