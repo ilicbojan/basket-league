@@ -1,12 +1,6 @@
-﻿using Application.Common.Mappings;
-using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Application.Users.Queries.LoginUser
+﻿namespace Application.Users.Queries.LoginUser
 {
-    public class UserVm : IMapFrom<AppUser>
+    public class UserVm
     {
         public string Token { get; set; }
         public string Id { get; set; }
