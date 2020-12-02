@@ -30,7 +30,7 @@ namespace Application.Leagues.Queries.GetLeagues
 
             vm.Leagues = await _context.Leagues
                 .ProjectTo<LeagueDto>(_mapper.ConfigurationProvider)
-                .OrderBy(l => l.Name)
+                .OrderBy(x => x.Name)
                 .ToListAsync(cancellationToken);
 
             return vm;

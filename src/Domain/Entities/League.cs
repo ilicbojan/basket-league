@@ -12,6 +12,6 @@ namespace Domain.Entities
         public int CityId { get; set; }
         public virtual City City { get; set; }
 
-        public virtual ICollection<Season> Seasons { get; set; }
+        public virtual ICollection<Season> Seasons { get; private set; } = new List<Season>();
     }
 }

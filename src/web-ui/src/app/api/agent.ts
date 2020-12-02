@@ -1,21 +1,22 @@
 import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
+import { ILeague, ILeaguesVm } from '../models/league';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.request.use(
-  (config) => {
+  (config: any) => {
     const token = window.localStorage.getItem('jwt');
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
-  (error) => {
+  (error: any) => {
     return Promise.reject(error);
   }
 );
 
-axios.interceptors.response.use(undefined, (error) => {
+axios.interceptors.response.use(undefined, (error: any) => {
   if (error.message === 'Network Error' && !error.response) {
     toast.error('Network error - make sure API is running!');
   }
@@ -72,4 +73,14 @@ const requests = {
   },
 };
 
-export default {};
+const Leagues = {
+  list: (): Promise<ILeaguesVm> => requests.get('/leagues'),
+  standings: (id: number) => requests.get(`/leagues/${id}`),
+  create: (league: ILeague) => requests.post('/leagues', league),
+  update: (league: ILeague) => requests.put(`/leagues/${league.id}`, league),
+  delete: (id: number) => requests.del(`/leagues/${id}`),
+};
+
+export default {
+  Leagues,
+};
