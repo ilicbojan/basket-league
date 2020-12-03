@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Field\Commands\" />
     <Folder Include="Field\Queries\" />
     <Folder Include="Lineups\Queries\" />
     <Folder Include="Matches\Queries\" />
