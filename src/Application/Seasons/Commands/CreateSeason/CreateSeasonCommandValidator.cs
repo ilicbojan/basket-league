@@ -19,7 +19,8 @@ namespace Application.Seasons.Commands.CreateSeason
 
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Naziv sezone je obavezan")
-                .MaximumLength(50).WithMessage("Naziv sezone ne sme biti duzi od 50 karaktera");
+                .MaximumLength(50).WithMessage("Naziv sezone ne sme biti duzi od 50 karaktera")
+                .MustAsync(BeUniqueName).WithMessage("Izabrani naziv vec postoji");
 
             RuleFor(x => x.Year)
                 .NotEmpty().WithMessage("Godina odrzavanja sezone je obavezna")
@@ -28,11 +29,25 @@ namespace Application.Seasons.Commands.CreateSeason
             RuleFor(x => x.LeagueId)
                 .NotEmpty().WithMessage("Liga je obavezna")
                 .MustAsync(LeagueExists).WithMessage("Izabrana liga ne postoji");
+
+            RuleFor(x => x.FieldId)
+                .NotEmpty().WithMessage("Teren je obavezan")
+                .MustAsync(FieldExists).WithMessage("Izabrani teren ne postoji");
+        }
+
+        public async Task<bool> BeUniqueName(string name, CancellationToken cancellationToken)
+        {
+            return await _context.Seasons.AllAsync(x => x.Name != name);
         }
 
         public async Task<bool> LeagueExists(int id, CancellationToken cancellationToken)
         {
-            return await _context.Leagues.AnyAsync(c => c.Id == id);
+            return await _context.Leagues.AnyAsync(x => x.Id == id);
+        }
+
+        public async Task<bool> FieldExists(int id, CancellationToken cancellationToken)
+        {
+            return await _context.Fields.AnyAsync(x => x.Id == id);
         }
     }
 }

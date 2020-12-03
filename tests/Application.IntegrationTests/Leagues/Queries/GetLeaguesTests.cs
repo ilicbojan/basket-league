@@ -1,5 +1,6 @@
 ﻿using Application.Cities.Commands.CreateCity;
 using Application.Countries.Commands.CreateCountry;
+using Application.Field.Commands.CreateField;
 using Application.Leagues.Queries.GetLeagues;
 using Domain.Entities;
 using FluentAssertions;
@@ -28,7 +29,12 @@ namespace Application.IntegrationTests.Leagues.Queries
                 CountryId = countryId
             });
 
-            // TODO: Create CreateFieldCommand in Application Project and use SendAsync to get fieldId
+            var fieldId = await SendAsync(new CreateFieldCommand
+            {
+                Name = "Teren 1",
+                Address = "Adresa terena",
+                CityId = cityId
+            });
 
             await AddAsync(new League
             {
@@ -36,9 +42,9 @@ namespace Application.IntegrationTests.Leagues.Queries
                 CityId = cityId,
                 Seasons = 
                 {
-                    new Season { Name = "Prolece", Year = 2020, Field = new Field { Name = "Teren 1", Address = "Adresa 1", CityId = cityId } },
-                    new Season { Name = "Leto", Year = 2020, Field = new Field { Name = "Teren 2", Address = "Adresa 2", CityId = cityId } },
-                    new Season { Name = "Jesen", Year = 2020, Field = new Field { Name = "Teren 3", Address = "Adresa 3", CityId = cityId } }
+                    new Season { Name = "Prolece", Year = 2020, FieldId = fieldId },
+                    new Season { Name = "Leto", Year = 2020, FieldId = fieldId },
+                    new Season { Name = "Jesen", Year = 2020, FieldId = fieldId }
                 }
             });
 

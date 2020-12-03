@@ -14,6 +14,7 @@ namespace Application.Seasons.Commands.CreateSeason
         public string Name { get; set; }
         public int Year { get; set; }
         public int LeagueId { get; set; }
+        public int FieldId { get; set; }
     }
 
     public class CreateSeasonCommandHandler : IRequestHandler<CreateSeasonCommand, int>
@@ -31,7 +32,8 @@ namespace Application.Seasons.Commands.CreateSeason
             {
                 Name = request.Name,
                 Year = request.Year,
-                LeagueId = request.LeagueId
+                LeagueId = request.LeagueId,
+                FieldId = request.FieldId
             };
 
             _context.Seasons.Add(season);

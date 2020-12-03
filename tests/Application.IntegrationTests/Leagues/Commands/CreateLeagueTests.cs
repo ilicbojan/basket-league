@@ -18,8 +18,8 @@ namespace Application.IntegrationTests.Leagues.Commands
         {
             var command = new CreateLeagueCommand();
 
-            FluentActions.Invoking(() => SendAsync(command))
-                .Should().Throw<ValidationException>();
+            FluentActions.Invoking(() => 
+                SendAsync(command)).Should().Throw<ValidationException>();
         }
 
         [Test]
@@ -48,8 +48,8 @@ namespace Application.IntegrationTests.Leagues.Commands
                 CityId = cityId
             };
 
-            FluentActions.Invoking(() => SendAsync(command))
-                .Should().Throw<ValidationException>();
+            FluentActions.Invoking(() => 
+                SendAsync(command)).Should().Throw<ValidationException>();
         }
 
         [Test]
@@ -61,8 +61,8 @@ namespace Application.IntegrationTests.Leagues.Commands
                 CityId = 1
             };
 
-            FluentActions.Invoking(() => SendAsync(command))
-                .Should().Throw<ValidationException>();
+            FluentActions.Invoking(() => 
+                SendAsync(command)).Should().Throw<ValidationException>();
         }
 
         [Test]
