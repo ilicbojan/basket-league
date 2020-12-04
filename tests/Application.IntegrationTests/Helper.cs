@@ -2,6 +2,7 @@
 using Application.Countries.Commands.CreateCountry;
 using Application.Field.Commands.CreateField;
 using Application.Leagues.Commands.CreateLeague;
+using Application.Teams.Commands.CreateTeam;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -67,6 +68,16 @@ namespace Application.IntegrationTests
             });
 
             return leagueId;
+        }
+
+        public async static Task<int> CreateTeam()
+        {
+            var teamId = await SendAsync(new CreateTeamCommand
+            {
+                Name = "Tim 1"
+            });
+
+            return teamId;
         }
     }
 }

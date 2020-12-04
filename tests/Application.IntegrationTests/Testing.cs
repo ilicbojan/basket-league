@@ -113,10 +113,15 @@ namespace Application.IntegrationTests
 
         public static async Task<string> RunAsDefaultUserAsync()
         {
-            return await RunAsUserAsync("test@local", "Testing1234!");
+            return await RunAsUserAsync("test@local", "Testing1234!", new string[] { });
         }
 
-        public static async Task<string> RunAsUserAsync(string email, string password)
+        public static async Task<string> RunAsAdministratorAsync()
+        {
+            return await RunAsUserAsync("administrator@local", "Administrator1234!", new[] { "Administrator" });
+        }
+
+        public static async Task<string> RunAsUserAsync(string email, string password, string[] roles)
         {
             using var scope = _scopeFactory.CreateScope();
 
@@ -125,6 +130,18 @@ namespace Application.IntegrationTests
             var user = new AppUser { UserName = email, Email = email };
 
             var result = await userManager.CreateAsync(user, password);
+
+            if (roles.Any())
+            {
+                var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+
+                foreach (var role in roles)
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                }
+
+                await userManager.AddToRolesAsync(user, roles);
+            }
 
             if (result.Succeeded)
             {
@@ -136,6 +153,24 @@ namespace Application.IntegrationTests
             var errors = string.Join(Environment.NewLine, result.ToApplicationResult().Errors);
 
             throw new Exception($"Unable to create {email}.{Environment.NewLine}{errors}");
+        }
+
+        public static async Task<string> CreateRoleAsync(string roleName)
+        {
+            using var scope = _scopeFactory.CreateScope();
+
+            var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+
+            var result = await roleManager.CreateAsync(new IdentityRole(roleName));
+
+            if (result.Succeeded)
+            {
+                return roleName;
+            }
+
+            var errors = string.Join(Environment.NewLine, result.ToApplicationResult().Errors);
+
+            throw new Exception($"Unable to create {roleName}.{Environment.NewLine}{errors}");
         }
 
         public static async Task ResetState()

@@ -24,7 +24,8 @@ namespace Application.Players.Commands.CreatePlayer
                 .MustAsync(BeUniqueEmail).WithMessage("Email vec postoji");
 
             RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("Password je obavezan");
+                .NotEmpty().WithMessage("Password je obavezan")
+                .MinimumLength(6).WithMessage("Passowrd mora biti duzi od 6 karaktera");
 
             RuleFor(x => x.FirstName)
                 .MaximumLength(50).WithMessage("Ime ne sme biti duze od 50 karaktera")
@@ -66,6 +67,11 @@ namespace Application.Players.Commands.CreatePlayer
         public async Task<bool> BeUniqueJerseyNumber(CreatePlayerCommand command, int num, CancellationToken cancellationToken)
         {
             var team = await _context.Teams.FindAsync(command.TeamId);
+
+            if (command.TeamId == null || team == null)
+            {
+                return true;
+            }
 
             return  team.Players.All(x => x.JerseyNumber != num);
         }
