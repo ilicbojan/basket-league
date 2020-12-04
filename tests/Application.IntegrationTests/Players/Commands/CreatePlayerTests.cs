@@ -161,6 +161,7 @@ namespace Application.IntegrationTests.Players.Commands
         public async Task ShouldRequireValidTeamId()
         {
             await CreateRoleAsync("player");
+
             var command = new CreatePlayerCommand
             {
                 Email = "test1@test.com",

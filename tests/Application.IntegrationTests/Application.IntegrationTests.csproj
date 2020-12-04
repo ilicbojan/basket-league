@@ -33,4 +33,8 @@
     <ProjectReference Include="..\..\src\API\API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Users\Queries\" />
+  </ItemGroup>
+
 </Project>
