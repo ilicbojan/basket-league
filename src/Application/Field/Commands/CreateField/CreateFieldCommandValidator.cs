@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Field.Commands.CreateField
 {
-    public class CreateFieldCommandValidator : AbstractValidator<Domain.Entities.Field>
+    public class CreateFieldCommandValidator : AbstractValidator<CreateFieldCommand>
     {
         private readonly IAppDbContext _context;
 
