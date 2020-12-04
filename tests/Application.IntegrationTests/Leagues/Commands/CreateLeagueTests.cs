@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Application.IntegrationTests.Leagues.Commands
 {
     using static Testing;
+    using static Helper;
 
     class CreateLeagueTests : TestBase
     {
@@ -25,16 +26,7 @@ namespace Application.IntegrationTests.Leagues.Commands
         [Test]
         public async Task ShouldRequireUniqueName()
         {
-            var countryId = await SendAsync(new CreateCountryCommand
-            {
-                Name = "Srbija"
-            });
-
-            var cityId = await SendAsync(new CreateCityCommand
-            {
-                Name = "Beograd",
-                CountryId = countryId
-            });
+            var cityId = await CreateCity();
 
             await SendAsync(new CreateLeagueCommand
             {
@@ -68,16 +60,7 @@ namespace Application.IntegrationTests.Leagues.Commands
         [Test]
         public async Task ShouldCreateLeague()
         {
-            var countryId = await SendAsync(new CreateCountryCommand
-            {
-                Name = "Srbija"
-            });
-
-            var cityId = await SendAsync(new CreateCityCommand
-            {
-                Name = "Beograd",
-                CountryId = countryId
-            });
+            var cityId = await CreateCity();
 
             var command = new CreateLeagueCommand
             {

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Application.IntegrationTests.Field.Commands
 {
     using static Testing;
+    using static Helper;
 
     public class CreateFieldTests : TestBase
     {
@@ -78,22 +79,6 @@ namespace Application.IntegrationTests.Field.Commands
             field.Name.Should().Be(command.Name);
             field.Address.Should().Be(command.Address);
             field.CityId.Should().Be(command.CityId);
-        }
-
-        private async Task<int> CreateCity()
-        {
-            var countryId = await SendAsync(new CreateCountryCommand
-            {
-                Name = "Srbija"
-            });
-
-            var cityId = await SendAsync(new CreateCityCommand
-            {
-                Name = "Beograd",
-                CountryId = countryId
-            });
-
-            return cityId;
         }
     }
 }

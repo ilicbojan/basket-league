@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Application.IntegrationTests.Cities.Commands
 {
     using static Testing;
+    using static Helper;
 
     public class CreateCityTests : TestBase
     {
@@ -24,10 +25,7 @@ namespace Application.IntegrationTests.Cities.Commands
         [Test]
         public async Task ShouldRequireUniqueName()
         {
-            var countryId = await SendAsync(new CreateCountryCommand
-            {
-                Name = "Srbija"
-            });
+            var countryId = await CreateCountry();
 
             await SendAsync(new CreateCityCommand
             {
@@ -61,10 +59,7 @@ namespace Application.IntegrationTests.Cities.Commands
         [Test]
         public async Task ShouldCreateCity()
         {
-            var countryId = await SendAsync(new CreateCountryCommand
-            {
-                Name = "Srbija"
-            });
+            var countryId = await CreateCountry();
 
             var command = new CreateCityCommand
             {

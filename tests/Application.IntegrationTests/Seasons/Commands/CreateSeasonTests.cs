@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 namespace Application.IntegrationTests.Seasons.Commands
 {
     using static Testing;
+    using static Helper;
 
     public class CreateSeasonTests : TestBase
     {
@@ -30,29 +31,9 @@ namespace Application.IntegrationTests.Seasons.Commands
         [Test]
         public async Task ShouldRequireUniqueName()
         {
-            var countryId = await SendAsync(new CreateCountryCommand
-            {
-                Name = "Srbija"
-            });
-
-            var cityId = await SendAsync(new CreateCityCommand
-            {
-                Name = "Beograd",
-                CountryId = countryId
-            });
-
-            var leagueId = await SendAsync(new CreateLeagueCommand
-            {
-                Name = "Prva liga",
-                CityId = cityId
-            });
-
-            var fieldId = await SendAsync(new CreateFieldCommand
-            {
-                Name = "Teren 1",
-                Address = "Adresa terena",
-                CityId = cityId
-            });
+            var cityId = await CreateCity();
+            var leagueId = await CreateLeague(cityId);
+            var fieldId = await CreateField(cityId);
 
             await SendAsync(new CreateSeasonCommand
             {
@@ -77,23 +58,8 @@ namespace Application.IntegrationTests.Seasons.Commands
         [Test]
         public async Task ShouldRequireValidLeagueId()
         {
-            var countryId = await SendAsync(new CreateCountryCommand
-            {
-                Name = "Srbija"
-            });
-
-            var cityId = await SendAsync(new CreateCityCommand
-            {
-                Name = "Beograd",
-                CountryId = countryId
-            });
-
-            var fieldId = await SendAsync(new CreateFieldCommand
-            {
-                Name = "Teren 1",
-                Address = "Adresa terena",
-                CityId = cityId
-            });
+            var cityId = await CreateCity();
+            var fieldId = await CreateField(cityId);
 
             var command = new CreateSeasonCommand
             {
@@ -110,22 +76,8 @@ namespace Application.IntegrationTests.Seasons.Commands
         [Test]
         public async Task ShouldRequireValidFieldId()
         {
-            var countryId = await SendAsync(new CreateCountryCommand
-            {
-                Name = "Srbija"
-            });
-
-            var cityId = await SendAsync(new CreateCityCommand
-            {
-                Name = "Beograd",
-                CountryId = countryId
-            });
-
-            var leagueId = await SendAsync(new CreateLeagueCommand
-            {
-                Name = "Prva liga",
-                CityId = cityId
-            });
+            var cityId = await CreateCity();
+            var leagueId = await CreateLeague(cityId);
 
             var command = new CreateSeasonCommand
             {
@@ -142,29 +94,9 @@ namespace Application.IntegrationTests.Seasons.Commands
         [Test]
         public async Task ShouldCreateSeason()
         {
-            var countryId = await SendAsync(new CreateCountryCommand
-            {
-                Name = "Srbija"
-            });
-
-            var cityId = await SendAsync(new CreateCityCommand
-            {
-                Name = "Beograd",
-                CountryId = countryId
-            });
-
-            var leagueId = await SendAsync(new CreateLeagueCommand
-            {
-                Name = "Prva liga",
-                CityId = cityId
-            });
-
-            var fieldId = await SendAsync(new CreateFieldCommand
-            {
-                Name = "Teren 1",
-                Address = "Adresa terena",
-                CityId = cityId
-            });
+            var cityId = await CreateCity();
+            var leagueId = await CreateLeague(cityId);
+            var fieldId = await CreateField(cityId);
 
             var command = new CreateSeasonCommand
             {

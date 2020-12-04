@@ -1,40 +1,24 @@
-﻿using Application.Cities.Commands.CreateCity;
-using Application.Countries.Commands.CreateCountry;
+﻿using Application.Countries.Commands.CreateCountry;
 using Application.Field.Commands.CreateField;
 using Application.Leagues.Queries.GetLeagues;
 using Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Application.IntegrationTests.Leagues.Queries
 {
     using static Testing;
+    using static Helper;
 
     public class GetLeaguesTests : TestBase
     {
         [Test]
         public async Task ShouldReturnAllLeagues()
         {
-            var countryId = await SendAsync(new CreateCountryCommand
-            {
-                Name = "Srbija"
-            });
-
-            var cityId = await SendAsync(new CreateCityCommand
-            {
-                Name = "Beograd",
-                CountryId = countryId
-            });
-
-            var fieldId = await SendAsync(new CreateFieldCommand
-            {
-                Name = "Teren 1",
-                Address = "Adresa terena",
-                CityId = cityId
-            });
+            var cityId = await CreateCity();
+            var fieldId = await CreateField(cityId);
 
             await AddAsync(new League
             {
