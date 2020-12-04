@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Seasons.Queries.Dtos
+namespace Application.Seasons.Queries.GetSeasons
 {
     public class SeasonsVm
     {

@@ -1,5 +1,4 @@
 ﻿using Application.Seasons.Commands.CreateSeason;
-using Application.Seasons.Queries.Dtos;
 using Application.Seasons.Queries.GetSeasons;
 using Microsoft.AspNetCore.Mvc;
 using System;
