@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Matches.Commands.CreateMatch
 {
-    public class CreateMatchCommand : IRequest
+    public class CreateMatchCommand : IRequest<List<int>>
     {
         public string Date { get; set; }
         public string Time { get; set; }
@@ -21,7 +21,7 @@ namespace Application.Matches.Commands.CreateMatch
         public int SeasonId { get; set; }
     }
 
-    public class CreateMatchCommandHandler : IRequestHandler<CreateMatchCommand>
+    public class CreateMatchCommandHandler : IRequestHandler<CreateMatchCommand, List<int>>
     {
         private readonly IAppDbContext _context;
 
@@ -30,7 +30,7 @@ namespace Application.Matches.Commands.CreateMatch
             _context = context;
         }
 
-        public async Task<Unit> Handle(CreateMatchCommand request, CancellationToken cancellationToken)
+        public async Task<List<int>> Handle(CreateMatchCommand request, CancellationToken cancellationToken)
         {
             var date = DateTime.Parse(request.Date);
             var time = TimeSpan.Parse(request.Time);
@@ -64,7 +64,14 @@ namespace Application.Matches.Commands.CreateMatch
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            var ids = new List<int>();
+
+            foreach (var match in matches)
+            {
+                ids.Add(match.Id);
+            }
+
+            return ids;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace API.Controllers
     public class MatchesController : ApiController
     {
         [HttpPost]
-        public async Task<ActionResult<Unit>> Create(CreateMatchCommand command)
+        public async Task<ActionResult<List<int>>> Create(CreateMatchCommand command)
         {
             return await Mediator.Send(command);
         }

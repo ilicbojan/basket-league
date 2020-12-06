@@ -113,7 +113,7 @@ namespace Application.IntegrationTests
 
         public static async Task<string> RunAsDefaultUserAsync()
         {
-            return await RunAsUserAsync("test@local", "Testing1234!", new string[] { });
+            return await RunAsUserAsync("test@test.com", "test12", new string[] { });
         }
 
         public static async Task<string> RunAsAdministratorAsync()

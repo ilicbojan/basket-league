@@ -104,7 +104,7 @@ namespace Infrastructure.Identity
 
             if (user == null)
             {
-                throw new NotFoundException(nameof(AppUser), userId);
+                throw new ValidationException();
             }
 
             return await _userManager.IsInRoleAsync(user, roleName);
