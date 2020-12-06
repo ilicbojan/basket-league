@@ -24,6 +24,6 @@ namespace Domain.Entities
         public int SeasonId { get; set; }
         public virtual Season Season { get; set; }
 
-        public virtual ICollection<MatchPlayer> MatchPlayers { get; set; }
+        public virtual ICollection<MatchPlayer> MatchPlayers { get; set; } = new List<MatchPlayer>();
     }
 }

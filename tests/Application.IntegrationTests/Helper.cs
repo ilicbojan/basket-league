@@ -2,6 +2,8 @@
 using Application.Countries.Commands.CreateCountry;
 using Application.Field.Commands.CreateField;
 using Application.Leagues.Commands.CreateLeague;
+using Application.Matches.Commands.CreateMatch;
+using Application.Players.Commands.CreatePlayer;
 using Application.Seasons.Commands.CreateSeason;
 using Application.Teams.Commands.CreateTeam;
 using Application.Users.Commands.CreateUser;
@@ -100,6 +102,17 @@ namespace Application.IntegrationTests
             return teamId;
         }
 
+        public async static Task<int> CreateTeam(string name)
+        {
+            var teamId = await SendAsync(new CreateTeamCommand
+            {
+                Name = name,
+
+            });
+
+            return teamId;
+        }
+
         public async static Task<int> CreateTeam(int seasonId)
         {
             var teamId = await SendAsync(new CreateTeamCommand
@@ -131,6 +144,82 @@ namespace Application.IntegrationTests
             });
 
             return teamId;
+        }
+
+        public async static Task<int> CreateMatch(int teamId, int seasonId)
+        {
+            var awayTeamId = await CreateTeam(seasonId);
+            var refereeId = await CreateReferee();
+            var delegateId = await CreateDelegate();
+
+            var matchId = await SendAsync(new CreateMatchCommand
+            {
+                Date = "12/12/2020",
+                Time = "18:00:00",
+                Round = 1,
+                HomeTeamId = teamId,
+                AwayTeamId = awayTeamId,
+                RefereeId = refereeId,
+                DelegateId = delegateId,
+                SeasonId = seasonId
+            });
+
+            return matchId[0];
+        }
+
+        public async static Task<List<int>> CreatePlayers(int teamId)
+        {
+            await CreateRoleAsync("player");
+
+            var id1 = await SendAsync(new CreatePlayerCommand
+            {
+                Email = "test@test.com",
+                Password = "test12",
+                FirstName = "Ime",
+                LastName = "Prezime",
+                JerseyNumber = 5,
+                JMBG = "1234567891235",
+                PhoneNumber = "0651234568",
+                TeamId = teamId
+            });
+
+            var id2 = await SendAsync(new CreatePlayerCommand
+            {
+                Email = "igrac2@test.com",
+                Password = "test12",
+                FirstName = "igrac2",
+                LastName = "igrac2",
+                JerseyNumber = 2,
+                JMBG = "1234567891232",
+                PhoneNumber = "0651234562",
+                TeamId = teamId
+            });
+
+            var id3 = await SendAsync(new CreatePlayerCommand
+            {
+                Email = "igrac3@test.com",
+                Password = "test12",
+                FirstName = "igrac3",
+                LastName = "igrac3",
+                JerseyNumber = 3,
+                JMBG = "1234567891233",
+                PhoneNumber = "0651234563",
+                TeamId = teamId
+            });
+
+            var id4 = await SendAsync(new CreatePlayerCommand
+            {
+                Email = "igrac4@test.com",
+                Password = "test12",
+                FirstName = "igrac4",
+                LastName = "igrac4",
+                JerseyNumber = 4,
+                JMBG = "1234567891234",
+                PhoneNumber = "0651234564",
+                TeamId = teamId
+            });
+
+            return new List<int> { id1, id2, id3, id4 };
         }
 
         public async static Task<string> CreateReferee()

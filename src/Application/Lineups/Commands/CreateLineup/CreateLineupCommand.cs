@@ -13,7 +13,7 @@ namespace Application.Lineups.Commands.CreateLineup
     {
         public int MatchId { get; set; }
         public int TeamId { get; set; }
-        public List<int> PlayersIds { get; set; }
+        public List<int> PlayersIds { get; set; } = new List<int>();
     }
 
     public class CreateLineupCommandHandler : IRequestHandler<CreateLineupCommand>

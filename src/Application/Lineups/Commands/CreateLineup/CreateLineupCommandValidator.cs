@@ -56,6 +56,11 @@ namespace Application.Lineups.Commands.CreateLineup
         {
             var match = await _context.Matches.FindAsync(command.MatchId);
 
+            if (match == null)
+            {
+                return true;
+            }
+
             return match.MatchPlayers.All(x => x.PlayerId != id);
         }
     }
