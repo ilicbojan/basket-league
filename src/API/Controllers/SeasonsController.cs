@@ -1,5 +1,6 @@
 ﻿using Application.Seasons.Commands.CreateSeason;
 using Application.Seasons.Queries.GetSeasons;
+using Application.Seasons.Queries.GetSeasonStandings;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,12 @@ namespace API.Controllers
         public async Task<ActionResult<SeasonsVm>> GetAll()
         {
             return await Mediator.Send(new GetSeasonsQuery());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SeasonVm>> GetStandings(int id)
+        {
+            return await Mediator.Send(new GetSeasonStandingsQuery { Id = id });
         }
 
         [HttpPost]
