@@ -10,5 +10,9 @@ namespace Domain.Entities
         public virtual Match Match { get; set; }
         public int PlayerId { get; set; }
         public virtual Player Player { get; set; }
+
+        public int Points { get; set; }
+        public int Assists { get; set; }
+        public int Fouls { get; set; }
     }
 }

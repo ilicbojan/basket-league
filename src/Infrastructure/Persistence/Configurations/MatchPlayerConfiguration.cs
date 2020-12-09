@@ -26,6 +26,15 @@ namespace Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.PlayerId)
                 .IsRequired();
+
+            builder.Property(x => x.Points)
+                .IsRequired();
+
+            builder.Property(x => x.Assists)
+                .IsRequired();
+
+            builder.Property(x => x.Fouls)
+                .IsRequired();
         }
     }
 }

@@ -51,6 +51,7 @@ namespace Application.IntegrationTests.Seasons.Queries
             result.Id.Should().Be(seasonId);
             result.Name.Should().NotBeNullOrEmpty();
             result.Year.Should().BeGreaterThan(2000);
+            result.Standings.Should().BeOfType<List<TeamDto>>();
         }
     }
 }

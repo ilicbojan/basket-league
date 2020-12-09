@@ -36,7 +36,10 @@ namespace Application.Lineups.Commands.CreateLineup
                 var matchPlayer = new MatchPlayer
                 {
                     MatchId = request.MatchId,
-                    PlayerId = id
+                    PlayerId = id,
+                    Points = 0,
+                    Assists = 0,
+                    Fouls = 0
                 };
 
                 lineup.Add(matchPlayer);

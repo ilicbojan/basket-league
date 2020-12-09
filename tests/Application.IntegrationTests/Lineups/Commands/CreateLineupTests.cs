@@ -130,6 +130,9 @@ namespace Application.IntegrationTests.Lineups.Commands
                 matchPlayer.Should().NotBeNull();
                 matchPlayer.MatchId.Should().Be(matchId);
                 matchPlayer.PlayerId.Should().Be(playerId);
+                matchPlayer.Points.Should().Be(0);
+                matchPlayer.Assists.Should().Be(0);
+                matchPlayer.Fouls.Should().Be(0);
             }
         }
     }
