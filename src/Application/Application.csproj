@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Field\Queries\" />
-    <Folder Include="Lineups\Queries\" />
+    <Folder Include="MatchPlayers\Queries\" />
     <Folder Include="Matches\Queries\" />
     <Folder Include="Players\Queries\" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using Application.Common.Exceptions;
-using Application.Lineups.Commands.CreateLineup;
+using Application.MatchPlayers.Commands.CreateLineup;
 using Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
