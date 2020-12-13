@@ -5,7 +5,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using System.Threading.Tasks;
 
-namespace Application.IntegrationTests.Lineups.Commands
+namespace Application.IntegrationTests.MatchPlayers.Commands
 {
     using static Testing;
     using static Helper;

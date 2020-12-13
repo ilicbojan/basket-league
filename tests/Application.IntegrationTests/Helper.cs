@@ -3,6 +3,7 @@ using Application.Countries.Commands.CreateCountry;
 using Application.Field.Commands.CreateField;
 using Application.Leagues.Commands.CreateLeague;
 using Application.Matches.Commands.CreateMatch;
+using Application.MatchPlayers.Commands.CreateLineup;
 using Application.Players.Commands.CreatePlayer;
 using Application.Seasons.Commands.CreateSeason;
 using Application.Teams.Commands.CreateTeam;
@@ -256,6 +257,16 @@ namespace Application.IntegrationTests
             });
 
             return delegateId;
+        }
+
+        public async static Task CreateLineup(int matchId, int teamId, List<int> playersIds)
+        {
+            await SendAsync(new CreateLineupCommand
+            {
+                MatchId = matchId,
+                TeamId = teamId,
+                PlayersIds = playersIds
+            });
         }
     }
 }
