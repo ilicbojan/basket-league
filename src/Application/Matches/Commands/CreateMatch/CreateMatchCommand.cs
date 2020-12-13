@@ -48,6 +48,7 @@ namespace Application.Matches.Commands.CreateMatch
                     Round = request.Round,
                     HomePoints = 0,
                     AwayPoints = 0,
+                    IsPlayed = false,
                     HomeTeamId = request.HomeTeamId,
                     AwayTeamId = request.AwayTeamId,
                     RefereeId = request.RefereeId,

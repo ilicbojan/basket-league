@@ -1,9 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infrastructure.Persistence.Configurations
 {
@@ -47,6 +44,9 @@ namespace Infrastructure.Persistence.Configurations
                 .IsRequired();
 
             builder.Property(x => x.AwayPoints)
+                .IsRequired();
+
+            builder.Property(x => x.IsPlayed)
                 .IsRequired();
 
             builder.Property(x => x.HomeTeamId)

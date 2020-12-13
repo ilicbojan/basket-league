@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Entities
 {
@@ -12,6 +11,7 @@ namespace Domain.Entities
         public int Round { get; set; }
         public int HomePoints { get; set; }
         public int AwayPoints { get; set; }
+        public bool IsPlayed { get; set; }
 
         public int HomeTeamId { get; set; }
         public virtual Team HomeTeam { get; set; }
