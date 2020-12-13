@@ -1,4 +1,5 @@
-﻿using Application.MatchPlayers.Commands.AddPoints;
+﻿using Application.MatchPlayers.Commands.AddFoul;
+using Application.MatchPlayers.Commands.AddPoints;
 using Application.MatchPlayers.Commands.CreateLineup;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,14 @@ namespace API.Controllers
 
         [HttpPatch("{matchId}/points")]
         public async Task<ActionResult<Unit>> AddPoints(int matchId, AddPointsCommand command)
+        {
+            command.MatchId = matchId;
+
+            return await Mediator.Send(command);
+        }
+
+        [HttpPatch("{matchId}/fouls")]
+        public async Task<ActionResult<Unit>> AddFoul(int matchId, AddFoulCommand command)
         {
             command.MatchId = matchId;
 
