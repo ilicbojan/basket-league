@@ -3,10 +3,8 @@ using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -50,7 +48,11 @@ namespace Application.Seasons.Queries.GetSeasonStandings
                 teams.Add(team.Id, team);
             }
 
-            foreach (var match in season.Matches.ToList())
+            var matches = season.Matches
+                .Where(x => x.IsPlayed)
+                .ToList();
+
+            foreach (var match in matches)
             {
                 var homeTeam = teams[match.HomeTeamId];
                 var awayTeam = teams[match.AwayTeamId];
