@@ -1,11 +1,9 @@
 ﻿using Application.Common.Exceptions;
 using Application.Seasons.Commands.CreateSeason;
-using Application.Seasons.Queries.GetSeasonResults;
+using Application.Seasons.Queries.GetSeasonMatches;
 using FluentAssertions;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.IntegrationTests.Seasons.Queries
@@ -13,19 +11,19 @@ namespace Application.IntegrationTests.Seasons.Queries
     using static Testing;
     using static Helper;
 
-    public class GetSeasonResultsTests : TestBase
+    public class GetSeasonMatchesTests : TestBase
     {
         [Test]
         public void ShouldRequireValidId()
         {
-            var query = new GetSeasonResultsQuery { Id = 1 };
+            var query = new GetSeasonMatchesQuery(1, true);
 
             FluentActions.Invoking(() =>
                 SendAsync(query)).Should().Throw<NotFoundException>();
         }
 
         [Test]
-        public async Task ShouldReturnSeasonResults()
+        public async Task ShouldReturnSeasonMatches()
         {
             var cityId = await CreateCity();
             var leageId = await CreateLeague(cityId);
@@ -39,13 +37,12 @@ namespace Application.IntegrationTests.Seasons.Queries
                 LeagueId = leageId
             });
 
-            var query = new GetSeasonResultsQuery { Id = seasonId };
+            var query = new GetSeasonMatchesQuery(seasonId, true);
 
             var result = await SendAsync(query);
 
-            result.Should().BeOfType<ResultsVm>();
+            result.Should().BeOfType<List<MatchDto>>();
             result.Should().NotBeNull();
-            result.Matches.Should().BeOfType<List<MatchDto>>();
         }
     }
 }
