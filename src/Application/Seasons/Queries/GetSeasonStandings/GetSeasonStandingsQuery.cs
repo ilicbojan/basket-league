@@ -26,7 +26,7 @@ namespace Application.Seasons.Queries.GetSeasonStandings
 
         public async Task<SeasonVm> Handle(GetSeasonStandingsQuery request, CancellationToken cancellationToken)
         {
-            var season = await _context.Seasons.SingleOrDefaultAsync(x => x.Id == request.Id);
+            var season = await _context.Seasons.FindAsync(request.Id);
 
             if (season == null)
             {

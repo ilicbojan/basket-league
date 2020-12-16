@@ -1,5 +1,6 @@
 ﻿using Application.Seasons.Commands.CreateSeason;
 using Application.Seasons.Queries.GetSeasonMatches;
+using Application.Seasons.Queries.GetSeasonPlayersStats;
 using Application.Seasons.Queries.GetSeasons;
 using Application.Seasons.Queries.GetSeasonStandings;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,12 @@ namespace API.Controllers
         public async Task<ActionResult<List<MatchDto>>> GetMatches(int id, bool isPlayed)
         {
             return await Mediator.Send(new GetSeasonMatchesQuery(id, isPlayed));
+        }
+
+        [HttpGet("{id}/stats-players")]
+        public async Task<ActionResult<List<PlayerDto>>> GetPlayersStats(int id)
+        {
+            return await Mediator.Send(new GetSeasonPlayersStatsQuery { Id = id });
         }
 
         [HttpPost]
