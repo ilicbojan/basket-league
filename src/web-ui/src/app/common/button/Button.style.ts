@@ -9,13 +9,15 @@ interface IProps {
 
 const Button = styled.button`
   width: ${(props: IProps) => (props.block ? '100%' : props.width + 'px')};
+  height: 45px;
 
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   margin: 15px 0;
-  padding: 12px 24px;
+  padding: 0 24px;
+  font-size: 1.5rem;
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;

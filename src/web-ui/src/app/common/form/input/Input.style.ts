@@ -10,10 +10,11 @@ const Input = styled.input<IProps>`
   font-size: 1.6rem;
   padding: 10px;
   outline: none;
-  border: 2px solid ${COLOR.white};
+  border: 1px solid ${COLOR.white};
   border-radius: ${utilities.borderRadius};
   box-shadow: ${utilities.shadow};
 
+  height: 40px;
   width: ${(props: IProps) => props.block && '100%'};
 
   &:focus {

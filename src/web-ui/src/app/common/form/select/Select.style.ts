@@ -8,13 +8,14 @@ export interface IProps {
 
 const Select = styled.select<IProps>`
   font-size: 1.6rem;
-  padding: 13px 10px;
+  padding: 10px;
   outline: none;
-  border: 2px solid ${COLOR.white};
+  border: 1px solid ${COLOR.white};
   border-radius: ${utilities.borderRadius};
   box-shadow: ${utilities.shadow};
   background-color: ${COLOR.white};
 
+  height: 40px;
   width: ${(props: IProps) => props.block && '100%'};
 
   &:focus {
@@ -24,7 +25,7 @@ const Select = styled.select<IProps>`
   &:disabled,
   &[disabled] {
     background-color: ${COLOR.gray};
-    border: 2px solid ${COLOR.gray};
+    border: 1px solid ${COLOR.gray};
   }
 `;
 

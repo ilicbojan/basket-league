@@ -8,6 +8,7 @@ import Input from '../common/form/input/Input';
 import { Field, Form } from 'react-final-form';
 import Select from '../common/form/select/Select';
 import Modal from '../common/modal/Modal';
+import Table from '../common/table/Table';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -40,6 +41,20 @@ function App() {
                 <option value='bbb'>bbb</option>
               </Field>
               <Button color='primary'>Button</Button>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Bojan</td>
+                  </tr>
+                </tbody>
+              </Table>
             </form>
           )}
         />

@@ -24,7 +24,7 @@ const Table = styled.table`
 
   & th,
   & td {
-    padding: 20px 15px;
+    padding: 15px 15px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
