@@ -12,7 +12,7 @@ namespace API.Controllers
     public class SeasonsController : ApiController
     {
         [HttpGet]
-        public async Task<ActionResult<SeasonsVm>> GetAll()
+        public async Task<ActionResult<List<SeasonDto>>> GetAll()
         {
             return await Mediator.Send(new GetSeasonsQuery());
         }

@@ -35,10 +35,10 @@ namespace Application.IntegrationTests.Seasons.Queries
             var result = await SendAsync(query);
 
             result.Should().NotBeNull();
-            result.Seasons.Should().HaveCount(1);
-            result.Seasons.First().Name.Should().NotBeNullOrEmpty();
-            result.Seasons.First().Year.Should().BePositive();
-            result.Seasons.First().League.Should().NotBeNull();
+            result.Should().HaveCount(1);
+            result.First().Name.Should().NotBeNullOrEmpty();
+            result.First().Year.Should().BePositive();
+            result.First().League.Should().NotBeNull();
         }
     }
 }

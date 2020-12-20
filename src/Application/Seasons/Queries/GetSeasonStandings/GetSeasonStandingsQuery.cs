@@ -83,7 +83,7 @@ namespace Application.Seasons.Queries.GetSeasonStandings
                 }
             }
 
-            vm.Standings = teams.Values
+            vm.Teams = teams.Values
                 .OrderByDescending(x => x.Points)
                 .ToList();
 

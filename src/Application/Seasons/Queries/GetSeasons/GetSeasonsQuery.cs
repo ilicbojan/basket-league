@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Application.Seasons.Queries.GetSeasons
 {
-    public class GetSeasonsQuery : IRequest<SeasonsVm>
+    public class GetSeasonsQuery : IRequest<List<SeasonDto>>
     {
     }
 
-    public class GetSeasonsQueryHandler : IRequestHandler<GetSeasonsQuery, SeasonsVm>
+    public class GetSeasonsQueryHandler : IRequestHandler<GetSeasonsQuery, List<SeasonDto>>
     {
         private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
@@ -27,11 +27,11 @@ namespace Application.Seasons.Queries.GetSeasons
             _mapper = mapper;
         }
 
-        public async Task<SeasonsVm> Handle(GetSeasonsQuery request, CancellationToken cancellationToken)
+        public async Task<List<SeasonDto>> Handle(GetSeasonsQuery request, CancellationToken cancellationToken)
         {
-            var vm = new SeasonsVm();
+            var vm = new List<SeasonDto>();
 
-            vm.Seasons = await _context.Seasons
+            vm = await _context.Seasons
                 .ProjectTo<SeasonDto>(_mapper.ConfigurationProvider)
                 .OrderByDescending(x => x.Year)
                 .ToListAsync(cancellationToken);

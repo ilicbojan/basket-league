@@ -7,6 +7,6 @@ namespace Application.Seasons.Queries.GetSeasonStandings
         public int Id { get; set; }
         public string Name { get; set; }
         public int Year { get; set; }
-        public List<TeamDto> Standings { get; set; } = new List<TeamDto>();
+        public List<TeamDto> Teams { get; set; } = new List<TeamDto>();
     }
 }
