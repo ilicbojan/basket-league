@@ -45,6 +45,15 @@ const Table = styled.table`
   & tbody tr:last-of-type {
     border-bottom: 2px solid ${COLOR.primary};
   }
+
+  & .loading {
+  }
+
+  & .spin {
+    position: relative;
+    display: block;
+    min-height: 100px;
+  }
 `;
 
 export const S = {

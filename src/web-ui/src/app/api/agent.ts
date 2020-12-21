@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
 import { ILeague, ILeaguesVm } from '../models/league';
+import { ISeason, IStandings } from '../models/season';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -81,6 +82,15 @@ const Leagues = {
   delete: (id: number) => requests.del(`/leagues/${id}`),
 };
 
-export default {
-  Leagues,
+const Seasons = {
+  list: (): Promise<ISeason[]> => requests.get('/seasons'),
+  standings: (id: number): Promise<IStandings> =>
+    requests.get(`/seasons/${id}`),
 };
+
+const agent = {
+  Leagues,
+  Seasons,
+};
+
+export default agent;

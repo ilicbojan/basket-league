@@ -1,14 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { RootStoreContext } from '../stores/rootStore';
 import { ToastContainer } from 'react-toastify';
-import Button from '../common/button/Button';
-import Input from '../common/form/input/Input';
-import { Field, Form } from 'react-final-form';
-import Select from '../common/form/select/Select';
 import Modal from '../common/modal/Modal';
-import Table from '../common/table/Table';
+import SeasonStandings from '../../features/seasons/SeasonStandings';
+import HomePage from '../../features/home/HomePage';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -29,43 +26,15 @@ function App() {
     <>
       <ToastContainer position='bottom-right' />
       <div>
-        <h1>This is React Template</h1>
         <Modal show={modal.open}></Modal>
-        <Form
-          onSubmit={(values: any) => console.log(values)}
-          render={({ handleSubmit, submitting }) => (
-            <form onSubmit={handleSubmit}>
-              <Field name='test' label='Test' type='text' component={Input} />
-              <Field name='select' label='Test' component={Select}>
-                <option value='aaa'>aaa</option>
-                <option value='bbb'>bbb</option>
-              </Field>
-              <Button color='primary'>Button</Button>
-              <Table>
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Bojan</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </form>
-          )}
-        />
-        {/* <Route exact path='/' component={HomePage} />
+        <Route exact path='/' component={HomePage} />
         <Route
           path={'/(.+)'}
           render={() => (
             <>
               <Switch>
-                <Route exact path='/fields' component={SportObjectList} />
-                <PrivateRoute exact path='/profile' component={UserProfile} />
+                <Route exact path='/seasons/:id' component={SeasonStandings} />
+                {/* <PrivateRoute exact path='/profile' component={UserProfile} />
                 <PrivateRoute
                   exact
                   path='/favourites'
@@ -78,11 +47,11 @@ function App() {
                   client
                   component={WorkingHours}
                 />
-                <Route component={NotFound} />
+                <Route component={NotFound} /> */}
               </Switch>
             </>
           )}
-        /> */}
+        />
       </div>
     </>
   );

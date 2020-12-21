@@ -7,7 +7,6 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 import ScrollToTop from './app/layout/ScrollToTop';
-import 'mobx-react-lite/batchingForReactDom';
 
 // added for history object in all components
 export const history = createBrowserHistory();
