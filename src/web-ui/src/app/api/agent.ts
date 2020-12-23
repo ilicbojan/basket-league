@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
 import { ILeague, ILeaguesVm } from '../models/league';
+import { IMatch } from '../models/match';
 import { ISeason, IStandings } from '../models/season';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -86,6 +87,8 @@ const Seasons = {
   list: (): Promise<ISeason[]> => requests.get('/seasons'),
   standings: (id: number): Promise<IStandings> =>
     requests.get(`/seasons/${id}`),
+  matchesList: (id: number, params: URLSearchParams): Promise<IMatch[]> =>
+    axios.get(`/seasons/${id}/matches`, { params }).then(responseBody),
 };
 
 const agent = {

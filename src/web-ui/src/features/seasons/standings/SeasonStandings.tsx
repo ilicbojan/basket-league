@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import Table from '../../app/common/table/Table';
-import LoadingSpinner from '../../app/layout/spinner/LoadingSpinner';
-import { RootStoreContext } from '../../app/stores/rootStore';
+import Table from '../../../app/common/table/Table';
+import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
+import { RootStoreContext } from '../../../app/stores/rootStore';
 
 interface IProps {
   id: string;
@@ -18,51 +18,34 @@ const SeasonStandings: React.FC<RouteComponentProps<IProps>> = observer(
       loadStandings(Number.parseInt(match.params.id));
     }, [loadStandings, match.params.id, history]);
 
-    // if (loading)
-    //   return (
-    //     <Table>
-    //       <thead>
-    //         <tr>
-    //           <th>Loading...</th>
-    //         </tr>
-    //       </thead>
-    //       <tbody>
-    //         <tr>
-    //           <td className='spin'>
-    //             <LoadingSpinner />
-    //           </td>
-    //         </tr>
-    //       </tbody>
-    //     </Table>
-    //   );
-
     return (
       <div>
+        <Link to={`/seasons/${standings?.id}/results`}>Results</Link>
         <Table>
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>OU</th>
-              <th>PO</th>
-              <th>IZ</th>
+              <th>#</th>
+              <th>Team</th>
+              <th>MP</th>
+              <th>W</th>
+              <th>L</th>
               <th>P+</th>
               <th>P-</th>
-              <th>P+-</th>
-              <th>BO</th>
+              <th>+/-</th>
+              <th>P</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td className='spin'>
+                <td className='spin' colSpan={9}>
                   <LoadingSpinner />
                 </td>
               </tr>
             ) : (
-              standings?.teams.map((team) => (
+              standings?.teams.map((team, i) => (
                 <tr key={team.id}>
-                  <td>{team.id}</td>
+                  <td>{i + 1}</td>
                   <td>{team.name}</td>
                   <td>{team.matchesPlayed}</td>
                   <td>{team.wins}</td>

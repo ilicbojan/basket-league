@@ -51,8 +51,7 @@ const Table = styled.table`
 
   & .spin {
     position: relative;
-    display: block;
-    min-height: 100px;
+    height: 100px;
   }
 `;
 
