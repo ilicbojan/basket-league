@@ -17,7 +17,7 @@ export default class SeasonStore {
       () => this.predicate.keys(),
       () => {
         this.matchRegistry.clear();
-        this.loadMatches(this.standings?.id!);
+        this.loadMatches(this.seasonId!);
       }
     );
   }
@@ -26,6 +26,7 @@ export default class SeasonStore {
   standingsRegistry = new Map();
   matchRegistry = new Map();
   standings: IStandings | null = null;
+  seasonId: number | null = null;
   loading = false;
   submitting = false;
   error: AxiosResponse | null = null;
@@ -51,7 +52,10 @@ export default class SeasonStore {
   setMatchesPredicate = (predicate: string, value: string) => {
     this.predicate.clear();
     this.predicate.set(predicate, value);
-    history.push(`/seasons/${this.standings?.id}/results`);
+  };
+
+  setSeasonId = (id: number) => {
+    this.seasonId = id;
   };
 
   loadSeasons = async () => {
@@ -109,7 +113,6 @@ export default class SeasonStore {
           this.matchRegistry.set(match.id, match);
         });
         this.loading = false;
-        console.log(matches);
       });
     } catch (error) {
       runInAction(() => {

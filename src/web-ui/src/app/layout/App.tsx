@@ -4,10 +4,9 @@ import { observer } from 'mobx-react-lite';
 import { RootStoreContext } from '../stores/rootStore';
 import { ToastContainer } from 'react-toastify';
 import Modal from '../common/modal/Modal';
-import SeasonStandings from '../../features/seasons/standings/SeasonStandings';
 import HomePage from '../../features/home/HomePage';
 import Nav from './nav/navigation/Nav';
-import SeasonMatches from '../../features/seasons/matches/SeasonMatches';
+import SeasonDetails from '../../features/seasons/details/SeasonDetails';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -28,38 +27,35 @@ function App() {
     <>
       <ToastContainer position='bottom-right' />
       <div>
-        <Modal show={modal.open}></Modal>
         <Nav />
-        <Route exact path='/' component={HomePage} />
-        <Route
-          path={'/(.+)'}
-          render={() => (
-            <>
-              <Switch>
-                <Route exact path='/seasons/:id' component={SeasonStandings} />
-                <Route
-                  exact
-                  path='/seasons/:id/results'
-                  component={SeasonMatches}
-                />
-                {/* <PrivateRoute exact path='/profile' component={UserProfile} />
+        <div className='appContainer'>
+          <Modal show={modal.open}></Modal>
+          <Route exact path='/' component={HomePage} />
+          <Route
+            path={'/(.+)'}
+            render={() => (
+              <>
+                <Switch>
+                  <Route exact path='/seasons/:id' component={SeasonDetails} />
+                  {/* <PrivateRoute exact path='/profile' component={UserProfile} />
                 <PrivateRoute
-                  exact
-                  path='/favourites'
-                  user
-                  component={FavouritesList}
+                exact
+                path='/favourites'
+                user
+                component={FavouritesList}
                 />
                 <PrivateRoute
-                  exact
-                  path='/working-hours'
-                  client
-                  component={WorkingHours}
+                exact
+                path='/working-hours'
+                client
+                component={WorkingHours}
                 />
-                <Route component={NotFound} /> */}
-              </Switch>
-            </>
-          )}
-        />
+              <Route component={NotFound} /> */}
+                </Switch>
+              </>
+            )}
+          />
+        </div>
       </div>
     </>
   );
