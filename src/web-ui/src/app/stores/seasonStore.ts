@@ -1,33 +1,22 @@
 import { AxiosResponse } from 'axios';
-import { makeAutoObservable, reaction, runInAction } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import agent from '../api/agent';
-import { IMatch } from '../models/match';
-import { IStandings } from '../models/season';
+import { ISeason, IStandings } from '../models/season';
 import { RootStore } from './rootStore';
-import { history } from '../..';
-
 export default class SeasonStore {
   rootStore: RootStore;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this);
-
-    reaction(
-      () => this.predicate.keys(),
-      () => {
-        this.matchRegistry.clear();
-        this.loadMatches(this.seasonId!);
-      }
-    );
   }
 
   seasonRegistry = new Map();
+  season: ISeason | null = null;
   standingsRegistry = new Map();
-  matchRegistry = new Map();
   standings: IStandings | null = null;
-  seasonId: number | null = null;
   loading = false;
+  loadingStandings = false;
   submitting = false;
   error: AxiosResponse | null = null;
   predicate = new Map();
@@ -35,28 +24,6 @@ export default class SeasonStore {
   get seasons() {
     return Array.from(this.seasonRegistry.values());
   }
-
-  get matches(): IMatch[] {
-    return Array.from(this.matchRegistry.values());
-  }
-
-  get axiosParams() {
-    const params = new URLSearchParams();
-    this.predicate.forEach((value, key) => {
-      params.append(key, value);
-    });
-
-    return params;
-  }
-
-  setMatchesPredicate = (predicate: string, value: string) => {
-    this.predicate.clear();
-    this.predicate.set(predicate, value);
-  };
-
-  setSeasonId = (id: number) => {
-    this.seasonId = id;
-  };
 
   loadSeasons = async () => {
     this.loading = true;
@@ -77,22 +44,48 @@ export default class SeasonStore {
     }
   };
 
-  loadStandings = async (id: number) => {
-    let standings: IStandings = this.getStandings(id);
-    if (standings) {
-      this.standings = standings;
+  loadSeason = async (id: number) => {
+    let season: ISeason = this.getSeason(id);
+    if (season) {
+      this.season = season;
     } else {
       this.loading = true;
       try {
-        standings = await agent.Seasons.standings(id);
+        season = await agent.Seasons.details(id);
         runInAction(() => {
-          this.standingsRegistry.set(standings.id, standings);
-          this.standings = standings;
+          this.seasonRegistry.set(season.id, season);
+          this.season = season;
           this.loading = false;
         });
       } catch (error) {
         runInAction(() => {
           this.loading = false;
+        });
+        console.log(error);
+      }
+    }
+  };
+
+  getSeason = (id: number): ISeason => {
+    return this.seasonRegistry.get(id);
+  };
+
+  loadStandings = async (id: number) => {
+    let standings: IStandings = this.getStandings(id);
+    if (standings) {
+      this.standings = standings;
+    } else {
+      this.loadingStandings = true;
+      try {
+        standings = await agent.Seasons.standings(id);
+        runInAction(() => {
+          this.standingsRegistry.set(standings.seasonId, standings);
+          this.standings = standings;
+          this.loadingStandings = false;
+        });
+      } catch (error) {
+        runInAction(() => {
+          this.loadingStandings = false;
           this.error = error;
         });
         console.log(error);
@@ -102,24 +95,5 @@ export default class SeasonStore {
 
   getStandings = (id: number): IStandings => {
     return this.standingsRegistry.get(id);
-  };
-
-  loadMatches = async (id: number) => {
-    this.loading = true;
-    try {
-      const matches = await agent.Seasons.matchesList(id, this.axiosParams);
-      runInAction(() => {
-        matches.forEach((match) => {
-          this.matchRegistry.set(match.id, match);
-        });
-        this.loading = false;
-      });
-    } catch (error) {
-      runInAction(() => {
-        this.loading = false;
-        this.error = error;
-      });
-      console.log(error);
-    }
   };
 }

@@ -1,26 +1,26 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { RootStoreContext } from '../../../app/stores/rootStore';
+import MatchesList from '../../matches/list/MatchesList';
 
-const SeasonMatches = observer(() => {
+interface IProps {
+  isPlayed: boolean;
+}
+
+const SeasonMatches: React.FC<IProps> = observer(({ isPlayed }) => {
   const rootStore = useContext(RootStoreContext);
-  const { matches } = rootStore.seasonStore;
+  const { setMatchesPredicate } = rootStore.matchStore;
+
+  const isPlayedString = isPlayed ? 'true' : 'false';
+
+  useEffect(() => {
+    setMatchesPredicate('isPlayed', isPlayedString);
+  }, [setMatchesPredicate]);
 
   return (
-    <div>
-      <div>Results</div>
-      {matches.map((match) => (
-        <div key={match.id}>
-          <div>{match.round}</div>
-          <div>{match.date}</div>
-          <div>{match.time}</div>
-          <div>{match.homeTeam.name}</div>
-          <div>{match.homePoints}</div>
-          <div>{match.awayPoints}</div>
-          <div>{match.awayTeam.name}</div>
-        </div>
-      ))}
-    </div>
+    <Fragment>
+      <MatchesList />
+    </Fragment>
   );
 });
 

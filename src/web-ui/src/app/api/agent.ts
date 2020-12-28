@@ -85,15 +85,20 @@ const Leagues = {
 
 const Seasons = {
   list: (): Promise<ISeason[]> => requests.get('/seasons'),
+  details: (id: number): Promise<ISeason> => requests.get(`/seasons/${id}`),
   standings: (id: number): Promise<IStandings> =>
-    requests.get(`/seasons/${id}`),
-  matchesList: (id: number, params: URLSearchParams): Promise<IMatch[]> =>
+    requests.get(`/seasons/${id}/standings`),
+};
+
+const Matches = {
+  list: (id: number, params: URLSearchParams): Promise<IMatch[]> =>
     axios.get(`/seasons/${id}/matches`, { params }).then(responseBody),
 };
 
 const agent = {
   Leagues,
   Seasons,
+  Matches,
 };
 
 export default agent;

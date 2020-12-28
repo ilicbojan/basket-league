@@ -17,41 +17,38 @@ const SeasonDetails: React.FC<RouteComponentProps<IProps>> = observer(
     const rootStore = useContext(RootStoreContext);
     const {
       loadStandings,
-      setMatchesPredicate,
-      standings,
+      loadSeason,
+      season,
       loading,
-      setSeasonId,
     } = rootStore.seasonStore;
+    const { setSeasonId } = rootStore.matchStore;
 
-    const [selected, setSelected] = useState<string>('standings');
-    const tabs = ['standings', 'matches', 'results'];
+    const [selected, setSelected] = useState<string>('Standings');
+    const tabs = ['Standings', 'Matches', 'Results'];
 
     useEffect(() => {
-      setSeasonId(Number.parseInt(match.params.id));
-      loadStandings(Number.parseInt(match.params.id));
-      setMatchesPredicate('isPlayed', 'true');
-    }, [
-      loadStandings,
-      match.params.id,
-      history,
-      setMatchesPredicate,
-      setSeasonId,
-    ]);
+      const id = Number.parseInt(match.params.id);
+      setSeasonId(id);
+      loadSeason(id);
+      loadStandings(id);
+    }, [loadStandings, loadSeason, match.params.id, history, setSeasonId]);
 
     if (loading) return <LoadingSpinner />;
 
     return (
       <div>
         <div>
-          {standings?.name} - {standings?.year}
+          {season?.name} - {season?.year}
         </div>
         <TabNav tabs={tabs} selected={selected} setSelected={setSelected}>
-          <Tab isSelected={selected === 'standings'}>
+          <Tab isSelected={selected === 'Standings'}>
             <SeasonStandings />
           </Tab>
-          <Tab isSelected={selected === 'matches'}>Text</Tab>
-          <Tab isSelected={selected === 'results'}>
-            <SeasonMatches />
+          <Tab isSelected={selected === 'Matches'}>
+            <SeasonMatches isPlayed={false} />
+          </Tab>
+          <Tab isSelected={selected === 'Results'}>
+            <SeasonMatches isPlayed={true} />
           </Tab>
         </TabNav>
       </div>

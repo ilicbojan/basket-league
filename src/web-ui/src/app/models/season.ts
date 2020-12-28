@@ -3,6 +3,7 @@ export interface ISeason {
   name: string;
   year: number;
   league: ILeague;
+  field: IField;
 }
 
 interface ILeague {
@@ -10,10 +11,13 @@ interface ILeague {
   name: string;
 }
 
-export interface IStandings {
+interface IField {
   id: number;
   name: string;
-  year: number;
+}
+
+export interface IStandings {
+  seasonId: number;
   teams: ITeam[];
 }
 

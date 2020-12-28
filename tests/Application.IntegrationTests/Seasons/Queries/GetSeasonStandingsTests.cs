@@ -46,7 +46,7 @@ namespace Application.IntegrationTests.Seasons.Queries
 
             var result = await SendAsync(query);
 
-            result.Should().BeOfType<SeasonVm>();
+            result.Should().BeOfType<SeasonStandingsVm>();
             result.Should().NotBeNull();
             result.Id.Should().Be(seasonId);
             result.Name.Should().NotBeNullOrEmpty();

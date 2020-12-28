@@ -6,7 +6,7 @@ import { RootStoreContext } from '../../../app/stores/rootStore';
 
 const SeasonStandings = observer(() => {
   const rootStore = useContext(RootStoreContext);
-  const { standings, loading } = rootStore.seasonStore;
+  const { standings, loadingStandings } = rootStore.seasonStore;
 
   return (
     <div>
@@ -25,7 +25,7 @@ const SeasonStandings = observer(() => {
           </tr>
         </thead>
         <tbody>
-          {loading ? (
+          {loadingStandings ? (
             <tr>
               <td className='spin' colSpan={9}>
                 <LoadingSpinner />

@@ -2,6 +2,7 @@ import { configure } from 'mobx';
 import { createContext } from 'react';
 import CommonStore from './commonStore';
 import LeagueStore from './leagueStore';
+import MatchStore from './matchStore';
 import ModalStore from './modalStore';
 import SeasonStore from './seasonStore';
 
@@ -12,12 +13,14 @@ export class RootStore {
   leagueStore: LeagueStore;
   modalStore: ModalStore;
   seasonStore: SeasonStore;
+  matchStore: MatchStore;
 
   constructor() {
     this.commonStore = new CommonStore(this);
     this.leagueStore = new LeagueStore(this);
     this.modalStore = new ModalStore(this);
     this.seasonStore = new SeasonStore(this);
+    this.matchStore = new MatchStore(this);
   }
 }
 
