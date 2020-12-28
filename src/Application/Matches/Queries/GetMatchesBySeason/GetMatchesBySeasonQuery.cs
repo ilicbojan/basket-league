@@ -9,11 +9,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Seasons.Queries.GetSeasonMatches
+namespace Application.Matches.Queries.GetMatchesBySeason
 {
-    public class GetSeasonMatchesQuery : IRequest<List<MatchDto>>
+    public class GetMatchesBySeasonQuery : IRequest<List<MatchDto>>
     {
-        public GetSeasonMatchesQuery(int id, bool isPlayed)
+        public GetMatchesBySeasonQuery(int id, bool isPlayed)
         {
             Id = id;
             IsPlayed = isPlayed;
@@ -23,18 +23,18 @@ namespace Application.Seasons.Queries.GetSeasonMatches
         public bool IsPlayed { get; set; }
     }
 
-    public class GetSeasonMatchesQueryHandler : IRequestHandler<GetSeasonMatchesQuery, List<MatchDto>>
+    public class GetMatchesBySeasonQueryHandler : IRequestHandler<GetMatchesBySeasonQuery, List<MatchDto>>
     {
         private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetSeasonMatchesQueryHandler(IAppDbContext context, IMapper mapper)
+        public GetMatchesBySeasonQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<List<MatchDto>> Handle(GetSeasonMatchesQuery request, CancellationToken cancellationToken)
+        public async Task<List<MatchDto>> Handle(GetMatchesBySeasonQuery request, CancellationToken cancellationToken)
         {
             var season = await _context.Seasons.FindAsync(request.Id);
 

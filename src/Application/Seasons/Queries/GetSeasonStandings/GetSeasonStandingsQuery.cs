@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Application.Seasons.Queries.GetSeasonStandings
 {
-    public class GetSeasonStandingsQuery : IRequest<SeasonVm>
+    public class GetSeasonStandingsQuery : IRequest<SeasonStandingsVm>
     {
         public int Id { get; set; }
     }
 
-    public class GetSeasonStandingsQueryHandler : IRequestHandler<GetSeasonStandingsQuery, SeasonVm>
+    public class GetSeasonStandingsQueryHandler : IRequestHandler<GetSeasonStandingsQuery, SeasonStandingsVm>
     {
         private readonly IAppDbContext _context;
 
@@ -24,7 +24,7 @@ namespace Application.Seasons.Queries.GetSeasonStandings
             _context = context;
         }
 
-        public async Task<SeasonVm> Handle(GetSeasonStandingsQuery request, CancellationToken cancellationToken)
+        public async Task<SeasonStandingsVm> Handle(GetSeasonStandingsQuery request, CancellationToken cancellationToken)
         {
             var season = await _context.Seasons.FindAsync(request.Id);
 
@@ -33,11 +33,9 @@ namespace Application.Seasons.Queries.GetSeasonStandings
                 throw new NotFoundException(nameof(Season), request.Id);
             }
 
-            var vm = new SeasonVm
+            var vm = new SeasonStandingsVm
             {
-                Id = season.Id,
-                Name = season.Name,
-                Year = season.Year
+                SeasonId = season.Id,
             };
 
             var teams = new Dictionary<int, TeamDto>();

@@ -2,7 +2,7 @@
 using Domain.Entities;
 using System;
 
-namespace Application.Seasons.Queries.GetSeasonMatches
+namespace Application.Matches.Queries.GetMatchesBySeason
 {
     public class MatchDto : IMapFrom<Match>
     {

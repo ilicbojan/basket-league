@@ -1,9 +1,9 @@
 ﻿using Application.Common.Mappings;
 using Domain.Entities;
 
-namespace Application.Seasons.Queries.GetSeasonMatches
+namespace Application.Seasons.Queries.GetSeason
 {
-    public class TeamDto : IMapFrom<Team>
+    public class LeagueDto : IMapFrom<League>
     {
         public int Id { get; set; }
         public string Name { get; set; }

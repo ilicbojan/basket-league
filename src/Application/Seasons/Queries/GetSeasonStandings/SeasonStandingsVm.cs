@@ -2,11 +2,9 @@
 
 namespace Application.Seasons.Queries.GetSeasonStandings
 {
-    public class SeasonVm
+    public class SeasonStandingsVm
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Year { get; set; }
+        public int SeasonId { get; set; }
         public List<TeamDto> Teams { get; set; } = new List<TeamDto>();
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Application.Seasons.Commands.CreateSeason;
-using Application.Seasons.Queries.GetSeasonMatches;
+using Application.Seasons.Queries.GetSeason;
 using Application.Seasons.Queries.GetSeasonPlayersStats;
 using Application.Seasons.Queries.GetSeasons;
 using Application.Seasons.Queries.GetSeasonStandings;
@@ -18,15 +18,15 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<SeasonVm>> GetStandings(int id)
+        public async Task<ActionResult<SeasonVm>> Get(int id)
         {
-            return await Mediator.Send(new GetSeasonStandingsQuery { Id = id });
+            return await Mediator.Send(new GetSeasonQuery { Id = id });
         }
 
-        [HttpGet("{id}/matches")]
-        public async Task<ActionResult<List<MatchDto>>> GetMatches(int id, bool isPlayed)
+        [HttpGet("{id}/standings")]
+        public async Task<ActionResult<SeasonStandingsVm>> GetStandings(int id)
         {
-            return await Mediator.Send(new GetSeasonMatchesQuery(id, isPlayed));
+            return await Mediator.Send(new GetSeasonStandingsQuery { Id = id });
         }
 
         [HttpGet("{id}/stats-players")]
