@@ -21,6 +21,7 @@ export default class MatchStore {
   }
 
   matchRegistry = new Map();
+  match: IMatch | null = null;
   resultRegistry = new Map();
   seasonId: number | null = null;
   loadingMatches = false;
@@ -67,5 +68,31 @@ export default class MatchStore {
       });
       console.log(error);
     }
+  };
+
+  loadMatch = async (id: number) => {
+    let match: IMatch = this.getMatch(id);
+    if (match) {
+      this.match = match;
+    } else {
+      this.loadingMatches = true;
+      try {
+        match = await agent.Matches.details(id);
+        runInAction(() => {
+          this.matchRegistry.set(match.id, match);
+          this.match = match;
+          this.loadingMatches = false;
+        });
+      } catch (error) {
+        runInAction(() => {
+          this.loadingMatches = false;
+        });
+        console.log(error);
+      }
+    }
+  };
+
+  getMatch = (id: number): IMatch => {
+    return this.matchRegistry.get(id);
   };
 }

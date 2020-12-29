@@ -7,6 +7,7 @@ import Modal from '../common/modal/Modal';
 import HomePage from '../../features/home/HomePage';
 import Nav from './nav/navigation/Nav';
 import SeasonDetails from '../../features/seasons/details/SeasonDetails';
+import MatchDetails from '../../features/matches/details/MatchDetails';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -37,6 +38,7 @@ function App() {
               <>
                 <Switch>
                   <Route exact path='/seasons/:id' component={SeasonDetails} />
+                  <Route exact path='/matches/:id' component={MatchDetails} />
                   {/* <PrivateRoute exact path='/profile' component={UserProfile} />
                 <PrivateRoute
                 exact

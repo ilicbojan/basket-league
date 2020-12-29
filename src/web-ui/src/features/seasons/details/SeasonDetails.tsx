@@ -24,7 +24,7 @@ const SeasonDetails: React.FC<RouteComponentProps<IProps>> = observer(
     const { setSeasonId } = rootStore.matchStore;
 
     const [selected, setSelected] = useState<string>('Standings');
-    const tabs = ['Standings', 'Matches', 'Results'];
+    const tabs = ['Standings', 'Matches', 'Results', 'Leaders', 'Archive'];
 
     useEffect(() => {
       const id = Number.parseInt(match.params.id);
@@ -50,6 +50,8 @@ const SeasonDetails: React.FC<RouteComponentProps<IProps>> = observer(
           <Tab isSelected={selected === 'Results'}>
             <SeasonMatches isPlayed={true} />
           </Tab>
+          <Tab isSelected={selected === 'Leaders'}>Leaders</Tab>
+          <Tab isSelected={selected === 'Archive'}>Archive</Tab>
         </TabNav>
       </div>
     );
