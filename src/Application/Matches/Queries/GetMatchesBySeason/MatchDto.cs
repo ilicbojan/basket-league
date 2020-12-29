@@ -12,6 +12,7 @@ namespace Application.Matches.Queries.GetMatchesBySeason
         public int Round { get; set; }
         public int HomePoints { get; set; }
         public int AwayPoints { get; set; }
+        public bool IsPlayed { get; set; }
 
         public TeamDto HomeTeam { get; set; }
         public TeamDto AwayTeam { get; set; }
