@@ -4,7 +4,7 @@ import { history } from '../..';
 import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
 import { IMatch } from '../models/match';
-import { ISeason, IStandings } from '../models/season';
+import { IPlayersStats, ISeason, IStandings } from '../models/season';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -89,6 +89,8 @@ const Seasons = {
   details: (id: number): Promise<ISeason> => requests.get(`/seasons/${id}`),
   standings: (id: number): Promise<IStandings> =>
     requests.get(`/seasons/${id}/standings`),
+  playersStats: (id: number): Promise<IPlayersStats> =>
+    requests.get(`/seasons/${id}/stats-players`),
 };
 
 const Matches = {

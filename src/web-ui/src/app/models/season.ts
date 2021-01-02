@@ -32,3 +32,20 @@ interface ITeam {
   pointsDiff: number;
   points: number;
 }
+
+export interface IPlayersStats {
+  players: IPlayerStats[];
+}
+
+export interface IPlayerStats {
+  id: number;
+  firstName: string;
+  lastName: string;
+  matchesPlayed: number;
+  pointsAvg: number;
+  assistsAvg: number;
+  foulsAvg: number;
+  points: number;
+  assists: number;
+  fouls: number;
+}

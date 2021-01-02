@@ -6,6 +6,7 @@ import Tab from '../../../app/common/tabs/tab/Tab';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
 import SeasonMatches from '../matches/SeasonMatches';
+import SeasonPlayersStats from '../players-stats/SeasonPlayersStats';
 import SeasonStandings from '../standings/SeasonStandings';
 
 interface IProps {
@@ -18,6 +19,7 @@ const SeasonDetails: React.FC<RouteComponentProps<IProps>> = observer(
     const {
       loadStandings,
       loadSeason,
+      loadPlayersStats,
       season,
       loading,
     } = rootStore.seasonStore;
@@ -31,7 +33,15 @@ const SeasonDetails: React.FC<RouteComponentProps<IProps>> = observer(
       setSeasonId(id);
       loadSeason(id);
       loadStandings(id);
-    }, [loadStandings, loadSeason, match.params.id, history, setSeasonId]);
+      loadPlayersStats(id);
+    }, [
+      loadStandings,
+      loadSeason,
+      match.params.id,
+      history,
+      setSeasonId,
+      loadPlayersStats,
+    ]);
 
     if (loading) return <LoadingSpinner />;
 
@@ -50,7 +60,9 @@ const SeasonDetails: React.FC<RouteComponentProps<IProps>> = observer(
           <Tab isSelected={selected === 'Results'}>
             <SeasonMatches isPlayed={true} />
           </Tab>
-          <Tab isSelected={selected === 'Leaders'}>Leaders</Tab>
+          <Tab isSelected={selected === 'Leaders'}>
+            <SeasonPlayersStats />
+          </Tab>
           <Tab isSelected={selected === 'Archive'}>Archive</Tab>
         </TabNav>
       </div>

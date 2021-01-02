@@ -30,7 +30,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}/stats-players")]
-        public async Task<ActionResult<List<PlayerDto>>> GetPlayersStats(int id)
+        public async Task<ActionResult<PlayersStatsVm>> GetPlayersStats(int id)
         {
             return await Mediator.Send(new GetSeasonPlayersStatsQuery { Id = id });
         }

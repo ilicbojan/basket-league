@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Application.Seasons.Queries.GetSeasonPlayersStats
 {
-    public class GetSeasonPlayersStatsQuery : IRequest<List<PlayerDto>>
+    public class GetSeasonPlayersStatsQuery : IRequest<PlayersStatsVm>
     {
         public int Id { get; set; }
     }
 
-    public class GetSeasonPlayersStatsQueryHandler : IRequestHandler<GetSeasonPlayersStatsQuery, List<PlayerDto>>
+    public class GetSeasonPlayersStatsQueryHandler : IRequestHandler<GetSeasonPlayersStatsQuery, PlayersStatsVm>
     {
         private readonly IAppDbContext _context;
 
@@ -24,7 +24,7 @@ namespace Application.Seasons.Queries.GetSeasonPlayersStats
             _context = context;
         }
 
-        public async Task<List<PlayerDto>> Handle(GetSeasonPlayersStatsQuery request, CancellationToken cancellationToken)
+        public async Task<PlayersStatsVm> Handle(GetSeasonPlayersStatsQuery request, CancellationToken cancellationToken)
         {
             var season = await _context.Seasons.FindAsync(request.Id);
 
@@ -46,6 +46,7 @@ namespace Application.Seasons.Queries.GetSeasonPlayersStats
                     {
                         playersStats.Add(mp.PlayerId, new PlayerDto
                         {
+                            Id = mp.PlayerId,
                             FirstName = mp.Player.User.FirstName,
                             LastName = mp.Player.User.LastName
                         });
@@ -63,10 +64,13 @@ namespace Application.Seasons.Queries.GetSeasonPlayersStats
                 }
             }
 
-            return playersStats.Values
+            var vm = new PlayersStatsVm();
+            vm.Players = playersStats.Values
                 .OrderByDescending(x => x.PointsAvg)
                 .ThenByDescending(x => x.AssistsAvg)
                 .ToList();
+
+            return vm;
         }
     }
 }

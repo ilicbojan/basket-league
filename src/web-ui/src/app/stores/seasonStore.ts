@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 import agent from '../api/agent';
-import { ISeason, IStandings } from '../models/season';
+import { IPlayerStats, ISeason, IStandings } from '../models/season';
 import { RootStore } from './rootStore';
 export default class SeasonStore {
   rootStore: RootStore;
@@ -15,14 +15,20 @@ export default class SeasonStore {
   season: ISeason | null = null;
   standingsRegistry = new Map();
   standings: IStandings | null = null;
+  playersStatsRegistry = new Map();
   loading = false;
   loadingStandings = false;
+  loadingPlayersStats = false;
   submitting = false;
   error: AxiosResponse | null = null;
   predicate = new Map();
 
   get seasons() {
     return Array.from(this.seasonRegistry.values());
+  }
+
+  get playersStats(): IPlayerStats[] {
+    return Array.from(this.playersStatsRegistry.values());
   }
 
   loadSeasons = async () => {
@@ -95,5 +101,24 @@ export default class SeasonStore {
 
   getStandings = (id: number): IStandings => {
     return this.standingsRegistry.get(id);
+  };
+
+  loadPlayersStats = async (id: number) => {
+    this.loadingPlayersStats = true;
+    try {
+      const playersStats = await agent.Seasons.playersStats(id);
+      const { players } = playersStats;
+      runInAction(() => {
+        players.forEach((player) => {
+          this.playersStatsRegistry.set(player.id, player);
+        });
+        this.loadingPlayersStats = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.loadingPlayersStats = false;
+      });
+      console.log(error);
+    }
   };
 }
