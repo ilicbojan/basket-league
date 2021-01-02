@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
 import { ILeague, ILeaguesVm } from '../models/league';
+import { ILineup } from '../models/lineup';
 import { IMatch } from '../models/match';
 import { ISeason, IStandings } from '../models/season';
 
@@ -96,10 +97,16 @@ const Matches = {
   details: (id: number): Promise<IMatch> => requests.get(`/matches/${id}`),
 };
 
+const MatchPlayers = {
+  lineup: (id: number): Promise<ILineup> =>
+    requests.get(`/matches/${id}/lineup`),
+};
+
 const agent = {
   Leagues,
   Seasons,
   Matches,
+  MatchPlayers,
 };
 
 export default agent;

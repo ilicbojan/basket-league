@@ -1,6 +1,7 @@
 ﻿using Application.MatchPlayers.Commands.AddFoul;
 using Application.MatchPlayers.Commands.AddPoints;
 using Application.MatchPlayers.Commands.CreateLineup;
+using Application.MatchPlayers.Queries.GetLineup;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,7 +11,13 @@ namespace API.Controllers
     [Route("api/matches")]
     public class MatchPlayersController : ApiController
     {
-        [HttpPost("{matchId}/lineups")]
+        [HttpGet("{matchId}/lineup")]
+        public async Task<ActionResult<LineupVm>> GetLineup(int matchId)
+        {
+            return await Mediator.Send(new GetLineupQuery { MatchId = matchId });
+        }
+
+        [HttpPost("{matchId}/lineup")]
         public async Task<ActionResult<Unit>> CreateLineup(int matchId, CreateLineupCommand command)
         {
             command.MatchId = matchId;
