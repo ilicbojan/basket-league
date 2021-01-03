@@ -13,6 +13,7 @@ namespace Application.Matches.Queries.GetMatch
         public int HomePoints { get; set; }
         public int AwayPoints { get; set; }
         public bool IsPlayed { get; set; }
+        public int SeasonId { get; set; }
 
         public TeamDto HomeTeam { get; set; }
         public TeamDto AwayTeam { get; set; }

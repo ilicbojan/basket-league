@@ -36,6 +36,7 @@ namespace Application.Seasons.Queries.GetSeasonPlayersStats
             var matches = season.Matches
                 .Where(x => x.IsPlayed)
                 .ToList();
+
             var playersStats = new Dictionary<int, PlayerDto>();
 
             foreach (var match in matches)
@@ -65,6 +66,7 @@ namespace Application.Seasons.Queries.GetSeasonPlayersStats
             }
 
             var vm = new PlayersStatsVm();
+
             vm.Players = playersStats.Values
                 .OrderByDescending(x => x.PointsAvg)
                 .ThenByDescending(x => x.AssistsAvg)

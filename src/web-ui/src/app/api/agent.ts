@@ -5,6 +5,7 @@ import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
 import { IMatch } from '../models/match';
 import { IPlayersStats, ISeason, IStandings } from '../models/season';
+import { ITeam } from '../models/team';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -104,11 +105,16 @@ const MatchPlayers = {
     requests.get(`/matches/${id}/lineup`),
 };
 
+const Teams = {
+  details: (id: number): Promise<ITeam> => requests.get(`/teams/${id}`),
+};
+
 const agent = {
   Leagues,
   Seasons,
   Matches,
   MatchPlayers,
+  Teams,
 };
 
 export default agent;

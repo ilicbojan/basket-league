@@ -5,6 +5,7 @@ export interface IMatch {
   round: number;
   homePoints: number;
   awayPoints: number;
+  seasonId: number;
   homeTeam: ITeam;
   awayTeam: ITeam;
 }

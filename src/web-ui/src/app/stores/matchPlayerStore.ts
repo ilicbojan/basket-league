@@ -24,6 +24,7 @@ export default class MatchPlayerStore {
       const lineup = await agent.MatchPlayers.lineup(matchId);
       const { players } = lineup;
       runInAction(() => {
+        this.lineupRegistry.clear();
         players.forEach((player) => {
           this.lineupRegistry.set(player.id, player);
         });

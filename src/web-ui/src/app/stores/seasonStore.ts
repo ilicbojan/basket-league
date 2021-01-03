@@ -109,6 +109,7 @@ export default class SeasonStore {
       const playersStats = await agent.Seasons.playersStats(id);
       const { players } = playersStats;
       runInAction(() => {
+        this.playersStatsRegistry.clear();
         players.forEach((player) => {
           this.playersStatsRegistry.set(player.id, player);
         });

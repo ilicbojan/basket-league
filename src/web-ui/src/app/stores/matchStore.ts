@@ -70,10 +70,11 @@ export default class MatchStore {
     }
   };
 
-  loadMatch = async (id: number) => {
+  loadMatch = async (id: number): Promise<number> => {
     let match: IMatch = this.getMatch(id);
     if (match) {
       this.match = match;
+      return match.seasonId;
     } else {
       this.loadingMatches = true;
       try {
@@ -89,6 +90,7 @@ export default class MatchStore {
         });
         console.log(error);
       }
+      return match.seasonId;
     }
   };
 
