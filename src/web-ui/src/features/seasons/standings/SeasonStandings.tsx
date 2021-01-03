@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Table from '../../../app/common/table/Table';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
@@ -35,7 +36,9 @@ const SeasonStandings = observer(() => {
             standings?.teams.map((team, i) => (
               <tr key={team.id}>
                 <td>{i + 1}</td>
-                <td>{team.name}</td>
+                <td>
+                  <Link to={`/teams/${team.id}`}>{team.name}</Link>
+                </td>
                 <td>{team.matchesPlayed}</td>
                 <td>{team.wins}</td>
                 <td>{team.losses}</td>

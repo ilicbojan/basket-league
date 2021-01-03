@@ -6,6 +6,7 @@ import MatchPlayerStore from './matchPlayerStore';
 import MatchStore from './matchStore';
 import ModalStore from './modalStore';
 import SeasonStore from './seasonStore';
+import TeamStore from './teamStore';
 
 configure({ enforceActions: 'always' });
 
@@ -16,6 +17,7 @@ export class RootStore {
   seasonStore: SeasonStore;
   matchStore: MatchStore;
   matchPlayerStore: MatchPlayerStore;
+  teamStore: TeamStore;
 
   constructor() {
     this.commonStore = new CommonStore(this);
@@ -24,6 +26,7 @@ export class RootStore {
     this.seasonStore = new SeasonStore(this);
     this.matchStore = new MatchStore(this);
     this.matchPlayerStore = new MatchPlayerStore(this);
+    this.teamStore = new TeamStore(this);
   }
 }
 
