@@ -1,7 +1,7 @@
 ﻿using Application.Common.Mappings;
 using Domain.Entities;
 
-namespace Application.Matches.Queries.GetMatchesBySeason
+namespace Application.Matches.Queries.GetMatches
 {
     public class TeamDto : IMapFrom<Team>
     {

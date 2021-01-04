@@ -1,7 +1,7 @@
 ﻿using Application.Matches.Commands.CreateMatch;
 using Application.Matches.Commands.FinishMatch;
 using Application.Matches.Queries.GetMatch;
-using Application.Matches.Queries.GetMatchesBySeason;
+using Application.Matches.Queries.GetMatches;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -11,11 +11,10 @@ namespace API.Controllers
 {
     public class MatchesController : ApiController
     {
-        [Route("/api/seasons/{id}/matches")]
         [HttpGet]
-        public async Task<ActionResult<List<MatchDto>>> GetMatchesBySeason(int id, bool isPlayed)
+        public async Task<ActionResult<List<MatchDto>>> GetMatchesBySeason(int? seasonId, int? teamId, bool isPlayed)
         {
-            return await Mediator.Send(new GetMatchesBySeasonQuery(id, isPlayed));
+            return await Mediator.Send(new GetMatchesQuery(seasonId, teamId, isPlayed));
         }
 
         [HttpGet("{id}")]
