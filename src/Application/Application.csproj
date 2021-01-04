@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Field\Queries\" />
-    <Folder Include="Players\Queries\" />
   </ItemGroup>
 
   <PropertyGroup>
