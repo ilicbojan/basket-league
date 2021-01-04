@@ -95,8 +95,8 @@ const Seasons = {
 };
 
 const Matches = {
-  list: (id: number, params: URLSearchParams): Promise<IMatch[]> =>
-    axios.get(`/seasons/${id}/matches`, { params }).then(responseBody),
+  list: (params: URLSearchParams): Promise<IMatch[]> =>
+    axios.get(`/matches`, { params }).then(responseBody),
   details: (id: number): Promise<IMatch> => requests.get(`/matches/${id}`),
 };
 

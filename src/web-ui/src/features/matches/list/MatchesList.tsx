@@ -1,23 +1,53 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
 import MatchesListItem from '../list-item/MatchesListItem';
 
-const MatchesList = observer(() => {
-  const rootStore = useContext(RootStoreContext);
-  const { matches, loadingMatches } = rootStore.matchStore;
+interface IProps {
+  seasonId?: number;
+  teamId?: number;
+  isPlayed: boolean;
+}
 
-  if (loadingMatches) return <LoadingSpinner />;
+const MatchesList: React.FC<IProps> = observer(
+  ({ seasonId, teamId, isPlayed }) => {
+    const rootStore = useContext(RootStoreContext);
+    const {
+      setMatchPredicates,
+      matches,
+      loadingMatches,
+    } = rootStore.matchStore;
 
-  return (
-    <div>
-      <div>Results</div>
-      {matches.map((match) => (
-        <MatchesListItem match={match} key={match.id} />
-      ))}
-    </div>
-  );
-});
+    const isPlayedString = isPlayed ? 'true' : 'false';
+
+    useEffect(() => {
+      if (seasonId) {
+        const values = {
+          isPlayed: isPlayedString,
+          seasonId: seasonId,
+        };
+        setMatchPredicates(values);
+      } else if (teamId) {
+        const values = {
+          isPlayed: isPlayedString,
+          teamId: teamId,
+        };
+        setMatchPredicates(values);
+      }
+    }, [setMatchPredicates, seasonId, teamId, isPlayedString]);
+
+    if (loadingMatches) return <LoadingSpinner />;
+
+    return (
+      <div>
+        <div>Results</div>
+        {matches.map((match) => (
+          <MatchesListItem match={match} key={match.id} />
+        ))}
+      </div>
+    );
+  }
+);
 
 export default MatchesList;

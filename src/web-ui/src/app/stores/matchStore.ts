@@ -15,15 +15,13 @@ export default class MatchStore {
       () => this.predicate.keys(),
       () => {
         this.matchRegistry.clear();
-        this.loadMatches(this.seasonId!);
+        this.loadMatches();
       }
     );
   }
 
   matchRegistry = new Map();
   match: IMatch | null = null;
-  resultRegistry = new Map();
-  seasonId: number | null = null;
   loadingMatches = false;
   submitting = false;
   error: AxiosResponse | null = null;
@@ -42,19 +40,22 @@ export default class MatchStore {
     return params;
   }
 
-  setMatchesPredicate = (predicate: string, value: string) => {
+  setMatchPredicate = (predicate: string, value: string) => {
     this.predicate.clear();
     this.predicate.set(predicate, value);
   };
 
-  setSeasonId = (id: number) => {
-    this.seasonId = id;
+  setMatchPredicates = (values: any) => {
+    this.predicate.clear();
+    for (var key in values) {
+      this.predicate.set(key, values[key]);
+    }
   };
 
-  loadMatches = async (id: number) => {
+  loadMatches = async () => {
     this.loadingMatches = true;
     try {
-      const matches = await agent.Matches.list(id, this.axiosParams);
+      const matches = await agent.Matches.list(this.axiosParams);
       runInAction(() => {
         matches.forEach((match) => {
           this.matchRegistry.set(match.id, match);

@@ -1,5 +1,5 @@
 ﻿using Application.Common.Exceptions;
-using Application.Matches.Queries.GetMatchesBySeason;
+using Application.Matches.Queries.GetMatches;
 using Application.Seasons.Commands.CreateSeason;
 using FluentAssertions;
 using NUnit.Framework;
@@ -16,7 +16,7 @@ namespace Application.IntegrationTests.Matches.Queries
         [Test]
         public void ShouldRequireValidId()
         {
-            var query = new GetMatchesBySeasonQuery(1, true);
+            var query = new GetMatchesQuery(1, true);
 
             FluentActions.Invoking(() =>
                 SendAsync(query)).Should().Throw<NotFoundException>();
@@ -37,7 +37,7 @@ namespace Application.IntegrationTests.Matches.Queries
                 LeagueId = leageId
             });
 
-            var query = new GetMatchesBySeasonQuery(seasonId, true);
+            var query = new GetMatchesQuery(seasonId, true);
 
             var result = await SendAsync(query);
 
