@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
 
@@ -22,7 +23,9 @@ const PlayersList: React.FC<IProps> = observer(({ teamId }) => {
       {players.map((player) => (
         <div key={player.id}>
           <div>{player.jerseyNumber}</div>
-          <div>{player.firstName}</div>
+          <div>
+            <Link to={`/players/${player.id}`}>{player.firstName}</Link>
+          </div>
           <div>{player.lastName}</div>
         </div>
       ))}

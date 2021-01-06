@@ -9,6 +9,7 @@ import Nav from './nav/navigation/Nav';
 import SeasonDetails from '../../features/seasons/details/SeasonDetails';
 import MatchDetails from '../../features/matches/details/MatchDetails';
 import TeamDetails from '../../features/teams/details/TeamDetails';
+import PlayerDetails from '../../features/players/details/PlayerDetails';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -41,6 +42,7 @@ function App() {
                   <Route exact path='/seasons/:id' component={SeasonDetails} />
                   <Route exact path='/matches/:id' component={MatchDetails} />
                   <Route exact path='/teams/:id' component={TeamDetails} />
+                  <Route exact path='/players/:id' component={PlayerDetails} />
                   {/* <PrivateRoute exact path='/profile' component={UserProfile} />
                 <PrivateRoute
                 exact

@@ -19,6 +19,7 @@ export default class PlayerStore {
   }
 
   playerRegistry = new Map();
+  player: IPlayer | null = null;
   loadingPlayers = false;
   predicate = new Map();
 
@@ -56,5 +57,31 @@ export default class PlayerStore {
       });
       console.log(error);
     }
+  };
+
+  loadPlayer = async (id: number) => {
+    let player = this.getPlayer(id);
+    if (player) {
+      this.player = player;
+    } else {
+      this.loadingPlayers = true;
+      try {
+        player = await agent.Players.details(id);
+        runInAction(() => {
+          this.playerRegistry.set(player.id, player);
+          this.player = player;
+          this.loadingPlayers = false;
+        });
+      } catch (error) {
+        runInAction(() => {
+          this.loadingPlayers = false;
+        });
+        console.log(error);
+      }
+    }
+  };
+
+  getPlayer = (id: number): IPlayer => {
+    return this.playerRegistry.get(id);
   };
 }
