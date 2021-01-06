@@ -6,6 +6,7 @@ import Tab from '../../../app/common/tabs/tab/Tab';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
 import MatchesList from '../../matches/list/MatchesList';
+import PlayersList from '../../players/list/PlayersList';
 
 interface IProps {
   id: string;
@@ -31,7 +32,9 @@ const TeamDetails: React.FC<RouteComponentProps<IProps>> = observer(
         <div>{team?.name}</div>
         <TabNav tabs={tabs} selected={selected} setSelected={setSelected}>
           <Tab isSelected={selected === 'Stats'}>Stats</Tab>
-          <Tab isSelected={selected === 'Players'}>Players</Tab>
+          <Tab isSelected={selected === 'Players'}>
+            <PlayersList teamId={id} />
+          </Tab>
           <Tab isSelected={selected === 'Matches'}>
             <MatchesList isPlayed={false} teamId={id} />
           </Tab>

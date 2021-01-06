@@ -4,6 +4,7 @@ import { history } from '../..';
 import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
 import { IMatch } from '../models/match';
+import { IPlayersVm } from '../models/player';
 import { IPlayersStats, ISeason, IStandings } from '../models/season';
 import { ITeam } from '../models/team';
 
@@ -109,12 +110,18 @@ const Teams = {
   details: (id: number): Promise<ITeam> => requests.get(`/teams/${id}`),
 };
 
+const Players = {
+  list: (params: URLSearchParams): Promise<IPlayersVm> =>
+    axios.get(`/players`, { params }).then(responseBody),
+};
+
 const agent = {
   Leagues,
   Seasons,
   Matches,
   MatchPlayers,
   Teams,
+  Players,
 };
 
 export default agent;

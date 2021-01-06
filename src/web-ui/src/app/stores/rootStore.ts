@@ -5,6 +5,7 @@ import LeagueStore from './leagueStore';
 import MatchPlayerStore from './matchPlayerStore';
 import MatchStore from './matchStore';
 import ModalStore from './modalStore';
+import PlayerStore from './playerStore';
 import SeasonStore from './seasonStore';
 import TeamStore from './teamStore';
 
@@ -18,6 +19,7 @@ export class RootStore {
   matchStore: MatchStore;
   matchPlayerStore: MatchPlayerStore;
   teamStore: TeamStore;
+  playerStore: PlayerStore;
 
   constructor() {
     this.commonStore = new CommonStore(this);
@@ -27,6 +29,7 @@ export class RootStore {
     this.matchStore = new MatchStore(this);
     this.matchPlayerStore = new MatchPlayerStore(this);
     this.teamStore = new TeamStore(this);
+    this.playerStore = new PlayerStore(this);
   }
 }
 
