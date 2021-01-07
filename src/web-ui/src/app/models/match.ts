@@ -14,3 +14,14 @@ interface ITeam {
   id: number;
   name: string;
 }
+
+export interface IMatchStats {
+  homeTeam: ITeam;
+  homePoints: number;
+  homeAssists: number;
+  homeFouls: number;
+  awayTeam: ITeam;
+  awayPoints: number;
+  awayAssists: number;
+  awayFouls: number;
+}

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { history } from '../..';
 import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
-import { IMatch } from '../models/match';
+import { IMatch, IMatchStats } from '../models/match';
 import { IPlayer, IPlayersVm } from '../models/player';
 import { IPlayersStats, ISeason, IStandings } from '../models/season';
 import { ITeam } from '../models/team';
@@ -99,6 +99,8 @@ const Matches = {
   list: (params: URLSearchParams): Promise<IMatch[]> =>
     axios.get(`/matches`, { params }).then(responseBody),
   details: (id: number): Promise<IMatch> => requests.get(`/matches/${id}`),
+  stats: (id: number): Promise<IMatchStats> =>
+    requests.get(`/matches/${id}/stats`),
 };
 
 const MatchPlayers = {

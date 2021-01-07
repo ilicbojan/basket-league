@@ -7,6 +7,7 @@ import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
 import SeasonStandings from '../../seasons/standings/SeasonStandings';
 import MatchLineup from '../lineup/MatchLineup';
+import MatchStats from '../stats/MatchStats';
 
 interface IProps {
   id: string;
@@ -15,7 +16,12 @@ interface IProps {
 const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
   ({ match: routeMatch, history }) => {
     const rootStore = useContext(RootStoreContext);
-    const { loadMatch, loadingMatches, match } = rootStore.matchStore;
+    const {
+      loadMatch,
+      loadMatchStats,
+      loadingMatches,
+      match,
+    } = rootStore.matchStore;
     const { loadLineup } = rootStore.matchPlayerStore;
     const { loadStandings } = rootStore.seasonStore;
 
@@ -23,7 +29,15 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
       const id = Number.parseInt(routeMatch.params.id);
       loadMatch(id).then((seasonId) => loadStandings(seasonId!));
       loadLineup(id);
-    }, [loadMatch, routeMatch.params.id, history, loadLineup, loadStandings]);
+      loadMatchStats(id);
+    }, [
+      loadMatch,
+      routeMatch.params.id,
+      history,
+      loadLineup,
+      loadStandings,
+      loadMatchStats,
+    ]);
 
     const [selected, setSelected] = useState<string>('Summary');
     const tabs = ['Summary', 'Player Stats', 'H2H', 'Standings'];
@@ -44,7 +58,9 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
           <div>{match?.awayTeam.name}</div>
         </div>
         <TabNav tabs={tabs} selected={selected} setSelected={setSelected}>
-          <Tab isSelected={selected === 'Summary'}>Statistics</Tab>
+          <Tab isSelected={selected === 'Summary'}>
+            <MatchStats />
+          </Tab>
           <Tab isSelected={selected === 'Player Stats'}>
             <MatchLineup />
           </Tab>

@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable, reaction, runInAction } from 'mobx';
 import agent from '../api/agent';
-import { IMatch } from '../models/match';
+import { IMatch, IMatchStats } from '../models/match';
 import { RootStore } from './rootStore';
 
 export default class MatchStore {
@@ -22,7 +22,9 @@ export default class MatchStore {
 
   matchRegistry = new Map();
   match: IMatch | null = null;
+  matchStats: IMatchStats | null = null;
   loadingMatches = false;
+  loadingMatchStats = false;
   submitting = false;
   error: AxiosResponse | null = null;
   predicate = new Map();
@@ -92,6 +94,22 @@ export default class MatchStore {
         console.log(error);
       }
       return match.seasonId;
+    }
+  };
+
+  loadMatchStats = async (id: number) => {
+    this.loadingMatchStats = true;
+    try {
+      const matchStats = await agent.Matches.stats(id);
+      runInAction(() => {
+        this.matchStats = matchStats;
+        this.loadingMatchStats = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.loadingMatchStats = false;
+      });
+      console.log(error);
     }
   };
 
