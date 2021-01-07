@@ -1,5 +1,6 @@
 ﻿using Application.Matches.Commands.CreateMatch;
 using Application.Matches.Commands.FinishMatch;
+using Application.Matches.Queries.GetH2HMatches;
 using Application.Matches.Queries.GetMatch;
 using Application.Matches.Queries.GetMatches;
 using Application.Matches.Queries.GetMatchStats;
@@ -7,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MatchDto = Application.Matches.Queries.GetMatches.MatchDto;
 
 namespace API.Controllers
 {
@@ -28,6 +30,12 @@ namespace API.Controllers
         public async Task<ActionResult<MatchStatsVm>> GetMatchStats(int id)
         {
             return await Mediator.Send(new GetMatchStatsQuery { Id = id });
+        }
+
+        [HttpGet("{id}/h2h")]
+        public async Task<ActionResult<H2HMatchesVm>> GetH2H(int id)
+        {
+            return await Mediator.Send(new GetH2HMatchesQuery { Id = id });
         }
 
         [HttpPost]
