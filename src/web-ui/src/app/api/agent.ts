@@ -42,7 +42,7 @@ axios.interceptors.response.use(undefined, (error: any) => {
     config.method === 'get' &&
     data.errors.hasOwnProperty('id')
   ) {
-    history.push('/notfound');
+    //history.push('/notfound');
   }
   if (status === 500) {
     toast.error('Server error - check the terminal for more info!');

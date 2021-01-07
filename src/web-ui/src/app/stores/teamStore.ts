@@ -19,10 +19,11 @@ export default class TeamStore {
     return Array.from(this.teamRegistry.values());
   }
 
-  loadTeam = async (id: number) => {
+  loadTeam = async (id: number): Promise<ITeam> => {
     let team = this.getTeam(id);
     if (team) {
       this.team = team;
+      return team;
     } else {
       this.loading = true;
       try {
@@ -38,6 +39,7 @@ export default class TeamStore {
         });
         console.log(error);
       }
+      return team;
     }
   };
 
