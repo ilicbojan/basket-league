@@ -2,6 +2,7 @@
 using Application.Matches.Commands.FinishMatch;
 using Application.Matches.Queries.GetMatch;
 using Application.Matches.Queries.GetMatches;
+using Application.Matches.Queries.GetMatchStats;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -21,6 +22,12 @@ namespace API.Controllers
         public async Task<ActionResult<MatchVm>> Get(int id)
         {
             return await Mediator.Send(new GetMatchQuery { Id = id });
+        }
+
+        [HttpGet("{id}/stats")]
+        public async Task<ActionResult<MatchStatsVm>> GetMatchStats(int id)
+        {
+            return await Mediator.Send(new GetMatchStatsQuery { Id = id });
         }
 
         [HttpPost]
