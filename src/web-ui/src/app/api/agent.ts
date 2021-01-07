@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { history } from '../..';
 import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
-import { IMatch, IMatchStats } from '../models/match';
+import { IH2HMatchesVm, IMatch, IMatchStats } from '../models/match';
 import { IPlayer, IPlayersVm } from '../models/player';
 import { IPlayersStats, ISeason, IStandings } from '../models/season';
 import { ITeam } from '../models/team';
@@ -101,6 +101,8 @@ const Matches = {
   details: (id: number): Promise<IMatch> => requests.get(`/matches/${id}`),
   stats: (id: number): Promise<IMatchStats> =>
     requests.get(`/matches/${id}/stats`),
+  h2h: (id: number): Promise<IH2HMatchesVm> =>
+    requests.get(`/matches/${id}/h2h`),
 };
 
 const MatchPlayers = {

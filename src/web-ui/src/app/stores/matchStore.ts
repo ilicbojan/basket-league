@@ -21,16 +21,22 @@ export default class MatchStore {
   }
 
   matchRegistry = new Map();
+  h2hRegistry = new Map();
   match: IMatch | null = null;
   matchStats: IMatchStats | null = null;
   loadingMatches = false;
   loadingMatchStats = false;
+  loadingH2H = false;
   submitting = false;
   error: AxiosResponse | null = null;
   predicate = new Map();
 
   get matches(): IMatch[] {
     return Array.from(this.matchRegistry.values());
+  }
+
+  get h2h(): IMatch[] {
+    return Array.from(this.h2hRegistry.values());
   }
 
   get axiosParams() {
@@ -110,6 +116,23 @@ export default class MatchStore {
         this.loadingMatchStats = false;
       });
       console.log(error);
+    }
+  };
+
+  loadH2HMatches = async (id: number) => {
+    this.loadingH2H = true;
+    try {
+      const { matches } = await agent.Matches.h2h(id);
+      runInAction(() => {
+        matches.forEach((match) => {
+          this.h2hRegistry.set(match.id, match);
+        });
+        this.loadingH2H = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.loadingH2H = false;
+      });
     }
   };
 

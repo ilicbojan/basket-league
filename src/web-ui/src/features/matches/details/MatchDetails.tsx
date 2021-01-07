@@ -6,6 +6,7 @@ import Tab from '../../../app/common/tabs/tab/Tab';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
 import SeasonStandings from '../../seasons/standings/SeasonStandings';
+import H2HMatches from '../h2h/H2HMatches';
 import MatchLineup from '../lineup/MatchLineup';
 import MatchStats from '../stats/MatchStats';
 
@@ -19,6 +20,7 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
     const {
       loadMatch,
       loadMatchStats,
+      loadH2HMatches,
       loadingMatches,
       match,
     } = rootStore.matchStore;
@@ -30,6 +32,7 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
       loadMatch(id).then((seasonId) => loadStandings(seasonId!));
       loadLineup(id);
       loadMatchStats(id);
+      loadH2HMatches(id);
     }, [
       loadMatch,
       routeMatch.params.id,
@@ -37,6 +40,7 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
       loadLineup,
       loadStandings,
       loadMatchStats,
+      loadH2HMatches,
     ]);
 
     const [selected, setSelected] = useState<string>('Summary');
@@ -64,7 +68,9 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
           <Tab isSelected={selected === 'Player Stats'}>
             <MatchLineup />
           </Tab>
-          <Tab isSelected={selected === 'H2H'}>H2H</Tab>
+          <Tab isSelected={selected === 'H2H'}>
+            <H2HMatches />
+          </Tab>
           <Tab isSelected={selected === 'Standings'}>
             <SeasonStandings />
           </Tab>

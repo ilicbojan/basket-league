@@ -25,3 +25,7 @@ export interface IMatchStats {
   awayAssists: number;
   awayFouls: number;
 }
+
+export interface IH2HMatchesVm {
+  matches: IMatch[];
+}
