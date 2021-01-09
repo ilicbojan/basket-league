@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import agent from '../api/agent';
-import { ITeam } from '../models/team';
+import { ITeam, ITeamStats } from '../models/team';
 import { RootStore } from './rootStore';
 
 export default class TeamStore {
@@ -13,7 +13,9 @@ export default class TeamStore {
 
   teamRegistry = new Map();
   team: ITeam | null = null;
+  teamCurrentStats: ITeamStats | null = null;
   loading = false;
+  loadingCurrentStats = false;
 
   get teams() {
     return Array.from(this.teamRegistry.values());
@@ -40,6 +42,22 @@ export default class TeamStore {
         console.log(error);
       }
       return team;
+    }
+  };
+
+  loadTeamCurrentStats = async (id: number) => {
+    this.loadingCurrentStats = true;
+    try {
+      const currentStats = await agent.Teams.currentStats(id);
+      runInAction(() => {
+        this.teamCurrentStats = currentStats;
+        this.loadingCurrentStats = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.loadingCurrentStats = false;
+      });
+      console.log(error);
     }
   };
 

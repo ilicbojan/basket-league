@@ -8,7 +8,7 @@
         public double AssistsAvg { get; set; }
         public double FoulsAvg { get; set; }
         public double WinsPercentage { get; set; }
-        public double LossesPercantage { get; set; }
+        public double LossesPercentage { get; set; }
         public int ScoredPoints { get; set; }
         public int ReceivedPoints { get; set; }
         public int Assists { get; set; }

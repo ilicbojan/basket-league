@@ -87,7 +87,7 @@ namespace Application.Teams.Queries.GetTeamCurrentStats
             vm.AssistsAvg = Math.Round((double)vm.Assists / vm.MatchesPlayed, 2);
             vm.FoulsAvg = Math.Round((double)vm.Fouls / vm.MatchesPlayed, 2);
             vm.WinsPercentage = Math.Round((double)vm.Wins / vm.MatchesPlayed * 100, 2);
-            vm.LossesPercantage = Math.Round((double)vm.Losses / vm.MatchesPlayed * 100, 2);
+            vm.LossesPercentage = Math.Round((double)vm.Losses / vm.MatchesPlayed * 100, 2);
 
             return vm;
         }

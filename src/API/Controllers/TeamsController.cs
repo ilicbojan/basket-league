@@ -14,7 +14,7 @@ namespace API.Controllers
             return await Mediator.Send(new GetTeamQuery { Id = id });
         }
 
-        [HttpGet("{id}/stats")]
+        [HttpGet("{id}/current-stats")]
         public async Task<ActionResult<TeamCurrentStatsVm>> GetCurrentStats(int id)
         {
             return await Mediator.Send(new GetTeamCurrentStatsQuery { Id = id });

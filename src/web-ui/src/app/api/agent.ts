@@ -6,7 +6,7 @@ import { ILineup } from '../models/lineup';
 import { IH2HMatchesVm, IMatch, IMatchStats } from '../models/match';
 import { IPlayer, IPlayersVm } from '../models/player';
 import { IPlayersStats, ISeason, IStandings } from '../models/season';
-import { ITeam } from '../models/team';
+import { ITeam, ITeamStats } from '../models/team';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -112,6 +112,8 @@ const MatchPlayers = {
 
 const Teams = {
   details: (id: number): Promise<ITeam> => requests.get(`/teams/${id}`),
+  currentStats: (id: number): Promise<ITeamStats> =>
+    requests.get(`/teams/${id}/current-stats`),
 };
 
 const Players = {
