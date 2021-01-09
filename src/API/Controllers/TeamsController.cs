@@ -1,9 +1,7 @@
 ﻿using Application.Teams.Commands.CreateTeam;
 using Application.Teams.Queries.GetTeam;
+using Application.Teams.Queries.GetTeamCurrentStats;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -14,6 +12,12 @@ namespace API.Controllers
         public async Task<ActionResult<TeamVm>> Get(int id)
         {
             return await Mediator.Send(new GetTeamQuery { Id = id });
+        }
+
+        [HttpGet("{id}/stats")]
+        public async Task<ActionResult<TeamCurrentStatsVm>> GetCurrentStats(int id)
+        {
+            return await Mediator.Send(new GetTeamCurrentStatsQuery { Id = id });
         }
 
         [HttpPost]
