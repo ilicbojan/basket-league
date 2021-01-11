@@ -1,5 +1,6 @@
 ﻿using Application.Players.Commands.CreatePlayer;
 using Application.Players.Queries.GetPlayer;
+using Application.Players.Queries.GetPlayerAllTimeStats;
 using Application.Players.Queries.GetPlayerCurrentStats;
 using Application.Players.Queries.GetPlayers;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,12 @@ namespace API.Controllers
         public async Task<ActionResult<PlayerCurrentStatsVm>> GetCurrentStats(int id)
         {
             return await Mediator.Send(new GetPlayerCurrentStatsQuery { Id = id });
+        }
+
+        [HttpGet("{id}/all-time-stats")]
+        public async Task<ActionResult<PlayerAllTimeStatsVm>> GetAllTimeStats(int id)
+        {
+            return await Mediator.Send(new GetPlayerAllTimeStatsQuery { Id = id });
         }
 
         [HttpPost]
