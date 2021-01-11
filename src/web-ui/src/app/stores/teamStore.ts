@@ -14,8 +14,10 @@ export default class TeamStore {
   teamRegistry = new Map();
   team: ITeam | null = null;
   teamCurrentStats: ITeamStats | null = null;
+  teamAllTimeStats: ITeamStats | null = null;
   loading = false;
   loadingCurrentStats = false;
+  loadingAllTimeStats = false;
 
   get teams() {
     return Array.from(this.teamRegistry.values());
@@ -45,6 +47,10 @@ export default class TeamStore {
     }
   };
 
+  getTeam = (id: number): ITeam => {
+    return this.teamRegistry.get(id);
+  };
+
   loadTeamCurrentStats = async (id: number) => {
     this.loadingCurrentStats = true;
     try {
@@ -61,7 +67,19 @@ export default class TeamStore {
     }
   };
 
-  getTeam = (id: number): ITeam => {
-    return this.teamRegistry.get(id);
+  loadTeamAllTimeStats = async (id: number) => {
+    this.loadingAllTimeStats = true;
+    try {
+      const allTimeStats = await agent.Teams.allTimeStats(id);
+      runInAction(() => {
+        this.teamAllTimeStats = allTimeStats;
+        this.loadingAllTimeStats = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.loadingAllTimeStats = false;
+      });
+      console.log(error);
+    }
   };
 }

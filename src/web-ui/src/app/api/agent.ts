@@ -114,6 +114,8 @@ const Teams = {
   details: (id: number): Promise<ITeam> => requests.get(`/teams/${id}`),
   currentStats: (id: number): Promise<ITeamStats> =>
     requests.get(`/teams/${id}/current-stats`),
+  allTimeStats: (id: number): Promise<ITeamStats> =>
+    requests.get(`/teams/${id}/all-time-stats`),
 };
 
 const Players = {

@@ -8,6 +8,7 @@ import { RootStoreContext } from '../../../app/stores/rootStore';
 import MatchesList from '../../matches/list/MatchesList';
 import PlayersList from '../../players/list/PlayersList';
 import SeasonStandings from '../../seasons/standings/SeasonStandings';
+import TeamAllTimeStats from '../all-time-stats/TeamAllTimeStats';
 import TeamCurrentStats from '../current-stats/TeamCurrentStats';
 
 interface IProps {
@@ -20,6 +21,7 @@ const TeamDetails: React.FC<RouteComponentProps<IProps>> = observer(
     const {
       loadTeam,
       loadTeamCurrentStats,
+      loadTeamAllTimeStats,
       team,
       loading,
     } = rootStore.teamStore;
@@ -32,12 +34,14 @@ const TeamDetails: React.FC<RouteComponentProps<IProps>> = observer(
       'Matches',
       'Results',
       'Standings',
+      'All time stats',
     ];
     const id = Number.parseInt(match.params.id);
 
     useEffect(() => {
       loadTeam(id).then((team) => loadStandings(team.currentSeasonId));
       loadTeamCurrentStats(id);
+      loadTeamAllTimeStats(id);
     }, [
       loadTeam,
       match.params.id,
@@ -45,6 +49,7 @@ const TeamDetails: React.FC<RouteComponentProps<IProps>> = observer(
       id,
       loadStandings,
       loadTeamCurrentStats,
+      loadTeamAllTimeStats,
     ]);
 
     if (loading) return <LoadingSpinner />;
@@ -67,6 +72,9 @@ const TeamDetails: React.FC<RouteComponentProps<IProps>> = observer(
           </Tab>
           <Tab isSelected={selected === 'Standings'}>
             <SeasonStandings />
+          </Tab>
+          <Tab isSelected={selected === 'All time stats'}>
+            <TeamAllTimeStats />
           </Tab>
         </TabNav>
       </div>
