@@ -5,6 +5,7 @@ import TabNav from '../../../app/common/tabs/tab-nav/TabNav';
 import Tab from '../../../app/common/tabs/tab/Tab';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
+import PlayerAllTimeStats from '../all-time-stats/PlayerAllTimeStats';
 import PlayerCurrentStats from '../current-stats/PlayerCurrentStats';
 
 interface IProps {
@@ -17,6 +18,7 @@ const PlayerDetails: React.FC<RouteComponentProps<IProps>> = observer(
     const {
       loadPlayer,
       loadPlayerCurrentStats,
+      loadPlayerAllTimeStats,
       player,
       loadingPlayers,
     } = rootStore.playerStore;
@@ -29,7 +31,15 @@ const PlayerDetails: React.FC<RouteComponentProps<IProps>> = observer(
     useEffect(() => {
       loadPlayer(id);
       loadPlayerCurrentStats(id);
-    }, [loadPlayer, loadPlayerCurrentStats, id, history, match.params.id]);
+      loadPlayerAllTimeStats(id);
+    }, [
+      loadPlayer,
+      loadPlayerCurrentStats,
+      loadPlayerAllTimeStats,
+      id,
+      history,
+      match.params.id,
+    ]);
 
     if (loadingPlayers) return <LoadingSpinner />;
 
@@ -43,7 +53,9 @@ const PlayerDetails: React.FC<RouteComponentProps<IProps>> = observer(
           <Tab isSelected={selected === 'Current stats'}>
             <PlayerCurrentStats />
           </Tab>
-          <Tab isSelected={selected === 'All time stats'}>all time</Tab>
+          <Tab isSelected={selected === 'All time stats'}>
+            <PlayerAllTimeStats />
+          </Tab>
         </TabNav>
       </div>
     );

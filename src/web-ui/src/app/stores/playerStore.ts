@@ -22,8 +22,10 @@ export default class PlayerStore {
   playerRegistry = new Map();
   player: IPlayer | null = null;
   playerCurrentStats: IPlayerStats | null = null;
+  playerAllTimeStats: IPlayerStats | null = null;
   loadingPlayers = false;
   loadingCurrentStats = false;
+  loadingAllTimeStats = false;
   predicate = new Map();
 
   get players(): IPlayer[] {
@@ -99,6 +101,22 @@ export default class PlayerStore {
     } catch (error) {
       runInAction(() => {
         this.loadingCurrentStats = false;
+      });
+      console.log(error);
+    }
+  };
+
+  loadPlayerAllTimeStats = async (id: number) => {
+    this.loadingAllTimeStats = true;
+    try {
+      const allTimeStats = await agent.Players.currentStats(id);
+      runInAction(() => {
+        this.playerAllTimeStats = allTimeStats;
+        this.loadingAllTimeStats = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.loadingAllTimeStats = false;
       });
       console.log(error);
     }

@@ -129,6 +129,8 @@ const Players = {
   details: (id: number): Promise<IPlayer> => requests.get(`/players/${id}`),
   currentStats: (id: number): Promise<IPlayerStats> =>
     requests.get(`/players/${id}/current-stats`),
+  allTimeStats: (id: number): Promise<IPlayerStats> =>
+    requests.get(`/players/${id}/all-time-stats`),
 };
 
 const agent = {
