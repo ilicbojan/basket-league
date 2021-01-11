@@ -5,7 +5,12 @@ import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
 import { IH2HMatchesVm, IMatch, IMatchStats } from '../models/match';
 import { IPlayer, IPlayersVm } from '../models/player';
-import { IPlayersStats, ISeason, IStandings } from '../models/season';
+import {
+  IPlayersStats,
+  IPlayerStats,
+  ISeason,
+  IStandings,
+} from '../models/season';
 import { ITeam, ITeamStats } from '../models/team';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -122,6 +127,8 @@ const Players = {
   list: (params: URLSearchParams): Promise<IPlayersVm> =>
     axios.get(`/players`, { params }).then(responseBody),
   details: (id: number): Promise<IPlayer> => requests.get(`/players/${id}`),
+  currentStats: (id: number): Promise<IPlayerStats> =>
+    requests.get(`/players/${id}/current-stats`),
 };
 
 const agent = {
