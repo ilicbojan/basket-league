@@ -4,7 +4,12 @@ import { history } from '../..';
 import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
 import { IH2HMatchesVm, IMatch, IMatchStats } from '../models/match';
-import { IPlayer, IPlayerCurrentStats, IPlayersVm } from '../models/player';
+import {
+  IPlayer,
+  IPlayerAllTimeStats,
+  IPlayerCurrentStats,
+  IPlayersVm,
+} from '../models/player';
 import {
   IPlayersStats,
   IPlayerStats,
@@ -129,7 +134,7 @@ const Players = {
   details: (id: number): Promise<IPlayer> => requests.get(`/players/${id}`),
   currentStats: (id: number): Promise<IPlayerCurrentStats> =>
     requests.get(`/players/${id}/current-stats`),
-  allTimeStats: (id: number): Promise<IPlayerStats> =>
+  allTimeStats: (id: number): Promise<IPlayerAllTimeStats> =>
     requests.get(`/players/${id}/all-time-stats`),
 };
 

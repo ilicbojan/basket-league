@@ -1,7 +1,10 @@
 import { makeAutoObservable, reaction, runInAction } from 'mobx';
 import agent from '../api/agent';
-import { IPlayer, IPlayerCurrentStats } from '../models/player';
-import { IPlayerStats } from '../models/season';
+import {
+  IPlayer,
+  IPlayerAllTimeStats,
+  IPlayerCurrentStats,
+} from '../models/player';
 import { RootStore } from './rootStore';
 
 export default class PlayerStore {
@@ -22,7 +25,7 @@ export default class PlayerStore {
   playerRegistry = new Map();
   player: IPlayer | null = null;
   playerCurrentStats: IPlayerCurrentStats | null = null;
-  playerAllTimeStats: IPlayerStats | null = null;
+  playerAllTimeStats: IPlayerAllTimeStats | null = null;
   loadingPlayers = false;
   loadingCurrentStats = false;
   loadingAllTimeStats = false;
