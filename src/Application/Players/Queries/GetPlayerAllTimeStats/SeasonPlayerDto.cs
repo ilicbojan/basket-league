@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Application.Players.Queries.GetPlayerAllTimeStats
+﻿namespace Application.Players.Queries.GetPlayerAllTimeStats
 {
-    public class PlayerAllTimeStatsVm
+    public class SeasonPlayerDto
     {
         public int MatchesPlayed { get; set; }
         public double PointsAvg { get; set; }
@@ -11,6 +9,6 @@ namespace Application.Players.Queries.GetPlayerAllTimeStats
         public int Points { get; set; }
         public int Assists { get; set; }
         public int Fouls { get; set; }
-        public IList<SeasonPlayerDto> Seasons { get; set; } = new List<SeasonPlayerDto>();
+        public SeasonDto Season { get; set; }
     }
 }
