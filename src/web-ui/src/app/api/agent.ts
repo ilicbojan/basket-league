@@ -4,7 +4,7 @@ import { history } from '../..';
 import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
 import { IH2HMatchesVm, IMatch, IMatchStats } from '../models/match';
-import { IPlayer, IPlayersVm } from '../models/player';
+import { IPlayer, IPlayerCurrentStats, IPlayersVm } from '../models/player';
 import {
   IPlayersStats,
   IPlayerStats,
@@ -127,7 +127,7 @@ const Players = {
   list: (params: URLSearchParams): Promise<IPlayersVm> =>
     axios.get(`/players`, { params }).then(responseBody),
   details: (id: number): Promise<IPlayer> => requests.get(`/players/${id}`),
-  currentStats: (id: number): Promise<IPlayerStats> =>
+  currentStats: (id: number): Promise<IPlayerCurrentStats> =>
     requests.get(`/players/${id}/current-stats`),
   allTimeStats: (id: number): Promise<IPlayerStats> =>
     requests.get(`/players/${id}/all-time-stats`),

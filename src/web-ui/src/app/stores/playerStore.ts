@@ -1,6 +1,6 @@
 import { makeAutoObservable, reaction, runInAction } from 'mobx';
 import agent from '../api/agent';
-import { IPlayer } from '../models/player';
+import { IPlayer, IPlayerCurrentStats } from '../models/player';
 import { IPlayerStats } from '../models/season';
 import { RootStore } from './rootStore';
 
@@ -21,7 +21,7 @@ export default class PlayerStore {
 
   playerRegistry = new Map();
   player: IPlayer | null = null;
-  playerCurrentStats: IPlayerStats | null = null;
+  playerCurrentStats: IPlayerCurrentStats | null = null;
   playerAllTimeStats: IPlayerStats | null = null;
   loadingPlayers = false;
   loadingCurrentStats = false;
@@ -109,7 +109,7 @@ export default class PlayerStore {
   loadPlayerAllTimeStats = async (id: number) => {
     this.loadingAllTimeStats = true;
     try {
-      const allTimeStats = await agent.Players.currentStats(id);
+      const allTimeStats = await agent.Players.allTimeStats(id);
       runInAction(() => {
         this.playerAllTimeStats = allTimeStats;
         this.loadingAllTimeStats = false;

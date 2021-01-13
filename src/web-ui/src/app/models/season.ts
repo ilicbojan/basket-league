@@ -32,7 +32,6 @@ interface ITeam {
   pointsDiff: number;
   points: number;
 }
-
 export interface IPlayersStats {
   players: IPlayerStats[];
 }
