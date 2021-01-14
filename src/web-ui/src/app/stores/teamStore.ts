@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import agent from '../api/agent';
-import { ITeam, ITeamStats } from '../models/team';
+import { ITeam, ITeamAllTimeStats, ITeamStats } from '../models/team';
 import { RootStore } from './rootStore';
 
 export default class TeamStore {
@@ -14,7 +14,7 @@ export default class TeamStore {
   teamRegistry = new Map();
   team: ITeam | null = null;
   teamCurrentStats: ITeamStats | null = null;
-  teamAllTimeStats: ITeamStats | null = null;
+  teamAllTimeStats: ITeamAllTimeStats | null = null;
   loading = false;
   loadingCurrentStats = false;
   loadingAllTimeStats = false;

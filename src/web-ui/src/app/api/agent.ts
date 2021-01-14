@@ -16,7 +16,7 @@ import {
   ISeason,
   IStandings,
 } from '../models/season';
-import { ITeam, ITeamStats } from '../models/team';
+import { ITeam, ITeamAllTimeStats, ITeamStats } from '../models/team';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -124,7 +124,7 @@ const Teams = {
   details: (id: number): Promise<ITeam> => requests.get(`/teams/${id}`),
   currentStats: (id: number): Promise<ITeamStats> =>
     requests.get(`/teams/${id}/current-stats`),
-  allTimeStats: (id: number): Promise<ITeamStats> =>
+  allTimeStats: (id: number): Promise<ITeamAllTimeStats> =>
     requests.get(`/teams/${id}/all-time-stats`),
 };
 
