@@ -8,8 +8,8 @@ import { RootStoreContext } from '../../../app/stores/rootStore';
 import MatchesList from '../../matches/list/MatchesList';
 import PlayersList from '../../players/list/PlayersList';
 import SeasonStandings from '../../seasons/standings/SeasonStandings';
-import TeamAllTimeStats from '../all-time-stats/TeamAllTimeStats';
-import TeamCurrentStats from '../current-stats/TeamCurrentStats';
+import TeamStats from '../stats/TeamStats';
+import { S } from './TeamDetails.style';
 
 interface IProps {
   id: string;
@@ -27,15 +27,8 @@ const TeamDetails: React.FC<RouteComponentProps<IProps>> = observer(
     } = rootStore.teamStore;
     const { loadStandings } = rootStore.seasonStore;
 
-    const [selected, setSelected] = useState<string>('Current stats');
-    const tabs = [
-      'Current stats',
-      'Players',
-      'Matches',
-      'Results',
-      'Standings',
-      'All time stats',
-    ];
+    const [selected, setSelected] = useState<string>('Stats');
+    const tabs = ['Stats', 'Players', 'Matches', 'Results', 'Standings'];
     const id = Number.parseInt(match.params.id);
 
     useEffect(() => {
@@ -55,11 +48,11 @@ const TeamDetails: React.FC<RouteComponentProps<IProps>> = observer(
     if (loading) return <LoadingSpinner />;
 
     return (
-      <div>
+      <S.TeamDetails>
         <div>{team?.name}</div>
         <TabNav tabs={tabs} selected={selected} setSelected={setSelected}>
-          <Tab isSelected={selected === 'Current stats'}>
-            <TeamCurrentStats />
+          <Tab isSelected={selected === 'Stats'}>
+            <TeamStats />
           </Tab>
           <Tab isSelected={selected === 'Players'}>
             <PlayersList teamId={id} />
@@ -73,11 +66,8 @@ const TeamDetails: React.FC<RouteComponentProps<IProps>> = observer(
           <Tab isSelected={selected === 'Standings'}>
             <SeasonStandings />
           </Tab>
-          <Tab isSelected={selected === 'All time stats'}>
-            <TeamAllTimeStats />
-          </Tab>
         </TabNav>
-      </div>
+      </S.TeamDetails>
     );
   }
 );

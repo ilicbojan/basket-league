@@ -9,15 +9,14 @@ const Tabs = styled.ul`
   display: inline-flex;
   margin-top: 10px;
   color: ${COLOR.secondary};
-  border-radius: ${utilities.borderRadius};
-  box-shadow: ${utilities.shadow};
-  overflow: hidden;
+  border-bottom: 5px ${COLOR.secondary} solid;
 `;
 
 export const Tab = styled.li`
+  font-size: 1.2rem;
   text-decoration: none;
   text-align: center;
-  padding: 8px 0;
+  padding: 8px 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
