@@ -25,13 +25,15 @@ export const BREAKPOINTS = {
 };
 
 export const COLOR = {
-  primary: '#2f285a',
-  primaryLight: '#5d53a3',
-  primaryDark: '#1f1a41',
+  primary: '#e35000',
+  primaryLight: '#e35000',
+  primaryDark: '#e35000',
   secondary: '#3ed47b',
   secondaryDark: '#188155',
   red: '#ff1500',
-  gray: '#ececec',
+  gray1: '#464646',
+  gray2: '#2d2d2d',
+  gray3: '#575757',
   grayLight: '#f6f6f6 ',
   grayDark: '#333',
   white: '#fff',

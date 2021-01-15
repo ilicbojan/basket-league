@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
-import MatchesListItem from '../list-item/MatchesListItem';
+import ResultItem from '../result-item/ResultItem';
 
 const H2HMatches = observer(() => {
   const rootStore = useContext(RootStoreContext);
@@ -13,7 +13,7 @@ const H2HMatches = observer(() => {
   return (
     <div>
       {h2h.map((match) => (
-        <MatchesListItem match={match} key={match.id} />
+        <ResultItem match={match} key={match.id} />
       ))}
     </div>
   );

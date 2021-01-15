@@ -8,8 +8,7 @@ interface ITabProps {
 const Tabs = styled.ul`
   display: inline-flex;
   margin-top: 10px;
-  color: ${COLOR.secondary};
-  border-bottom: 5px ${COLOR.secondary} solid;
+  color: ${COLOR.white};
 `;
 
 export const Tab = styled.li`
@@ -22,13 +21,13 @@ export const Tab = styled.li`
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  background-color: ${COLOR.primary};
+  background-color: ${COLOR.gray1};
 
   ${(props: ITabProps) =>
     props.active &&
     `
-      background-color: ${COLOR.secondary};
-      color: ${COLOR.primaryDark};
+      background-color: ${COLOR.primary};
+      color: ${COLOR.white};
     `}
 
   @media ${BREAKPOINTS.lg} {
@@ -37,7 +36,12 @@ export const Tab = styled.li`
   }
 `;
 
+const Line = styled.hr`
+  border: 3px solid ${COLOR.primary};
+`;
+
 export const S = {
   Tabs,
   Tab,
+  Line,
 };

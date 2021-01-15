@@ -28,7 +28,7 @@ const Modal = styled.div<IProps>`
 `;
 
 const Content = styled.div`
-  background-color: ${COLOR.gray};
+  background-color: ${COLOR.gray1};
   width: 90%;
   box-shadow: ${utilities.shadow};
   border-radius: ${utilities.borderRadius};

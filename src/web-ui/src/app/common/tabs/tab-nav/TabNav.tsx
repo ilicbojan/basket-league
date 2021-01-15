@@ -26,6 +26,7 @@ const TabNav: React.FC<IProps> = ({
           </S.Tab>
         ))}
       </S.Tabs>
+      <S.Line></S.Line>
       {children}
     </div>
   );

@@ -7,44 +7,43 @@ const TableSection = styled.div`
 
 const Table = styled.table`
   border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 1.6rem;
-  min-width: 400px;
+  margin: 0;
+  font-size: 1.4rem;
+  min-width: 300px;
   width: 100%;
-  border-radius: ${utilities.borderRadius};
   box-shadow: ${utilities.shadow};
   overflow: hidden;
 
   & thead tr {
-    background-color: ${COLOR.primary};
-    color: ${COLOR.secondary};
+    background-color: ${COLOR.gray2};
+    color: ${COLOR.white};
+    border-color: ${COLOR.gray2};
     text-align: left;
-    font-weight: bold;
   }
 
   & th,
   & td {
-    padding: 15px 15px;
+    padding: 8px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
+  & th {
+    font-weight: normal;
+  }
+
   & tbody {
-    background-color: ${COLOR.white};
+    background-color: ${COLOR.gray1};
   }
 
   & tbody tr {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid ${COLOR.gray3};
   }
-
+  /* 
   & tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-  }
-
-  & tbody tr:last-of-type {
-    border-bottom: 2px solid ${COLOR.primary};
-  }
+    background-color: ${COLOR.gray3};
+  } */
 
   & .loading {
   }

@@ -24,8 +24,8 @@ const Select = styled.select<IProps>`
 
   &:disabled,
   &[disabled] {
-    background-color: ${COLOR.gray};
-    border: 1px solid ${COLOR.gray};
+    background-color: ${COLOR.gray1};
+    border: 1px solid ${COLOR.gray1};
   }
 `;
 

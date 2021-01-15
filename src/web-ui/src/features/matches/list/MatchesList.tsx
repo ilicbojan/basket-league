@@ -2,7 +2,8 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect } from 'react';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
-import MatchesListItem from '../list-item/MatchesListItem';
+import MatchItem from '../match-item/MatchItem';
+import ResultItem from '../result-item/ResultItem';
 
 interface IProps {
   seasonId?: number;
@@ -41,10 +42,13 @@ const MatchesList: React.FC<IProps> = observer(
 
     return (
       <div>
-        <div>Results</div>
-        {matches.map((match) => (
-          <MatchesListItem match={match} key={match.id} />
-        ))}
+        {matches.map((match) =>
+          isPlayed ? (
+            <ResultItem match={match} key={match.id} />
+          ) : (
+            <MatchItem match={match} key={match.id} />
+          )
+        )}
       </div>
     );
   }

@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import TabNav from '../../../app/common/tabs/tab-nav/TabNav';
 import Tab from '../../../app/common/tabs/tab/Tab';
+import { getDate } from '../../../app/common/util/dates';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
 import SeasonStandings from '../../seasons/standings/SeasonStandings';
@@ -53,7 +54,7 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
         <div>
           <div>Round {match?.round}</div>
           <div>
-            {match?.date} - {match?.time}
+            {getDate(match?.date!)} {match?.time}
           </div>
           <div>{match?.homeTeam.name}</div>
           <div>

@@ -66,6 +66,7 @@ export default class MatchStore {
       const matches = await agent.Matches.list(this.axiosParams);
       runInAction(() => {
         matches.forEach((match) => {
+          match.date = new Date(match.date);
           this.matchRegistry.set(match.id, match);
         });
         this.loadingMatches = false;
@@ -89,6 +90,7 @@ export default class MatchStore {
       try {
         match = await agent.Matches.details(id);
         runInAction(() => {
+          match.date = new Date(match.date);
           this.matchRegistry.set(match.id, match);
           this.match = match;
           this.loadingMatches = false;
@@ -125,6 +127,7 @@ export default class MatchStore {
       const { matches } = await agent.Matches.h2h(id);
       runInAction(() => {
         matches.forEach((match) => {
+          match.date = new Date(match.date);
           this.h2hRegistry.set(match.id, match);
         });
         this.loadingH2H = false;
