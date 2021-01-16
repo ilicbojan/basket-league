@@ -3,13 +3,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import TabNav from '../../../app/common/tabs/tab-nav/TabNav';
 import Tab from '../../../app/common/tabs/tab/Tab';
-import { getDate } from '../../../app/common/util/dates';
+import { getDate, getTime } from '../../../app/common/util/dates';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
 import SeasonStandings from '../../seasons/standings/SeasonStandings';
 import H2HMatches from '../h2h/H2HMatches';
 import MatchLineup from '../lineup/MatchLineup';
 import MatchStats from '../stats/MatchStats';
+import { S } from './MatchDetails.style';
 
 interface IProps {
   id: string;
@@ -47,21 +48,31 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
     const [selected, setSelected] = useState<string>('Summary');
     const tabs = ['Summary', 'Player Stats', 'H2H', 'Standings'];
 
-    if (loadingMatches) return <LoadingSpinner />;
+    if (loadingMatches || !match) return <LoadingSpinner />;
 
     return (
-      <div>
-        <div>
-          <div>Round {match?.round}</div>
-          <div>
-            {getDate(match?.date!)} {match?.time}
+      <S.MatchDetails>
+        <S.Info>
+          <div className='league'>League - Round {match?.round}</div>
+          <div className='match'>
+            <div className='team'>
+              <div>slika</div>
+              <div>{match?.homeTeam.name}</div>
+            </div>
+            <div className='info'>
+              <div className='date'>
+                {getDate(match?.date!)} {getTime(match?.time!)}
+              </div>
+              <div className='score'>
+                {match?.homePoints} <span>-</span> {match?.awayPoints}
+              </div>
+            </div>
+            <div className='team'>
+              <div>slika</div>
+              <div>{match?.awayTeam.name}</div>
+            </div>
           </div>
-          <div>{match?.homeTeam.name}</div>
-          <div>
-            {match?.homePoints} : {match?.awayPoints}
-          </div>
-          <div>{match?.awayTeam.name}</div>
-        </div>
+        </S.Info>
         <TabNav tabs={tabs} selected={selected} setSelected={setSelected}>
           <Tab isSelected={selected === 'Summary'}>
             <MatchStats />
@@ -76,7 +87,7 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
             <SeasonStandings />
           </Tab>
         </TabNav>
-      </div>
+      </S.MatchDetails>
     );
   }
 );

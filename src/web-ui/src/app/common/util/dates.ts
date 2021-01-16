@@ -1,6 +1,4 @@
 export const getDate = (date: Date) => {
-  date = new Date(date);
-
   const dateString =
     date.getDate() +
     '.' +
