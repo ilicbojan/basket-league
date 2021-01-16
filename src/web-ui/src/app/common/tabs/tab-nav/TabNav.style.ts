@@ -7,7 +7,6 @@ interface ITabProps {
 
 const Tabs = styled.ul`
   display: inline-flex;
-  margin-top: 10px;
   color: ${COLOR.white};
 `;
 

@@ -49,7 +49,10 @@ const TeamDetails: React.FC<RouteComponentProps<IProps>> = observer(
 
     return (
       <S.TeamDetails>
-        <div>{team?.name}</div>
+        <S.Team>
+          <div className='img'>slika</div>
+          <div>{team?.name}</div>
+        </S.Team>
         <TabNav tabs={tabs} selected={selected} setSelected={setSelected}>
           <Tab isSelected={selected === 'Stats'}>
             <TeamStats />
