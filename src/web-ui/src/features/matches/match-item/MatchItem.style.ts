@@ -3,7 +3,7 @@ import { COLOR } from '../../../app/common/util/variables';
 
 const MatchItem = styled.div`
   display: grid;
-  grid-template-columns: 20% 40% 40%;
+  grid-template-columns: 26% 37% 37%;
   align-items: center;
   padding: 5px 10px;
   font-size: 1.4rem;

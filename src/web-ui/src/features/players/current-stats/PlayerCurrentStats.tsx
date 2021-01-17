@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
 import Table from '../../../app/common/table/Table';
 import { RootStoreContext } from '../../../app/stores/rootStore';
+import { Style } from '../../../style';
 
 const PlayerCurrentStats = observer(() => {
   const rootStore = useContext(RootStoreContext);
@@ -9,13 +10,36 @@ const PlayerCurrentStats = observer(() => {
 
   return (
     <div>
-      <div>{playerCurrentStats?.matchesPlayed}</div>
-      <div>{playerCurrentStats?.pointsAvg}</div>
-      <div>{playerCurrentStats?.assistsAvg}</div>
-      <div>{playerCurrentStats?.foulsAvg}</div>
-      <div>{playerCurrentStats?.points}</div>
-      <div>{playerCurrentStats?.assists}</div>
-      <div>{playerCurrentStats?.fouls}</div>
+      <Style.Stats>
+        <div>
+          <h6>Points AVG</h6>
+          <span>{playerCurrentStats?.pointsAvg}</span>
+        </div>
+        <div>
+          <h6>Assists AVG</h6>
+          <span>{playerCurrentStats?.assistsAvg}</span>
+        </div>
+        <div>
+          <h6>Fouls AVG</h6>
+          <span>{playerCurrentStats?.foulsAvg}</span>
+        </div>
+        <div>
+          <h6>Points</h6>
+          <span>{playerCurrentStats?.points}</span>
+        </div>
+        <div>
+          <h6>Assists</h6>
+          <span>{playerCurrentStats?.assists}</span>
+        </div>
+        <div>
+          <h6>Fouls</h6>
+          <span>{playerCurrentStats?.fouls}</span>
+        </div>
+        <div>
+          <h6>Matches</h6>
+          <span>{playerCurrentStats?.matchesPlayed}</span>
+        </div>
+      </Style.Stats>
 
       <Table>
         <thead>

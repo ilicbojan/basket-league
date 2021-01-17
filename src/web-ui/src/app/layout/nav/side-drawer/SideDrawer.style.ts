@@ -10,7 +10,7 @@ const SideDrawer = styled.nav<IProps>`
   width: 70%;
   max-width: 400px;
   padding: 10px 20px;
-  background-color: ${COLOR.grayLight};
+  background-color: ${COLOR.gray1};
   box-shadow: ${utilities.shadow};
   position: fixed;
   top: 60px;
@@ -42,7 +42,7 @@ const SideDrawer = styled.nav<IProps>`
     align-items: center;
 
     & svg {
-      fill: ${COLOR.secondary};
+      fill: ${COLOR.primary};
       height: 25px;
       width: 25px;
       margin-right: 10px;
@@ -51,7 +51,7 @@ const SideDrawer = styled.nav<IProps>`
 
   & a,
   & button {
-    color: ${COLOR.primaryDark};
+    color: ${COLOR.white};
     text-decoration: none;
     font-size: 2.2rem;
     letter-spacing: 2px;
