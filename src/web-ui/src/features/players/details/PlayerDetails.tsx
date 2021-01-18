@@ -7,6 +7,7 @@ import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
 import PlayerAllTimeStats from '../all-time-stats/PlayerAllTimeStats';
 import PlayerCurrentStats from '../current-stats/PlayerCurrentStats';
+import { S } from './PlayerDetails.style';
 
 interface IProps {
   id: string;
@@ -45,10 +46,16 @@ const PlayerDetails: React.FC<RouteComponentProps<IProps>> = observer(
 
     return (
       <div>
-        <div>
-          {player?.firstName} + {player?.lastName}
-        </div>
-        <div># {player?.jerseyNumber}</div>
+        <S.Info>
+          <div className='image'>slika</div>
+          <div>
+            <div>
+              {player?.firstName} {player?.lastName}
+            </div>
+            <div>Tim</div>
+            <div># {player?.jerseyNumber}</div>
+          </div>
+        </S.Info>
         <TabNav tabs={tabs} selected={selected} setSelected={setSelected}>
           <Tab isSelected={selected === 'Current stats'}>
             <PlayerCurrentStats />
