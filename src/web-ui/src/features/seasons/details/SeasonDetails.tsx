@@ -8,6 +8,7 @@ import { RootStoreContext } from '../../../app/stores/rootStore';
 import MatchesList from '../../matches/list/MatchesList';
 import SeasonPlayersStats from '../players-stats/SeasonPlayersStats';
 import SeasonStandings from '../standings/SeasonStandings';
+import { S } from './SeasonDetails.style';
 
 interface IProps {
   id: string;
@@ -45,9 +46,13 @@ const SeasonDetails: React.FC<RouteComponentProps<IProps>> = observer(
 
     return (
       <div>
-        <div>
-          {season?.name} - {season?.year}
-        </div>
+        <S.Info>
+          <div className='image'>slika</div>
+          <div>
+            <div>{season?.name}</div>
+            <div>{season?.year}</div>
+          </div>
+        </S.Info>
         <TabNav tabs={tabs} selected={selected} setSelected={setSelected}>
           <Tab isSelected={selected === 'Standings'}>
             <SeasonStandings />
