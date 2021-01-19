@@ -50,7 +50,7 @@ const TeamDetails: React.FC<RouteComponentProps<IProps>> = observer(
     return (
       <S.TeamDetails>
         <S.Team>
-          <div className='img'>slika</div>
+          <img className='image' src='/images/team.jpg' />
           <div>{team?.name}</div>
         </S.Team>
         <TabNav tabs={tabs} selected={selected} setSelected={setSelected}>

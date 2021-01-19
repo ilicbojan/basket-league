@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { utilities, COLOR } from '../util/variables';
+import { utilities, COLOR, BREAKPOINTS } from '../util/variables';
 
 const TableSection = styled.div`
   overflow-x: auto;
@@ -13,6 +13,10 @@ const Table = styled.table`
   width: 100%;
   box-shadow: ${utilities.shadow};
   overflow: hidden;
+
+  @media ${BREAKPOINTS.lg} {
+    font-size: 1.6rem;
+  }
 
   & thead tr {
     background-color: ${COLOR.gray2};

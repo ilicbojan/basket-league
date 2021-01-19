@@ -56,7 +56,7 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
           <div className='league'>League - Round {match?.round}</div>
           <div className='match'>
             <div className='team'>
-              <div>slika</div>
+              <img className='image' src='/images/team.jpg' />
               <div>{match?.homeTeam.name}</div>
             </div>
             <div className='info'>
@@ -68,7 +68,7 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
               </div>
             </div>
             <div className='team'>
-              <div>slika</div>
+              <img className='image' src='/images/team.jpg' />
               <div>{match?.awayTeam.name}</div>
             </div>
           </div>

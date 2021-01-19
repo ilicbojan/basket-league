@@ -9,6 +9,7 @@ const Info = styled.div`
 
   & .image {
     margin-right: 10px;
+    width: 30%;
   }
 `;
 

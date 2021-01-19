@@ -47,7 +47,7 @@ const PlayerDetails: React.FC<RouteComponentProps<IProps>> = observer(
     return (
       <div>
         <S.Info>
-          <div className='image'>slika</div>
+          <img src='/images/user.jpg' className='image' />
           <div>
             <div>
               {player?.firstName} {player?.lastName}

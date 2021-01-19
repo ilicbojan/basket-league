@@ -19,7 +19,14 @@ const Info = styled.div`
   }
 
   & .team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-size: 1.4rem;
+  }
+
+  & .image {
+    width: 60px;
   }
 
   & .info {

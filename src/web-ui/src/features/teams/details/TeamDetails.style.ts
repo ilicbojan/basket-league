@@ -8,8 +8,9 @@ const Team = styled.div`
   justify-content: left;
   align-items: center;
 
-  & .img {
+  & .image {
     margin-right: 10px;
+    width: 30%;
   }
 `;
 

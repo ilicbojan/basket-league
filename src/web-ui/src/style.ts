@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR } from './app/common/util/variables';
+import { BREAKPOINTS, COLOR } from './app/common/util/variables';
 
 const Stats = styled.div`
   display: grid;
@@ -9,6 +9,10 @@ const Stats = styled.div`
   padding: 10px;
   font-size: 1.8rem;
 
+  @media ${BREAKPOINTS.lg} {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
   & div {
     display: flex;
     flex-direction: column;
@@ -17,6 +21,10 @@ const Stats = styled.div`
     height: calc((100vw - 40px) / 3);
     border: 2px solid ${COLOR.white};
     border-radius: 50%;
+
+    @media ${BREAKPOINTS.lg} {
+      height: calc((1200px - 40px) / 4);
+    }
   }
 
   & h6 {

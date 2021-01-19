@@ -31,7 +31,7 @@ export const Tab = styled.li`
 
   @media ${BREAKPOINTS.lg} {
     font-size: 1.8rem;
-    padding: 12px 10px;
+    padding: 10px;
   }
 `;
 
