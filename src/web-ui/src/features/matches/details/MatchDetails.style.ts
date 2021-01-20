@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR } from '../../../app/common/util/variables';
+import { BREAKPOINTS, COLOR } from '../../../app/common/util/variables';
 
 const MatchDetails = styled.div``;
 
@@ -9,6 +9,11 @@ const Info = styled.div`
     font-size: 1rem;
     text-transform: uppercase;
     border-bottom: 1px solid ${COLOR.gray3};
+
+    @media ${BREAKPOINTS.lg} {
+      padding: 10px 0 5px 0;
+      font-size: 1.4rem;
+    }
   }
 
   & .match {
@@ -16,6 +21,11 @@ const Info = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+
+    @media ${BREAKPOINTS.lg} {
+      justify-content: space-around;
+      padding: 20px 10px;
+    }
   }
 
   & .team {
@@ -23,10 +33,18 @@ const Info = styled.div`
     flex-direction: column;
     align-items: center;
     font-size: 1.4rem;
+
+    @media ${BREAKPOINTS.lg} {
+      font-size: 1.8rem;
+    }
   }
 
   & .image {
     width: 60px;
+
+    @media ${BREAKPOINTS.lg} {
+      width: 120px;
+    }
   }
 
   & .info {
@@ -37,10 +55,18 @@ const Info = styled.div`
 
   & .date {
     font-size: 1.2rem;
+
+    @media ${BREAKPOINTS.lg} {
+      font-size: 1.4rem;
+    }
   }
 
   & .score {
     font-size: 2.5rem;
+
+    @media ${BREAKPOINTS.lg} {
+      font-size: 4rem;
+    }
   }
 `;
 

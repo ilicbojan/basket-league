@@ -30,7 +30,7 @@ export const Tab = styled.li`
     `}
 
   @media ${BREAKPOINTS.lg} {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     padding: 10px;
   }
 `;
