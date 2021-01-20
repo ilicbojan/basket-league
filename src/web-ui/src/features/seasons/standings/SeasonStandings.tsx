@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import Table from '../../../app/common/table/Table';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
+import { S } from './SeasonStandings.style';
 
 const SeasonStandings = observer(() => {
   const rootStore = useContext(RootStoreContext);
   const { standings, loadingStandings } = rootStore.seasonStore;
 
   return (
-    <div>
+    <S.SeasonStandings>
       <Table>
         <thead>
           <tr>
@@ -37,7 +38,10 @@ const SeasonStandings = observer(() => {
               <tr key={team.id}>
                 <td>{i + 1}</td>
                 <td>
-                  <Link to={`/teams/${team.id}`}>{team.name}</Link>
+                  <Link to={`/teams/${team.id}`} className='team'>
+                    <img src='/images/team.jpg' alt='' className='image' />
+                    <div className='name'>{team.name}</div>
+                  </Link>
                 </td>
                 <td>{team.matchesPlayed}</td>
                 <td>{team.wins}</td>
@@ -51,7 +55,7 @@ const SeasonStandings = observer(() => {
           )}
         </tbody>
       </Table>
-    </div>
+    </S.SeasonStandings>
   );
 });
 
