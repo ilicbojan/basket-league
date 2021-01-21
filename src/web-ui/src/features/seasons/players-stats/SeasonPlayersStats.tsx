@@ -18,12 +18,12 @@ const SeasonPlayersStats = observer(() => {
             <th>#</th>
             <th>Player</th>
             <th>MP</th>
-            <th>P AVG</th>
-            <th>A AVG</th>
-            <th>F AVG</th>
-            <th>P</th>
-            <th>A</th>
-            <th>F</th>
+            <th>PTS</th>
+            <th>AVG</th>
+            <th>AST</th>
+            <th>AVG</th>
+            <th>PF</th>
+            <th>AVG</th>
           </tr>
         </thead>
         <tbody>
@@ -46,12 +46,12 @@ const SeasonPlayersStats = observer(() => {
                   </Link>
                 </td>
                 <td>{player.matchesPlayed}</td>
-                <td>{player.pointsAvg}</td>
-                <td>{player.assistsAvg}</td>
-                <td>{player.foulsAvg}</td>
                 <td>{player.points}</td>
+                <td>{player.pointsAvg}</td>
                 <td>{player.assists}</td>
+                <td>{player.assistsAvg}</td>
                 <td>{player.fouls}</td>
+                <td>{player.foulsAvg}</td>
               </tr>
             ))
           )}

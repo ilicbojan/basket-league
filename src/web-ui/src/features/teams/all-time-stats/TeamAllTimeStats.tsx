@@ -2,72 +2,52 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
 import Table from '../../../app/common/table/Table';
 import { RootStoreContext } from '../../../app/stores/rootStore';
-import { Style } from '../../../style';
+import { S } from './TeamAllTimeStats.style';
 
 const TeamAllTimeStats = observer(() => {
   const rootStore = useContext(RootStoreContext);
   const { teamAllTimeStats, loadingAllTimeStats } = rootStore.teamStore;
 
   return (
-    <div>
-      <Style.Stats>
-        <div>
-          <h6>Matches</h6>
-          <span>{teamAllTimeStats?.matchesPlayed}</span>
-        </div>
-        <div>
-          <h6>Points+</h6>
-          <span>{teamAllTimeStats?.scoredPoints}</span>
-        </div>
-        <div>
-          <h6>Points-</h6>
-          <span>{teamAllTimeStats?.receivedPoints}</span>
-        </div>
-        <div>
-          <h6>Points +/-</h6>
-          <span>{teamAllTimeStats?.pointsDiff}</span>
-        </div>
-        <div>
-          <h6>Assists</h6>
-          <span>{teamAllTimeStats?.assists}</span>
-        </div>
-        <div>
-          <h6>Fouls</h6>
-          <span>{teamAllTimeStats?.fouls}</span>
-        </div>
-        <div>
-          <h6>Wins</h6>
-          <span>{teamAllTimeStats?.wins}</span>
-        </div>
-        <div>
-          <h6>Losses</h6>
-          <span>{teamAllTimeStats?.losses}</span>
-        </div>
-        <div>
-          <h6>Points+ AVG</h6>
-          <span>{teamAllTimeStats?.scoredPointsAvg}</span>
-        </div>
-        <div>
-          <h6>Points- AVG</h6>
-          <span>{teamAllTimeStats?.receivedPointsAvg}</span>
-        </div>
-        <div>
-          <h6>Assists AVG</h6>
-          <span>{teamAllTimeStats?.assistsAvg}</span>
-        </div>
-        <div>
-          <h6>Fouls AVG</h6>
-          <span>{teamAllTimeStats?.foulsAvg}</span>
-        </div>
-        <div>
-          <h6>Wins %</h6>
-          <span>{teamAllTimeStats?.winsPercentage}%</span>
-        </div>
-        <div>
-          <h6>Losses %</h6>
-          <span>{teamAllTimeStats?.lossesPercentage}%</span>
-        </div>
-      </Style.Stats>
+    <S.TeamAllTimeStats>
+      <Table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>MP</th>
+            <th>PTS+</th>
+            <th>PTS-</th>
+            <th>AST</th>
+            <th>PF</th>
+            <th>W</th>
+            <th>L</th>
+            <th>PTS+/-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Totals</td>
+            <td>{teamAllTimeStats?.matchesPlayed}</td>
+            <td>{teamAllTimeStats?.scoredPoints}</td>
+            <td>{teamAllTimeStats?.receivedPoints}</td>
+            <td>{teamAllTimeStats?.assists}</td>
+            <td>{teamAllTimeStats?.fouls}</td>
+            <td>{teamAllTimeStats?.wins}</td>
+            <td>{teamAllTimeStats?.losses}</td>
+            <td>{teamAllTimeStats?.pointsDiff}</td>
+          </tr>
+          <tr>
+            <td>AVG</td>
+            <td>{teamAllTimeStats?.matchesPlayed}</td>
+            <td>{teamAllTimeStats?.scoredPointsAvg}</td>
+            <td>{teamAllTimeStats?.receivedPointsAvg}</td>
+            <td>{teamAllTimeStats?.assistsAvg}</td>
+            <td>{teamAllTimeStats?.foulsAvg}</td>
+            <td>{teamAllTimeStats?.winsPercentage}%</td>
+            <td>{teamAllTimeStats?.lossesPercentage}%</td>
+          </tr>
+        </tbody>
+      </Table>
 
       <Table>
         <thead>
@@ -75,12 +55,16 @@ const TeamAllTimeStats = observer(() => {
             <th>Year</th>
             <th>League</th>
             <th>MP</th>
+            <th>PTS+</th>
+            <th>AVG</th>
+            <th>PTS-</th>
+            <th>AVG</th>
+            <th>AST</th>
+            <th>AVG</th>
+            <th>PF</th>
+            <th>AVG</th>
             <th>W</th>
             <th>L</th>
-            <th>P+</th>
-            <th>P-</th>
-            <th>A</th>
-            <th>F</th>
           </tr>
         </thead>
         <tbody>
@@ -89,17 +73,21 @@ const TeamAllTimeStats = observer(() => {
               <td>{season.year}</td>
               <td>{season.name}</td>
               <td>{season.matchesPlayed}</td>
+              <td>{season.scoredPoints}</td>
+              <td>{season.scoredPointsAvg}</td>
+              <td>{season.receivedPoints}</td>
+              <td>{season.receivedPointsAvg}</td>
+              <td>{season.assists}</td>
+              <td>{season.assistsAvg}</td>
+              <td>{season.fouls}</td>
+              <td>{season.foulsAvg}</td>
               <td>{season.wins}</td>
               <td>{season.losses}</td>
-              <td>{season.scoredPointsAvg}</td>
-              <td>{season.receivedPointsAvg}</td>
-              <td>{season.assistsAvg}</td>
-              <td>{season.foulsAvg}</td>
             </tr>
           ))}
         </tbody>
       </Table>
-    </div>
+    </S.TeamAllTimeStats>
   );
 });
 

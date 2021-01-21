@@ -1,73 +1,54 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
+import Table from '../../../app/common/table/Table';
 import { RootStoreContext } from '../../../app/stores/rootStore';
-import { Style } from '../../../style';
+import { S } from './TeamCurrentStats.style';
 
 const TeamCurrentStats = observer(() => {
   const rootStore = useContext(RootStoreContext);
   const { teamCurrentStats, loadingCurrentStats } = rootStore.teamStore;
 
   return (
-    <div>
-      <Style.Stats>
-        <div>
-          <h6>PTS+</h6>
-          <span>{teamCurrentStats?.scoredPoints}</span>
-        </div>
-        <div>
-          <h6>PTS-</h6>
-          <span>{teamCurrentStats?.receivedPoints}</span>
-        </div>
-        <div>
-          <h6>PTS +/-</h6>
-          <span>{teamCurrentStats?.pointsDiff}</span>
-        </div>
-        <div>
-          <h6>AST</h6>
-          <span>{teamCurrentStats?.assists}</span>
-        </div>
-        <div>
-          <h6>PF</h6>
-          <span>{teamCurrentStats?.fouls}</span>
-        </div>
-        <div>
-          <h6>PTS+ AVG</h6>
-          <span>{teamCurrentStats?.scoredPointsAvg}</span>
-        </div>
-        <div>
-          <h6>PTS- AVG</h6>
-          <span>{teamCurrentStats?.receivedPointsAvg}</span>
-        </div>
-        <div>
-          <h6>AST AVG</h6>
-          <span>{teamCurrentStats?.assistsAvg}</span>
-        </div>
-        <div>
-          <h6>PF AVG</h6>
-          <span>{teamCurrentStats?.foulsAvg}</span>
-        </div>
-        <div>
-          <h6>MP</h6>
-          <span>{teamCurrentStats?.matchesPlayed}</span>
-        </div>
-        <div>
-          <h6>W</h6>
-          <span>{teamCurrentStats?.wins}</span>
-        </div>
-        <div>
-          <h6>L</h6>
-          <span>{teamCurrentStats?.losses}</span>
-        </div>
-        <div>
-          <h6>W %</h6>
-          <span>{teamCurrentStats?.winsPercentage}%</span>
-        </div>
-        <div>
-          <h6>L %</h6>
-          <span>{teamCurrentStats?.lossesPercentage}%</span>
-        </div>
-      </Style.Stats>
-    </div>
+    <S.TeamCurrentStats>
+      <Table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>MP</th>
+            <th>PTS+</th>
+            <th>PTS-</th>
+            <th>AST</th>
+            <th>PF</th>
+            <th>W</th>
+            <th>L</th>
+            <th>PTS+/-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Totals</td>
+            <td>{teamCurrentStats?.matchesPlayed}</td>
+            <td>{teamCurrentStats?.scoredPoints}</td>
+            <td>{teamCurrentStats?.receivedPoints}</td>
+            <td>{teamCurrentStats?.assists}</td>
+            <td>{teamCurrentStats?.fouls}</td>
+            <td>{teamCurrentStats?.wins}</td>
+            <td>{teamCurrentStats?.losses}</td>
+            <td>{teamCurrentStats?.pointsDiff}</td>
+          </tr>
+          <tr>
+            <td>AVG</td>
+            <td>{teamCurrentStats?.matchesPlayed}</td>
+            <td>{teamCurrentStats?.scoredPointsAvg}</td>
+            <td>{teamCurrentStats?.receivedPointsAvg}</td>
+            <td>{teamCurrentStats?.assistsAvg}</td>
+            <td>{teamCurrentStats?.foulsAvg}</td>
+            <td>{teamCurrentStats?.winsPercentage}%</td>
+            <td>{teamCurrentStats?.lossesPercentage}%</td>
+          </tr>
+        </tbody>
+      </Table>
+    </S.TeamCurrentStats>
   );
 });
 
