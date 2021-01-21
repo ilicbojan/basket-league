@@ -28,7 +28,7 @@ export const COLOR = {
   primary: '#e35000',
   primaryLight: '#e35000',
   primaryDark: '#e35000',
-  secondary: '#3ed47b',
+  secondary: '#0B79E3',
   secondaryDark: '#188155',
   red: '#ff1500',
   gray1: '#464646',

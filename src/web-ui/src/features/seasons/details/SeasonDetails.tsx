@@ -47,7 +47,7 @@ const SeasonDetails: React.FC<RouteComponentProps<IProps>> = observer(
     return (
       <div>
         <S.Info>
-          <div className='image'>slika</div>
+          <img className='image' src='/images/league.jpg' />
           <div>
             <div>{season?.name}</div>
             <div>{season?.year}</div>

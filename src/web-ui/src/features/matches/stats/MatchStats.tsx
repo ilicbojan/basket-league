@@ -17,16 +17,28 @@ const MatchStats = observer(() => {
         <div>Points</div>
         <div>{matchStats?.awayPoints}</div>
       </div>
+      <S.Bar home={matchStats?.homePoints!} away={matchStats?.awayPoints!}>
+        <div className='home'></div>
+        <div className='away'></div>
+      </S.Bar>
       <div className='stats'>
         <div>{matchStats?.homeAssists}</div>
         <div>Assists</div>
         <div>{matchStats?.awayAssists}</div>
       </div>
+      <S.Bar home={matchStats?.homeAssists!} away={matchStats?.awayAssists!}>
+        <div className='home'></div>
+        <div className='away'></div>
+      </S.Bar>
       <div className='stats'>
         <div>{matchStats?.homeFouls}</div>
         <div>Fouls</div>
         <div>{matchStats?.awayFouls}</div>
       </div>
+      <S.Bar home={matchStats?.homeFouls!} away={matchStats?.awayFouls!}>
+        <div className='home'></div>
+        <div className='away'></div>
+      </S.Bar>
     </S.MatchStats>
   );
 });
