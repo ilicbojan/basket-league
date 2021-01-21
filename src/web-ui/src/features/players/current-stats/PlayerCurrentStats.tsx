@@ -2,44 +2,41 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
 import Table from '../../../app/common/table/Table';
 import { RootStoreContext } from '../../../app/stores/rootStore';
-import { Style } from '../../../style';
+import { S } from './PlayerCurrentStats.style';
 
 const PlayerCurrentStats = observer(() => {
   const rootStore = useContext(RootStoreContext);
   const { playerCurrentStats, loadingCurrentStats } = rootStore.playerStore;
 
   return (
-    <div>
-      <Style.Stats>
-        <div>
-          <h6>Points AVG</h6>
-          <span>{playerCurrentStats?.pointsAvg}</span>
-        </div>
-        <div>
-          <h6>Assists AVG</h6>
-          <span>{playerCurrentStats?.assistsAvg}</span>
-        </div>
-        <div>
-          <h6>Fouls AVG</h6>
-          <span>{playerCurrentStats?.foulsAvg}</span>
-        </div>
-        <div>
-          <h6>Points</h6>
-          <span>{playerCurrentStats?.points}</span>
-        </div>
-        <div>
-          <h6>Assists</h6>
-          <span>{playerCurrentStats?.assists}</span>
-        </div>
-        <div>
-          <h6>Fouls</h6>
-          <span>{playerCurrentStats?.fouls}</span>
-        </div>
-        <div>
-          <h6>Matches</h6>
-          <span>{playerCurrentStats?.matchesPlayed}</span>
-        </div>
-      </Style.Stats>
+    <S.PlayerCurrentStats>
+      <Table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>MP</th>
+            <th>PTS</th>
+            <th>AST</th>
+            <th>PF</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Totals</td>
+            <td>{playerCurrentStats?.matchesPlayed}</td>
+            <td>{playerCurrentStats?.points}</td>
+            <td>{playerCurrentStats?.assists}</td>
+            <td>{playerCurrentStats?.fouls}</td>
+          </tr>
+          <tr>
+            <td>Averages</td>
+            <td>{playerCurrentStats?.matchesPlayed}</td>
+            <td>{playerCurrentStats?.pointsAvg}</td>
+            <td>{playerCurrentStats?.assistsAvg}</td>
+            <td>{playerCurrentStats?.foulsAvg}</td>
+          </tr>
+        </tbody>
+      </Table>
 
       <Table>
         <thead>
@@ -63,7 +60,7 @@ const PlayerCurrentStats = observer(() => {
           ))}
         </tbody>
       </Table>
-    </div>
+    </S.PlayerCurrentStats>
   );
 });
 
