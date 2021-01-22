@@ -7,9 +7,11 @@ const Info = styled.div`
   padding: 10px;
   display: flex;
   align-items: center;
+  font-size: 1.4rem;
 
   @media ${BREAKPOINTS.lg} {
     padding: 20px 0;
+    font-size: 1.6rem;
   }
 
   & .image {
@@ -17,7 +19,16 @@ const Info = styled.div`
     width: 100px;
 
     @media ${BREAKPOINTS.lg} {
+      margin-right: 20px;
       width: 120px;
+    }
+  }
+
+  & .name {
+    font-size: 1.6rem;
+
+    @media ${BREAKPOINTS.lg} {
+      font-size: 2rem;
     }
   }
 `;

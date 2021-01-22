@@ -34,7 +34,13 @@ const Table = styled.table`
   }
 
   & th {
+    font-size: 1.2rem;
+    text-transform: uppercase;
     font-weight: normal;
+
+    @media ${BREAKPOINTS.lg} {
+      font-size: 1.4rem;
+    }
   }
 
   & tbody {

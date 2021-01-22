@@ -6,6 +6,7 @@ const MatchStats = styled.div`
   font-size: 1.4rem;
 
   @media ${BREAKPOINTS.lg} {
+    padding: 20px 0;
     font-size: 1.6rem;
   }
 

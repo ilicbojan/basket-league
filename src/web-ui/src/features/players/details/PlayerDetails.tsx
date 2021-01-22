@@ -48,8 +48,8 @@ const PlayerDetails: React.FC<RouteComponentProps<IProps>> = observer(
       <div>
         <S.Info>
           <img src='/images/user.jpg' className='image' />
-          <div>
-            <div>
+          <div className='player'>
+            <div className='name'>
               {player?.firstName} {player?.lastName}
             </div>
             <div>Tim</div>
