@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { S } from './NavDropdown.style';
 
 const NavDropdown = () => {
@@ -10,7 +11,14 @@ const NavDropdown = () => {
     <S.NavDropdown
       onClick={handleClick}
       className={click ? 'dropdown-menu clicked' : 'dropdown-menu'}
-    ></S.NavDropdown>
+    >
+      <li onClick={() => setClick(false)}>
+        <NavLink to='/seasons/2'>1. Liga</NavLink>
+      </li>
+      <li onClick={() => setClick(false)}>
+        <NavLink to='/seasons/1'>2.Liga</NavLink>
+      </li>
+    </S.NavDropdown>
   );
 };
 

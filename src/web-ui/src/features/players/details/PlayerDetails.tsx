@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import TabNav from '../../../app/common/tabs/tab-nav/TabNav';
 import Tab from '../../../app/common/tabs/tab/Tab';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
@@ -52,7 +52,9 @@ const PlayerDetails: React.FC<RouteComponentProps<IProps>> = observer(
             <div className='name'>
               {player?.firstName} {player?.lastName}
             </div>
-            <div>Tim</div>
+            <div className='team'>
+              <Link to={`/teams}`}>Tim (staviti link)</Link>
+            </div>
             <div># {player?.jerseyNumber}</div>
           </div>
         </S.Info>

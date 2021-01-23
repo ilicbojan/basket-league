@@ -31,6 +31,10 @@ const Info = styled.div`
       font-size: 2rem;
     }
   }
+
+  & .team:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const S = {

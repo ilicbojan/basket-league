@@ -3,6 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 import { S } from './Toolbar.style';
 import Burger from '../burger/Burger';
 import { observer } from 'mobx-react-lite';
+import { FaAngleDown } from 'react-icons/fa';
+import NavDropdown from '../dropdown/NavDropdown';
 
 interface IProps {
   burgerClickHandler: () => void;
@@ -33,7 +35,16 @@ const Toolbar: React.FC<IProps> = observer(({ burgerClickHandler }) => {
         <S.Items>
           <ul>
             <li>
-              <NavLink to='/'>Početna</NavLink>
+              <NavLink to='/'>Home</NavLink>
+            </li>
+            <li
+              onClick={onClick}
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+            >
+              <button>Leagues</button>
+              <FaAngleDown />
+              {dropdown && <NavDropdown />}
             </li>
           </ul>
         </S.Items>

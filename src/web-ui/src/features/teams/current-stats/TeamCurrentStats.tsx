@@ -45,6 +45,7 @@ const TeamCurrentStats = observer(() => {
             <td>{teamCurrentStats?.foulsAvg}</td>
             <td>{teamCurrentStats?.winsPercentage}%</td>
             <td>{teamCurrentStats?.lossesPercentage}%</td>
+            <td></td>
           </tr>
         </tbody>
       </Table>

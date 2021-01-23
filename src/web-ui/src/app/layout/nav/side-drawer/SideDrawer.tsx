@@ -17,6 +17,15 @@ const SideDrawer: React.FC<IProps> = observer(({ show, click }) => {
           <FaHome />
           <NavLink to='/'>Home</NavLink>
         </li>
+        <hr />
+        <S.SubNavLinks>
+          <li onClick={click}>
+            <NavLink to='/seasons/2'>1. Liga</NavLink>
+          </li>
+          <li onClick={click}>
+            <NavLink to='/seasons/1'>2. Liga</NavLink>
+          </li>
+        </S.SubNavLinks>
       </ul>
     </S.SideDrawer>
   );

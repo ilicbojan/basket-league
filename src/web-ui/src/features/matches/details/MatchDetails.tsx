@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import TabNav from '../../../app/common/tabs/tab-nav/TabNav';
 import Tab from '../../../app/common/tabs/tab/Tab';
 import { getDate, getTime } from '../../../app/common/util/dates';
@@ -56,8 +56,14 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
           <div className='league'>League - Round {match?.round}</div>
           <div className='match'>
             <div className='team'>
-              <img className='image' src='/images/team.jpg' />
-              <div>{match?.homeTeam.name}</div>
+              <Link to={`/teams/${match.homeTeam.id}`}>
+                <img className='image' src='/images/team.jpg' />
+              </Link>
+              <div className='name'>
+                <Link to={`/teams/${match.homeTeam.id}`}>
+                  {match?.homeTeam.name}
+                </Link>
+              </div>
             </div>
             <div className='info'>
               <div className='date'>
@@ -68,8 +74,14 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
               </div>
             </div>
             <div className='team'>
-              <img className='image' src='/images/team.jpg' />
-              <div>{match?.awayTeam.name}</div>
+              <Link to={`/teams/${match.awayTeam.id}`}>
+                <img className='image' src='/images/team.jpg' />
+              </Link>
+              <div className='name'>
+                <Link to={`/teams/${match.awayTeam.id}`}>
+                  {match?.awayTeam.name}
+                </Link>
+              </div>
             </div>
           </div>
         </S.Info>

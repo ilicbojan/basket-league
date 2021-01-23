@@ -43,9 +43,9 @@ const PlayerCurrentStats = observer(() => {
           <tr>
             <th>#</th>
             <th>Team</th>
-            <th>Points</th>
-            <th>Assists</th>
-            <th>Fouls</th>
+            <th>PTS</th>
+            <th>AST</th>
+            <th>PF</th>
           </tr>
         </thead>
         <tbody>

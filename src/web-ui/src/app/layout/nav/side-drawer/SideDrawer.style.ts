@@ -78,7 +78,7 @@ const SubNavLinks = styled.div`
 
   & a,
   button {
-    color: ${COLOR.primaryDark};
+    color: ${COLOR.white};
     font-size: 1.7rem;
   }
 `;

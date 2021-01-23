@@ -32,11 +32,23 @@ const Info = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 1.4rem;
+
+    & a:first-child {
+      line-height: 0;
+    }
+  }
+
+  & .name {
+    font-size: 1.6rem;
 
     @media ${BREAKPOINTS.lg} {
       font-size: 1.8rem;
+      margin-top: 5px;
     }
+  }
+
+  & .name:hover {
+    text-decoration: underline;
   }
 
   & .image {
