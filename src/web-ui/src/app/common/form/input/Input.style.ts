@@ -10,7 +10,8 @@ const Input = styled.input<IProps>`
   font-size: 1.6rem;
   padding: 10px;
   outline: none;
-  border: 1px solid ${COLOR.white};
+  background-color: ${COLOR.gray3};
+  border: 1px solid ${COLOR.gray3};
   border-radius: ${utilities.borderRadius};
   box-shadow: ${utilities.shadow};
 
@@ -18,7 +19,7 @@ const Input = styled.input<IProps>`
   width: ${(props: IProps) => props.block && '100%'};
 
   &:focus {
-    border-color: ${COLOR.primary};
+    border-color: ${COLOR.secondary};
   }
 `;
 

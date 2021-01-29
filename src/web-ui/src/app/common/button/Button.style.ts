@@ -33,13 +33,13 @@ const Button = styled.button`
     color === 'primary' &&
     `
       background-color: ${COLOR.primary};
-      color: ${COLOR.secondary};
+      color: ${COLOR.white};
     `}
 
   ${({ color }) =>
     color === 'secondary' &&
     `
-      background-color: ${COLOR.secondaryDark};
+      background-color: ${COLOR.secondary};
       color: ${COLOR.white};
     `}
 

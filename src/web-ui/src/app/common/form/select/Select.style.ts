@@ -10,16 +10,16 @@ const Select = styled.select<IProps>`
   font-size: 1.6rem;
   padding: 10px;
   outline: none;
-  border: 1px solid ${COLOR.white};
+  background-color: ${COLOR.gray3};
+  border: 1px solid ${COLOR.gray3};
   border-radius: ${utilities.borderRadius};
   box-shadow: ${utilities.shadow};
-  background-color: ${COLOR.white};
 
   height: 40px;
   width: ${(props: IProps) => props.block && '100%'};
 
   &:focus {
-    border-color: ${COLOR.primary};
+    border-color: ${COLOR.secondary};
   }
 
   &:disabled,

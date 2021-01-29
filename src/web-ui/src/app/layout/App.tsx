@@ -10,6 +10,8 @@ import SeasonDetails from '../../features/seasons/details/SeasonDetails';
 import MatchDetails from '../../features/matches/details/MatchDetails';
 import TeamDetails from '../../features/teams/details/TeamDetails';
 import PlayerDetails from '../../features/players/details/PlayerDetails';
+import LeagueCreate from '../../features-admin/leagues/create/LeagueCreate';
+import SeasonCreate from '../../features-admin/seasons/SeasonCreate';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -29,7 +31,7 @@ function App() {
   return (
     <>
       <ToastContainer position='bottom-right' />
-      <div>
+      <div className='app'>
         <Nav />
         <div className='appContainer'>
           <Modal show={modal.open}></Modal>
@@ -39,10 +41,22 @@ function App() {
             render={() => (
               <>
                 <Switch>
+                  <Route
+                    exact
+                    path='/seasons/create'
+                    component={SeasonCreate}
+                  />
                   <Route exact path='/seasons/:id' component={SeasonDetails} />
                   <Route exact path='/matches/:id' component={MatchDetails} />
                   <Route exact path='/teams/:id' component={TeamDetails} />
                   <Route exact path='/players/:id' component={PlayerDetails} />
+
+                  <Route
+                    exact
+                    path='/leagues/create'
+                    component={LeagueCreate}
+                  />
+
                   {/* <PrivateRoute exact path='/profile' component={UserProfile} />
                 <PrivateRoute
                 exact

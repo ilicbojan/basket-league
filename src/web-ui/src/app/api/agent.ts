@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
+import { ICitiesVm } from '../models/city';
 import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
 import { IH2HMatchesVm, IMatch, IMatchStats } from '../models/match';
@@ -88,6 +89,10 @@ const requests = {
   },
 };
 
+const Cities = {
+  list: (): Promise<ICitiesVm> => requests.get('/cities'),
+};
+
 const Leagues = {
   list: (): Promise<ILeaguesVm> => requests.get('/leagues'),
   standings: (id: number) => requests.get(`/leagues/${id}`),
@@ -99,6 +104,7 @@ const Leagues = {
 const Seasons = {
   list: (): Promise<ISeason[]> => requests.get('/seasons'),
   details: (id: number): Promise<ISeason> => requests.get(`/seasons/${id}`),
+  create: (season: ISeason) => requests.post('/seasons', season),
   standings: (id: number): Promise<IStandings> =>
     requests.get(`/seasons/${id}/standings`),
   playersStats: (id: number): Promise<IPlayersStats> =>
@@ -139,6 +145,7 @@ const Players = {
 };
 
 const agent = {
+  Cities,
   Leagues,
   Seasons,
   Matches,

@@ -1,5 +1,11 @@
 import { AxiosResponse } from 'axios';
-import { action, computed, observable, runInAction } from 'mobx';
+import {
+  action,
+  computed,
+  makeAutoObservable,
+  observable,
+  runInAction,
+} from 'mobx';
 import { toast } from 'react-toastify';
 import agent from '../api/agent';
 import { ILeague } from '../models/league';
@@ -10,18 +16,19 @@ export default class LeagueStore {
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
+    makeAutoObservable(this);
   }
 
-  @observable leagueRegistry = new Map();
-  @observable loading = false;
-  @observable submitting = false;
-  @observable error: AxiosResponse | null = null;
+  leagueRegistry = new Map();
+  loading = false;
+  submitting = false;
+  error: AxiosResponse | null = null;
 
-  @computed get leagues() {
+  get leagues() {
     return Array.from(this.leagueRegistry.values());
   }
 
-  @action loadLeagues = async () => {
+  loadLeagues = async () => {
     this.loading = true;
     try {
       const leaguesVm = await agent.Leagues.list();
@@ -41,7 +48,7 @@ export default class LeagueStore {
     }
   };
 
-  @action createLeague = async (league: ILeague) => {
+  createLeague = async (league: ILeague) => {
     this.submitting = true;
     try {
       league.id = await agent.Leagues.create(league);
@@ -50,7 +57,7 @@ export default class LeagueStore {
         this.leagueRegistry.set(league.id, league);
         this.submitting = false;
       });
-      toast.success('Uspesno ste kreirali ligu');
+      toast.success('League created successfully');
     } catch (error) {
       runInAction(() => {
         this.submitting = false;

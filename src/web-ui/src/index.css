@@ -43,7 +43,9 @@ a {
 
 html,
 body,
-#root {
+#root,
+.app,
+.appContainer {
   height: 100%;
 }
 

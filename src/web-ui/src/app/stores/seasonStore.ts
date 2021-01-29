@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
+import { toast } from 'react-toastify';
 import agent from '../api/agent';
 import { IPlayerStats, ISeason, IStandings } from '../models/season';
 import { RootStore } from './rootStore';
@@ -74,6 +75,25 @@ export default class SeasonStore {
 
   getSeason = (id: number): ISeason => {
     return this.seasonRegistry.get(id);
+  };
+
+  createSeason = async (season: ISeason) => {
+    this.submitting = true;
+    try {
+      season.id = await agent.Seasons.create(season);
+      //get city and store it in league.city
+      runInAction(() => {
+        this.seasonRegistry.set(season.id, season);
+        this.submitting = false;
+      });
+      toast.success('Season created successfully');
+    } catch (error) {
+      runInAction(() => {
+        this.submitting = false;
+        this.error = error;
+      });
+      console.log(error);
+    }
   };
 
   loadStandings = async (id: number) => {
