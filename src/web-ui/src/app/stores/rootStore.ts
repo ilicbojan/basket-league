@@ -2,6 +2,7 @@ import { configure } from 'mobx';
 import { createContext } from 'react';
 import CityStore from './cityStore';
 import CommonStore from './commonStore';
+import FieldStore from './fieldStore';
 import LeagueStore from './leagueStore';
 import MatchPlayerStore from './matchPlayerStore';
 import MatchStore from './matchStore';
@@ -22,6 +23,7 @@ export class RootStore {
   teamStore: TeamStore;
   playerStore: PlayerStore;
   cityStore: CityStore;
+  fieldStore: FieldStore;
 
   constructor() {
     this.commonStore = new CommonStore(this);
@@ -33,6 +35,7 @@ export class RootStore {
     this.teamStore = new TeamStore(this);
     this.playerStore = new PlayerStore(this);
     this.cityStore = new CityStore(this);
+    this.fieldStore = new FieldStore(this);
   }
 }
 

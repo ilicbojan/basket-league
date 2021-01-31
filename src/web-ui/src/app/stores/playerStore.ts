@@ -1,4 +1,6 @@
+import { AxiosResponse } from 'axios';
 import { makeAutoObservable, reaction, runInAction } from 'mobx';
+import { toast } from 'react-toastify';
 import agent from '../api/agent';
 import {
   IPlayer,
@@ -29,7 +31,9 @@ export default class PlayerStore {
   loadingPlayers = false;
   loadingCurrentStats = false;
   loadingAllTimeStats = false;
+  submitting = false;
   predicate = new Map();
+  error: AxiosResponse | null = null;
 
   get players(): IPlayer[] {
     return Array.from(this.playerRegistry.values());
@@ -91,6 +95,24 @@ export default class PlayerStore {
 
   getPlayer = (id: number): IPlayer => {
     return this.playerRegistry.get(id);
+  };
+
+  createPlayer = async (player: IPlayer) => {
+    this.submitting = true;
+    try {
+      player.id = await agent.Players.create(player);
+      runInAction(() => {
+        this.playerRegistry.set(player.id, player);
+        this.submitting = false;
+      });
+      toast.success('Player created successfully');
+    } catch (error) {
+      runInAction(() => {
+        this.submitting = false;
+        this.error = error;
+      });
+      console.log(error);
+    }
   };
 
   loadPlayerCurrentStats = async (id: number) => {

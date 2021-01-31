@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const LeagueCreate = styled.div``;
+const TeamCreate = styled.div``;
 
 export const S = {
-  LeagueCreate,
+  TeamCreate,
 };

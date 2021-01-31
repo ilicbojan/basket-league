@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
 import { ICitiesVm } from '../models/city';
+import { IField } from '../models/field';
 import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
 import { IH2HMatchesVm, IMatch, IMatchStats } from '../models/match';
@@ -11,12 +12,7 @@ import {
   IPlayerCurrentStats,
   IPlayersVm,
 } from '../models/player';
-import {
-  IPlayersStats,
-  IPlayerStats,
-  ISeason,
-  IStandings,
-} from '../models/season';
+import { IPlayersStats, ISeason, IStandings } from '../models/season';
 import { ITeam, ITeamAllTimeStats, ITeamStats } from '../models/team';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -93,6 +89,10 @@ const Cities = {
   list: (): Promise<ICitiesVm> => requests.get('/cities'),
 };
 
+const Fields = {
+  create: (field: IField) => requests.post(`/fields`, field),
+};
+
 const Leagues = {
   list: (): Promise<ILeaguesVm> => requests.get('/leagues'),
   standings: (id: number) => requests.get(`/leagues/${id}`),
@@ -128,6 +128,7 @@ const MatchPlayers = {
 
 const Teams = {
   details: (id: number): Promise<ITeam> => requests.get(`/teams/${id}`),
+  create: (team: ITeam) => requests.post('/teams', team),
   currentStats: (id: number): Promise<ITeamStats> =>
     requests.get(`/teams/${id}/current-stats`),
   allTimeStats: (id: number): Promise<ITeamAllTimeStats> =>
@@ -138,6 +139,7 @@ const Players = {
   list: (params: URLSearchParams): Promise<IPlayersVm> =>
     axios.get(`/players`, { params }).then(responseBody),
   details: (id: number): Promise<IPlayer> => requests.get(`/players/${id}`),
+  create: (player: IPlayer) => requests.post('/players', player),
   currentStats: (id: number): Promise<IPlayerCurrentStats> =>
     requests.get(`/players/${id}/current-stats`),
   allTimeStats: (id: number): Promise<IPlayerAllTimeStats> =>
@@ -146,6 +148,7 @@ const Players = {
 
 const agent = {
   Cities,
+  Fields,
   Leagues,
   Seasons,
   Matches,

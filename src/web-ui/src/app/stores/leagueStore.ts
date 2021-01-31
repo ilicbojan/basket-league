@@ -1,11 +1,5 @@
 import { AxiosResponse } from 'axios';
-import {
-  action,
-  computed,
-  makeAutoObservable,
-  observable,
-  runInAction,
-} from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { toast } from 'react-toastify';
 import agent from '../api/agent';
 import { ILeague } from '../models/league';

@@ -5,26 +5,34 @@ import Button from '../../../app/common/button/Button';
 import Input from '../../../app/common/form/input/Input';
 import Select from '../../../app/common/form/select/Select';
 import { required } from '../../../app/common/util/validation';
-import { ILeague } from '../../../app/models/league';
+import { IField } from '../../../app/models/field';
 import { RootStoreContext } from '../../../app/stores/rootStore';
-import { S } from './LeagueCreate.style';
+import { S } from './FieldCreate.style';
 
-const LeagueCreate = observer(() => {
+const FieldCreate = observer(() => {
   const rootStore = useContext(RootStoreContext);
-  const { createLeague } = rootStore.leagueStore;
+  const { createField } = rootStore.fieldStore;
 
   return (
-    <S.LeagueCreate className='admin'>
+    <S.FieldCreate className='admin'>
       <div className='adminForm'>
-        <h2>Create League</h2>
+        <h2>Create Field</h2>
         <Form
-          onSubmit={(values: ILeague) => createLeague(values)}
+          onSubmit={(values: IField) => createField(values)}
           render={({ handleSubmit, submitting }) => (
             <form onSubmit={handleSubmit}>
               <Field
                 name='name'
                 type='text'
                 label='Name'
+                block
+                validate={required}
+                component={Input}
+              />
+              <Field
+                name='address'
+                type='text'
+                label='Address'
                 block
                 validate={required}
                 component={Input}
@@ -56,8 +64,8 @@ const LeagueCreate = observer(() => {
           )}
         ></Form>
       </div>
-    </S.LeagueCreate>
+    </S.FieldCreate>
   );
 });
 
-export default LeagueCreate;
+export default FieldCreate;

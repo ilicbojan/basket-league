@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 import agent from '../api/agent';
 import { ITeam, ITeamAllTimeStats, ITeamStats } from '../models/team';
@@ -16,8 +17,10 @@ export default class TeamStore {
   teamCurrentStats: ITeamStats | null = null;
   teamAllTimeStats: ITeamAllTimeStats | null = null;
   loading = false;
+  submitting = false;
   loadingCurrentStats = false;
   loadingAllTimeStats = false;
+  error: AxiosResponse | null = null;
 
   get teams() {
     return Array.from(this.teamRegistry.values());
@@ -49,6 +52,23 @@ export default class TeamStore {
 
   getTeam = (id: number): ITeam => {
     return this.teamRegistry.get(id);
+  };
+
+  createTeam = async (team: ITeam) => {
+    this.submitting = true;
+    try {
+      team.id = await agent.Teams.create(team);
+      runInAction(() => {
+        this.teamRegistry.set(team.id, team);
+        this.submitting = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.submitting = false;
+        this.error = error;
+      });
+      console.log(error);
+    }
   };
 
   loadTeamCurrentStats = async (id: number) => {

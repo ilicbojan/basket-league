@@ -12,6 +12,9 @@ import TeamDetails from '../../features/teams/details/TeamDetails';
 import PlayerDetails from '../../features/players/details/PlayerDetails';
 import LeagueCreate from '../../features-admin/leagues/create/LeagueCreate';
 import SeasonCreate from '../../features-admin/seasons/SeasonCreate';
+import FieldCreate from '../../features-admin/fields/create/FieldCreate';
+import TeamCreate from '../../features-admin/teams/TeamCreate';
+import PlayerCreate from '../../features-admin/players/create/PlayerCreate';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -48,7 +51,13 @@ function App() {
                   />
                   <Route exact path='/seasons/:id' component={SeasonDetails} />
                   <Route exact path='/matches/:id' component={MatchDetails} />
+                  <Route exact path='/teams/create' component={TeamCreate} />
                   <Route exact path='/teams/:id' component={TeamDetails} />
+                  <Route
+                    exact
+                    path='/players/create'
+                    component={PlayerCreate}
+                  />
                   <Route exact path='/players/:id' component={PlayerDetails} />
 
                   <Route
@@ -56,6 +65,7 @@ function App() {
                     path='/leagues/create'
                     component={LeagueCreate}
                   />
+                  <Route exact path='/fields/create' component={FieldCreate} />
 
                   {/* <PrivateRoute exact path='/profile' component={UserProfile} />
                 <PrivateRoute

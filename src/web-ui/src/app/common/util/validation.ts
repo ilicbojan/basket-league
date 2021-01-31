@@ -1,5 +1,5 @@
 export const required = (value: any) =>
-  value ? undefined : 'Polje je obavezno';
+  value ? undefined : 'Field is required';
 
 export const mustBeNumber = (value: any) =>
   isNaN(value) ? 'Must be a number' : undefined;

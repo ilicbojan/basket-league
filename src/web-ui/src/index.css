@@ -24,7 +24,6 @@ select {
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.7;
-
   color: #fff;
 }
 
@@ -63,11 +62,33 @@ a {
   margin: 0 auto;
 }
 
-.fullWidth {
+.fullWidth,
+.admin {
   width: 100vw;
   position: relative;
   left: 50%;
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+}
+
+.admin {
+  height: 100%;
+  padding: 10px;
+  background-color: #2d2d2d;
+}
+
+.adminForm {
+  width: 100%;
+}
+
+.adminForm button {
+  margin-top: 25px;
+}
+
+@media (min-width: 1200px) {
+  .adminForm {
+    width: 40%;
+    margin: 20px auto;
+  }
 }

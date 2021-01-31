@@ -15,7 +15,6 @@ const Button = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin: 15px 0;
   padding: 0 24px;
   font-size: 1.5rem;
   text-transform: uppercase;
