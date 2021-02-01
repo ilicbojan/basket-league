@@ -115,6 +115,7 @@ const Matches = {
   list: (params: URLSearchParams): Promise<IMatch[]> =>
     axios.get(`/matches`, { params }).then(responseBody),
   details: (id: number): Promise<IMatch> => requests.get(`/matches/${id}`),
+  create: (match: IMatch) => requests.post('/matches', match),
   stats: (id: number): Promise<IMatchStats> =>
     requests.get(`/matches/${id}/stats`),
   h2h: (id: number): Promise<IH2HMatchesVm> =>

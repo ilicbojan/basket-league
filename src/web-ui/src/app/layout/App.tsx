@@ -15,6 +15,7 @@ import SeasonCreate from '../../features-admin/seasons/SeasonCreate';
 import FieldCreate from '../../features-admin/fields/create/FieldCreate';
 import TeamCreate from '../../features-admin/teams/TeamCreate';
 import PlayerCreate from '../../features-admin/players/create/PlayerCreate';
+import MatchCreate from '../../features-admin/matches/create/MatchCreate';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -50,6 +51,7 @@ function App() {
                     component={SeasonCreate}
                   />
                   <Route exact path='/seasons/:id' component={SeasonDetails} />
+                  <Route exact path='/matches/create' component={MatchCreate} />
                   <Route exact path='/matches/:id' component={MatchDetails} />
                   <Route exact path='/teams/create' component={TeamCreate} />
                   <Route exact path='/teams/:id' component={TeamDetails} />

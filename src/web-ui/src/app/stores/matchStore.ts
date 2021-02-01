@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable, reaction, runInAction } from 'mobx';
+import { toast } from 'react-toastify';
 import agent from '../api/agent';
 import { IMatch, IMatchStats } from '../models/match';
 import { RootStore } from './rootStore';
@@ -102,6 +103,24 @@ export default class MatchStore {
         console.log(error);
       }
       return match.seasonId;
+    }
+  };
+
+  createMatch = async (match: IMatch) => {
+    this.submitting = true;
+    try {
+      match.id = await agent.Matches.create(match);
+      runInAction(() => {
+        this.matchRegistry.set(match.id, match);
+        this.submitting = false;
+      });
+      toast.success('Match created successfully');
+    } catch (error) {
+      runInAction(() => {
+        this.submitting = false;
+        this.error = error;
+      });
+      console.log(error);
     }
   };
 
