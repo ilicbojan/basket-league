@@ -2,6 +2,7 @@
 using Application.Teams.Queries.GetTeam;
 using Application.Teams.Queries.GetTeamAllTimeStats;
 using Application.Teams.Queries.GetTeamCurrentStats;
+using Application.Teams.Queries.GetTeams;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -9,6 +10,12 @@ namespace API.Controllers
 {
     public class TeamsController : ApiController
     {
+        [HttpGet]
+        public async Task<ActionResult<TeamsVm>> GetAll()
+        {
+            return await Mediator.Send(new GetTeamsQuery());
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<TeamVm>> Get(int id)
         {
