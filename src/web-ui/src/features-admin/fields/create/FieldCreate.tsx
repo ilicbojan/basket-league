@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Field, Form } from 'react-final-form';
 import Button from '../../../app/common/button/Button';
 import Input from '../../../app/common/form/input/Input';
@@ -12,6 +12,11 @@ import { S } from './FieldCreate.style';
 const FieldCreate = observer(() => {
   const rootStore = useContext(RootStoreContext);
   const { createField } = rootStore.fieldStore;
+  const { loadCities, loading, cities } = rootStore.cityStore;
+
+  useEffect(() => {
+    loadCities();
+  }, [loadCities]);
 
   return (
     <S.FieldCreate className='admin'>
@@ -41,15 +46,14 @@ const FieldCreate = observer(() => {
                 name='cityId'
                 label='City'
                 block
-                // disabled={loading}
+                disabled={loading}
                 component={Select}
               >
-                {/* {cities.map((city: ICity) => (
-                <option key={city.id} value={city.id}>
-                {city.name}
-                </option>
-              ))} */}
-                <option value='Beograd'>Beograd</option>
+                {cities.map((city) => (
+                  <option key={city.id} value={city.id}>
+                    {city.name}
+                  </option>
+                ))}
               </Field>
 
               <Button
