@@ -18,15 +18,14 @@ export default class LeagueStore {
   submitting = false;
   error: AxiosResponse | null = null;
 
-  get leagues() {
+  get leagues(): ILeague[] {
     return Array.from(this.leagueRegistry.values());
   }
 
   loadLeagues = async () => {
     this.loading = true;
     try {
-      const leaguesVm = await agent.Leagues.list();
-      const { leagues } = leaguesVm;
+      const { leagues } = await agent.Leagues.list();
       runInAction(() => {
         leagues.forEach((league) => {
           this.leagueRegistry.set(league.id, league);

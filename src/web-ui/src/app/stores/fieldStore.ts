@@ -14,8 +14,31 @@ export default class FieldStore {
   }
 
   fieldRegistry = new Map();
+  loading = false;
   submitting = false;
   error: AxiosResponse | null = null;
+
+  get fields(): IField[] {
+    return Array.from(this.fieldRegistry.values());
+  }
+
+  loadFields = async () => {
+    this.loading = true;
+    try {
+      const { fields } = await agent.Fields.list();
+      runInAction(() => {
+        fields.forEach((field) => {
+          this.fieldRegistry.set(field.id, field);
+        });
+        this.loading = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.loading = false;
+      });
+      console.log(error);
+    }
+  };
 
   createField = async (field: IField) => {
     this.submitting = true;

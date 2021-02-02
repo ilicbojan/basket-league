@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
 import { Field, Form } from 'react-final-form';
-import Button from '../../app/common/button/Button';
-import Input from '../../app/common/form/input/Input';
-import { required } from '../../app/common/util/validation';
-import { ITeam } from '../../app/models/team';
-import { RootStoreContext } from '../../app/stores/rootStore';
-import { S } from './create/TeamCreate.style';
+import Button from '../../../app/common/button/Button';
+import Input from '../../../app/common/form/input/Input';
+import { required } from '../../../app/common/util/validation';
+import { ITeam } from '../../../app/models/team';
+import { RootStoreContext } from '../../../app/stores/rootStore';
+import { S } from './TeamCreate.style';
 
 const TeamCreate = observer(() => {
   const rootStore = useContext(RootStoreContext);

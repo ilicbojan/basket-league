@@ -13,7 +13,7 @@ import PlayerDetails from '../../features/players/details/PlayerDetails';
 import LeagueCreate from '../../features-admin/leagues/create/LeagueCreate';
 import SeasonCreate from '../../features-admin/seasons/SeasonCreate';
 import FieldCreate from '../../features-admin/fields/create/FieldCreate';
-import TeamCreate from '../../features-admin/teams/TeamCreate';
+import TeamCreate from '../../features-admin/teams/create/TeamCreate';
 import PlayerCreate from '../../features-admin/players/create/PlayerCreate';
 import MatchCreate from '../../features-admin/matches/create/MatchCreate';
 

@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
 import { ICitiesVm } from '../models/city';
-import { IField } from '../models/field';
+import { IField, IFieldsVm } from '../models/field';
 import { ILeague, ILeaguesVm } from '../models/league';
 import { ILineup } from '../models/lineup';
 import { IH2HMatchesVm, IMatch, IMatchStats } from '../models/match';
@@ -90,6 +90,7 @@ const Cities = {
 };
 
 const Fields = {
+  list: (): Promise<IFieldsVm> => requests.get('/fields'),
   create: (field: IField) => requests.post(`/fields`, field),
 };
 

@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Field, Form } from 'react-final-form';
 import Button from '../../app/common/button/Button';
 import Input from '../../app/common/form/input/Input';
@@ -12,6 +12,17 @@ import { S } from './SeasonCreate.style';
 const SeasonCreate = observer(() => {
   const rootStore = useContext(RootStoreContext);
   const { createSeason } = rootStore.seasonStore;
+  const { loadFields, loading: loadingFields, fields } = rootStore.fieldStore;
+  const {
+    loadLeagues,
+    loading: loadingLeagues,
+    leagues,
+  } = rootStore.leagueStore;
+
+  useEffect(() => {
+    loadLeagues();
+    loadFields();
+  }, [loadLeagues, loadFields]);
 
   return (
     <S.SeasonCreate className='admin'>
@@ -41,29 +52,27 @@ const SeasonCreate = observer(() => {
                 name='leagueId'
                 label='League'
                 block
-                // disabled={loading}
+                disabled={loadingLeagues}
                 component={Select}
               >
-                {/* {cities.map((city: ICity) => (
-                <option key={city.id} value={city.id}>
-                  {city.name}
-                </option>
-              ))} */}
-                <option value='1'>1. Liga</option>
+                {leagues.map((league) => (
+                  <option key={league.id} value={league.id}>
+                    {league.name}
+                  </option>
+                ))}
               </Field>
               <Field
                 name='fieldId'
                 label='Field'
                 block
-                // disabled={loading}
+                disabled={loadingFields}
                 component={Select}
               >
-                {/* {cities.map((city: ICity) => (
-                <option key={city.id} value={city.id}>
-                  {city.name}
-                </option>
-              ))} */}
-                <option value='1'>Field</option>
+                {fields.map((field) => (
+                  <option key={field.id} value={field.id}>
+                    {field.name}
+                  </option>
+                ))}
               </Field>
 
               <Button
