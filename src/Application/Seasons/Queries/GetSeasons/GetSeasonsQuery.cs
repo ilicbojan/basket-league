@@ -3,20 +3,17 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.Seasons.Queries.GetSeasons
 {
-    public class GetSeasonsQuery : IRequest<List<SeasonDto>>
+    public class GetSeasonsQuery : IRequest<SeasonsVm>
     {
     }
 
-    public class GetSeasonsQueryHandler : IRequestHandler<GetSeasonsQuery, List<SeasonDto>>
+    public class GetSeasonsQueryHandler : IRequestHandler<GetSeasonsQuery, SeasonsVm>
     {
         private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
@@ -27,11 +24,11 @@ namespace Application.Seasons.Queries.GetSeasons
             _mapper = mapper;
         }
 
-        public async Task<List<SeasonDto>> Handle(GetSeasonsQuery request, CancellationToken cancellationToken)
+        public async Task<SeasonsVm> Handle(GetSeasonsQuery request, CancellationToken cancellationToken)
         {
-            var vm = new List<SeasonDto>();
+            var vm = new SeasonsVm();
 
-            vm = await _context.Seasons
+            vm.Seasons = await _context.Seasons
                 .ProjectTo<SeasonDto>(_mapper.ConfigurationProvider)
                 .OrderByDescending(x => x.Year)
                 .ToListAsync(cancellationToken);

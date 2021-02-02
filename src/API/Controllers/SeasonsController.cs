@@ -4,7 +4,6 @@ using Application.Seasons.Queries.GetSeasonPlayersStats;
 using Application.Seasons.Queries.GetSeasons;
 using Application.Seasons.Queries.GetSeasonStandings;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -12,7 +11,7 @@ namespace API.Controllers
     public class SeasonsController : ApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<SeasonDto>>> GetAll()
+        public async Task<ActionResult<SeasonsVm>> GetAll()
         {
             return await Mediator.Send(new GetSeasonsQuery());
         }
