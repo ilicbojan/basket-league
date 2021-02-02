@@ -12,8 +12,13 @@ import {
   IPlayerCurrentStats,
   IPlayersVm,
 } from '../models/player';
-import { IPlayersStats, ISeason, IStandings } from '../models/season';
-import { ITeam, ITeamAllTimeStats, ITeamStats } from '../models/team';
+import {
+  IPlayersStats,
+  ISeason,
+  ISeasonsVm,
+  IStandings,
+} from '../models/season';
+import { ITeam, ITeamAllTimeStats, ITeamStats, ITeamsVm } from '../models/team';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -103,7 +108,7 @@ const Leagues = {
 };
 
 const Seasons = {
-  list: (): Promise<ISeason[]> => requests.get('/seasons'),
+  list: (): Promise<ISeasonsVm> => requests.get('/seasons'),
   details: (id: number): Promise<ISeason> => requests.get(`/seasons/${id}`),
   create: (season: ISeason) => requests.post('/seasons', season),
   standings: (id: number): Promise<IStandings> =>
@@ -129,6 +134,7 @@ const MatchPlayers = {
 };
 
 const Teams = {
+  list: (): Promise<ITeamsVm> => requests.get('/teams'),
   details: (id: number): Promise<ITeam> => requests.get(`/teams/${id}`),
   create: (team: ITeam) => requests.post('/teams', team),
   currentStats: (id: number): Promise<ITeamStats> =>

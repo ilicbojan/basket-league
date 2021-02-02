@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Field, Form } from 'react-final-form';
 import Button from '../../../app/common/button/Button';
 import Input from '../../../app/common/form/input/Input';
 import Select from '../../../app/common/form/select/Select';
+import { hours } from '../../../app/common/util/dates';
 import { required } from '../../../app/common/util/validation';
 import { IMatch } from '../../../app/models/match';
 import { RootStoreContext } from '../../../app/stores/rootStore';
@@ -12,28 +13,38 @@ import { S } from './MatchCreate.style';
 const MatchCreate = observer(() => {
   const rootStore = useContext(RootStoreContext);
   const { createMatch } = rootStore.matchStore;
+  const { loadTeams, loading: loadingTeams, teams } = rootStore.teamStore;
+  const {
+    loadSeasons,
+    loading: loadingSeasons,
+    seasons,
+  } = rootStore.seasonStore;
+
+  useEffect(() => {
+    loadSeasons();
+    loadTeams();
+  }, [loadSeasons, loadTeams]);
 
   return (
     <S.MatchCreate className='admin'>
       <div className='adminForm'>
         <h2>Create Match</h2>
         <Form
-          onSubmit={(values: IMatch) => console.log(values)}
+          onSubmit={(values: IMatch) => createMatch(values)}
           render={({ handleSubmit, submitting }) => (
             <form onSubmit={handleSubmit}>
               <Field
                 name='seasonId'
                 label='Season'
                 block
-                // disabled={loading}
+                disabled={loadingSeasons}
                 component={Select}
               >
-                {/* {cities.map((city: ICity) => (
-                <option key={city.id} value={city.id}>
-                {city.name}
-                </option>
-              ))} */}
-                <option value='1'>1. League Summer</option>
+                {seasons.map((season) => (
+                  <option key={season.id} value={season.id}>
+                    {season.name}
+                  </option>
+                ))}
               </Field>
               <Field
                 name='round'
@@ -47,29 +58,27 @@ const MatchCreate = observer(() => {
                 name='homeTeamId'
                 label='Home Team'
                 block
-                // disabled={loading}
+                disabled={loadingTeams}
                 component={Select}
               >
-                {/* {cities.map((city: ICity) => (
-                <option key={city.id} value={city.id}>
-                {city.name}
-                </option>
-              ))} */}
-                <option value='1'>Team 1</option>
+                {teams.map((team) => (
+                  <option key={team.id} value={team.id}>
+                    {team.name}
+                  </option>
+                ))}
               </Field>
               <Field
                 name='awayTeamId'
                 label='Away Team'
                 block
-                // disabled={loading}
+                disabled={loadingTeams}
                 component={Select}
               >
-                {/* {cities.map((city: ICity) => (
-                <option key={city.id} value={city.id}>
-                {city.name}
-                </option>
-              ))} */}
-                <option value='1'>Team 1</option>
+                {teams.map((team) => (
+                  <option key={team.id} value={team.id}>
+                    {team.name}
+                  </option>
+                ))}
               </Field>
               <Field
                 name='date'
@@ -79,19 +88,12 @@ const MatchCreate = observer(() => {
                 validate={required}
                 component={Input}
               />
-              <Field
-                name='time'
-                label='Time'
-                block
-                // disabled={loading}
-                component={Select}
-              >
-                {/* {cities.map((city: ICity) => (
-                <option key={city.id} value={city.id}>
-                {city.name}
-                </option>
-              ))} */}
-                <option value='16:00:00'>16:00</option>
+              <Field name='time' label='Time' block component={Select}>
+                {hours.map((hour) => (
+                  <option key={hour} value={hour}>
+                    {hour}
+                  </option>
+                ))}
               </Field>
               <Field
                 name='refereeId'

@@ -1,3 +1,7 @@
+export interface ITeamsVm {
+  teams: ITeam[];
+}
+
 export interface ITeam {
   id: number;
   name: string;

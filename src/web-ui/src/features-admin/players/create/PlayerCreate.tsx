@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Field, Form } from 'react-final-form';
 import Button from '../../../app/common/button/Button';
 import Input from '../../../app/common/form/input/Input';
@@ -12,6 +12,11 @@ import { S } from './PlayerCreate.style';
 const PlayerCreate = observer(() => {
   const rootStore = useContext(RootStoreContext);
   const { createPlayer } = rootStore.playerStore;
+  const { loadTeams, loading, teams } = rootStore.teamStore;
+
+  useEffect(() => {
+    loadTeams();
+  }, [loadTeams]);
 
   return (
     <S.PlayerCreate className='admin'>
@@ -81,15 +86,14 @@ const PlayerCreate = observer(() => {
                 name='teamId'
                 label='Team'
                 block
-                // disabled={loading}
+                disabled={loading}
                 component={Select}
               >
-                {/* {cities.map((city: ICity) => (
-                <option key={city.id} value={city.id}>
-                {city.name}
-                </option>
-              ))} */}
-                <option value='team'>Team</option>
+                {teams.map((team) => (
+                  <option key={team.id} value={team.id}>
+                    {team.name}
+                  </option>
+                ))}
               </Field>
 
               <Button

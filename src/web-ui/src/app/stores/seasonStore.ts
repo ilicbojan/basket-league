@@ -35,7 +35,7 @@ export default class SeasonStore {
   loadSeasons = async () => {
     this.loading = true;
     try {
-      const seasons = await agent.Seasons.list();
+      const { seasons } = await agent.Seasons.list();
       runInAction(() => {
         seasons.forEach((season) => {
           this.seasonRegistry.set(season.id, season);

@@ -1,3 +1,7 @@
+export interface ISeasonsVm {
+  seasons: ISeason[];
+}
+
 export interface ISeason {
   id: number;
   name: string;

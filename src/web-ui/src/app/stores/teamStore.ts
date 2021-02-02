@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
+import { toast } from 'react-toastify';
 import agent from '../api/agent';
 import { ITeam, ITeamAllTimeStats, ITeamStats } from '../models/team';
 import { RootStore } from './rootStore';
@@ -22,9 +23,27 @@ export default class TeamStore {
   loadingAllTimeStats = false;
   error: AxiosResponse | null = null;
 
-  get teams() {
+  get teams(): ITeam[] {
     return Array.from(this.teamRegistry.values());
   }
+
+  loadTeams = async () => {
+    this.loading = true;
+    try {
+      const { teams } = await agent.Teams.list();
+      runInAction(() => {
+        teams.forEach((team) => {
+          this.teamRegistry.set(team, team);
+        });
+        this.loading = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.loading = false;
+      });
+      console.log(error);
+    }
+  };
 
   loadTeam = async (id: number): Promise<ITeam> => {
     let team = this.getTeam(id);
@@ -62,6 +81,7 @@ export default class TeamStore {
         this.teamRegistry.set(team.id, team);
         this.submitting = false;
       });
+      toast.success('Team created successfully');
     } catch (error) {
       runInAction(() => {
         this.submitting = false;
