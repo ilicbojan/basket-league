@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import TabNav from '../../../app/common/tabs/tab-nav/TabNav';
 import Tab from '../../../app/common/tabs/tab/Tab';
-import { getDate, getTime } from '../../../app/common/util/dates';
 import LoadingSpinner from '../../../app/layout/spinner/LoadingSpinner';
 import { RootStoreContext } from '../../../app/stores/rootStore';
 import SeasonStandings from '../../seasons/standings/SeasonStandings';
 import H2HMatches from '../h2h/H2HMatches';
+import MatchInfo from '../info/MatchInfo';
 import MatchLineup from '../lineup/MatchLineup';
 import MatchStats from '../stats/MatchStats';
 import { S } from './MatchDetails.style';
@@ -52,39 +52,7 @@ const MatchDetails: React.FC<RouteComponentProps<IProps>> = observer(
 
     return (
       <S.MatchDetails>
-        <S.Info>
-          <div className='league'>League - Round {match?.round}</div>
-          <div className='match'>
-            <div className='team'>
-              <Link to={`/teams/${match.homeTeam.id}`}>
-                <img className='image' src='/images/team.jpg' />
-              </Link>
-              <div className='name'>
-                <Link to={`/teams/${match.homeTeam.id}`}>
-                  {match?.homeTeam.name}
-                </Link>
-              </div>
-            </div>
-            <div className='info'>
-              <div className='date'>
-                {getDate(match?.date!)} {getTime(match?.time!)}
-              </div>
-              <div className='score'>
-                {match?.homePoints} <span>-</span> {match?.awayPoints}
-              </div>
-            </div>
-            <div className='team'>
-              <Link to={`/teams/${match.awayTeam.id}`}>
-                <img className='image' src='/images/team.jpg' />
-              </Link>
-              <div className='name'>
-                <Link to={`/teams/${match.awayTeam.id}`}>
-                  {match?.awayTeam.name}
-                </Link>
-              </div>
-            </div>
-          </div>
-        </S.Info>
+        <MatchInfo />
         <TabNav tabs={tabs} selected={selected} setSelected={setSelected}>
           <Tab isSelected={selected === 'Summary'}>
             <MatchStats />

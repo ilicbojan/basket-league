@@ -16,6 +16,8 @@ import FieldCreate from '../../features-admin/fields/create/FieldCreate';
 import TeamCreate from '../../features-admin/teams/create/TeamCreate';
 import PlayerCreate from '../../features-admin/players/create/PlayerCreate';
 import MatchCreate from '../../features-admin/matches/create/MatchCreate';
+import MatchManage from '../../features-admin/matches/manage/MatchManage';
+import LineupCreate from '../../features-admin/lineup/create/LineupCreate';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -52,6 +54,16 @@ function App() {
                   />
                   <Route exact path='/seasons/:id' component={SeasonDetails} />
                   <Route exact path='/matches/create' component={MatchCreate} />
+                  <Route
+                    exact
+                    path='/matches/:matchId/teams/:teamId/lineup'
+                    component={LineupCreate}
+                  />
+                  <Route
+                    exact
+                    path='/matches/:id/manage'
+                    component={MatchManage}
+                  />
                   <Route exact path='/matches/:id' component={MatchDetails} />
                   <Route exact path='/teams/create' component={TeamCreate} />
                   <Route exact path='/teams/:id' component={TeamDetails} />
@@ -61,14 +73,12 @@ function App() {
                     component={PlayerCreate}
                   />
                   <Route exact path='/players/:id' component={PlayerDetails} />
-
                   <Route
                     exact
                     path='/leagues/create'
                     component={LeagueCreate}
                   />
                   <Route exact path='/fields/create' component={FieldCreate} />
-
                   {/* <PrivateRoute exact path='/profile' component={UserProfile} />
                 <PrivateRoute
                 exact

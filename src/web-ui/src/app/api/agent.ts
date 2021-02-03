@@ -4,7 +4,7 @@ import { history } from '../..';
 import { ICitiesVm } from '../models/city';
 import { IField, IFieldsVm } from '../models/field';
 import { ILeague, ILeaguesVm } from '../models/league';
-import { ILineup } from '../models/lineup';
+import { ILineup, ILineupFormValues } from '../models/lineup';
 import { IH2HMatchesVm, IMatch, IMatchStats } from '../models/match';
 import {
   IPlayer,
@@ -129,6 +129,8 @@ const Matches = {
 };
 
 const MatchPlayers = {
+  create: (lineup: ILineupFormValues) =>
+    requests.post(`/matches/${lineup.matchId}/lineup`, lineup),
   lineup: (id: number): Promise<ILineup> =>
     requests.get(`/matches/${id}/lineup`),
 };

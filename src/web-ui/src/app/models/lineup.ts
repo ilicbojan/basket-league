@@ -16,3 +16,9 @@ interface ITeam {
   id: number;
   name: string;
 }
+
+export interface ILineupFormValues {
+  matchId: number;
+  teamId: number;
+  playersIds: number[];
+}

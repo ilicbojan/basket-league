@@ -1,6 +1,9 @@
+import { AxiosResponse } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
+import { toast } from 'react-toastify';
+import { history } from '../..';
 import agent from '../api/agent';
-import { IMatchPlayer } from '../models/lineup';
+import { ILineupFormValues, IMatchPlayer } from '../models/lineup';
 import { RootStore } from './rootStore';
 
 export default class MatchPlayerStore {
@@ -13,6 +16,8 @@ export default class MatchPlayerStore {
 
   lineupRegistry = new Map();
   loadingLineup = false;
+  submitting = false;
+  error: AxiosResponse | null = null;
 
   get lineup(): IMatchPlayer[] {
     return Array.from(this.lineupRegistry.values());
@@ -33,6 +38,25 @@ export default class MatchPlayerStore {
     } catch (error) {
       runInAction(() => {
         this.loadingLineup = false;
+      });
+      console.log(error);
+    }
+  };
+
+  createLineup = async (lineup: ILineupFormValues) => {
+    this.submitting = true;
+    try {
+      await agent.MatchPlayers.create(lineup);
+      this.loadLineup(lineup.matchId);
+      runInAction(() => {
+        this.submitting = false;
+      });
+      history.goBack();
+      toast.success('Lineup created successfully');
+    } catch (error) {
+      runInAction(() => {
+        this.submitting = false;
+        this.error = error;
       });
       console.log(error);
     }
