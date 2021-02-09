@@ -7,6 +7,7 @@ export interface IPlayer {
   jerseyNumber: number;
   firstName: string;
   lastName: string;
+  team: ITeam;
 }
 export interface IPlayerCurrentStats {
   matchesPlayed: number;

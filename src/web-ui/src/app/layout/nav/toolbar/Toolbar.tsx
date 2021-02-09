@@ -29,13 +29,16 @@ const Toolbar: React.FC<IProps> = observer(({ burgerClickHandler }) => {
     <S.Toolbar>
       <S.Navigation>
         <S.Logo>
-          <Link to='/'>Logo</Link>
+          <Link to='/'>3x3 ABL</Link>
         </S.Logo>
         <S.Spacer></S.Spacer>
         <S.Items>
           <ul>
             <li>
               <NavLink to='/'>Home</NavLink>
+            </li>
+            <li>
+              <NavLink to='/contact'>Create team</NavLink>
             </li>
             <li
               onClick={onClick}

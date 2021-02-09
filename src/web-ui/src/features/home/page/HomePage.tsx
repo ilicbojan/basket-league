@@ -1,17 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import HomeCounters from '../counters/HomeCounters';
 import HomeHeader from '../header/HomeHeader';
+import HomeLeagues from '../leagues/HomeLeagues';
 import Social from '../social/HomeSocial';
 
 const HomePage = () => {
   return (
     <div>
       <HomeHeader />
+      <HomeLeagues />
       <HomeCounters />
       <Social />
-      <div>Home</div>
-      <Link to='/seasons/2'>Season</Link>
     </div>
   );
 };

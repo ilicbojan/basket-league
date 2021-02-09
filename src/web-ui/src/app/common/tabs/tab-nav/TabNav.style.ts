@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BREAKPOINTS, COLOR, utilities } from '../../util/variables';
+import { BREAKPOINTS, COLOR } from '../../util/variables';
 
 interface ITabProps {
   active: boolean;

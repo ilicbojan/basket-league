@@ -14,7 +14,7 @@ const MatchInfo = () => {
       <div className='match'>
         <div className='team'>
           <Link to={`/teams/${match?.homeTeam.id}`}>
-            <img className='image' src='/images/team.jpg' />
+            <img className='image' src='/images/team.jpg' alt='home team' />
           </Link>
           <div className='name'>
             <Link to={`/teams/${match?.homeTeam.id}`}>
@@ -32,7 +32,7 @@ const MatchInfo = () => {
         </div>
         <div className='team'>
           <Link to={`/teams/${match?.awayTeam.id}`}>
-            <img className='image' src='/images/team.jpg' />
+            <img className='image' src='/images/team.jpg' alt='away team' />
           </Link>
           <div className='name'>
             <Link to={`/teams/${match?.awayTeam.id}`}>

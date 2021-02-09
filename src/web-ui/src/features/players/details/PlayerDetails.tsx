@@ -47,13 +47,13 @@ const PlayerDetails: React.FC<RouteComponentProps<IProps>> = observer(
     return (
       <div>
         <S.Info>
-          <img src='/images/user.jpg' className='image' />
+          <img src='/images/user.jpg' className='image' alt='player' />
           <div className='player'>
             <div className='name'>
               {player?.firstName} {player?.lastName}
             </div>
             <div className='team'>
-              <Link to={`/teams}`}>Tim (staviti link)</Link>
+              <Link to={`/teams/${player?.team.id}}`}>{player?.team.name}</Link>
             </div>
             <div># {player?.jerseyNumber}</div>
           </div>

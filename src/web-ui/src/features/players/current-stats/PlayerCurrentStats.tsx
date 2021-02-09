@@ -6,7 +6,7 @@ import { S } from './PlayerCurrentStats.style';
 
 const PlayerCurrentStats = observer(() => {
   const rootStore = useContext(RootStoreContext);
-  const { playerCurrentStats, loadingCurrentStats } = rootStore.playerStore;
+  const { playerCurrentStats } = rootStore.playerStore;
 
   return (
     <S.PlayerCurrentStats>

@@ -26,7 +26,7 @@ const SeasonDetails: React.FC<RouteComponentProps<IProps>> = observer(
     } = rootStore.seasonStore;
 
     const [selected, setSelected] = useState<string>('Standings');
-    const tabs = ['Standings', 'Matches', 'Results', 'Leaders', 'Archive'];
+    const tabs = ['Standings', 'Matches', 'Results', 'Leaders'];
     const id = Number.parseInt(match.params.id);
 
     useEffect(() => {
@@ -47,7 +47,7 @@ const SeasonDetails: React.FC<RouteComponentProps<IProps>> = observer(
     return (
       <div>
         <S.Info>
-          <img className='image' src='/images/league.jpg' />
+          <img className='image' src='/images/league.jpg' alt='league' />
           <div>
             <div className='name'>{season?.name}</div>
             <div>{season?.year}</div>

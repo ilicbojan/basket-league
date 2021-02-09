@@ -14,7 +14,7 @@ interface IParam {
 const MatchManage = observer(() => {
   const rootStore = useContext(RootStoreContext);
   const { loadMatch, loadingMatches, match } = rootStore.matchStore;
-  const { loadLineup, loadingLineup, lineup } = rootStore.matchPlayerStore;
+  const { loadLineup, lineup } = rootStore.matchPlayerStore;
 
   const { id } = useParams<IParam>();
   const matchId = Number.parseInt(id);
@@ -22,7 +22,7 @@ const MatchManage = observer(() => {
   useEffect(() => {
     loadMatch(matchId);
     loadLineup(matchId);
-  }, [loadMatch, loadLineup]);
+  }, [loadMatch, loadLineup, matchId]);
 
   const homeHaveLineup = lineup.find((x) => x.team.id === match?.homeTeam.id)
     ? true

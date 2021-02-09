@@ -13,10 +13,10 @@ const NavDropdown = () => {
       className={click ? 'dropdown-menu clicked' : 'dropdown-menu'}
     >
       <li onClick={() => setClick(false)}>
-        <NavLink to='/seasons/2'>1. Liga</NavLink>
+        <NavLink to='/seasons/2'>1. League</NavLink>
       </li>
       <li onClick={() => setClick(false)}>
-        <NavLink to='/seasons/1'>2.Liga</NavLink>
+        <NavLink to='/seasons/1'>2. League</NavLink>
       </li>
     </S.NavDropdown>
   );

@@ -24,7 +24,7 @@ const LineupCreate = observer(() => {
 
   useEffect(() => {
     setPredicate('teamId', teamId + '');
-  }, [setPredicate]);
+  }, [setPredicate, teamId]);
 
   const handleFormSubmit = (values: ILineupFormValues) => {
     values.teamId = teamID;

@@ -18,6 +18,7 @@ import PlayerCreate from '../../features-admin/players/create/PlayerCreate';
 import MatchCreate from '../../features-admin/matches/create/MatchCreate';
 import MatchManage from '../../features-admin/matches/manage/MatchManage';
 import LineupCreate from '../../features-admin/lineup/create/LineupCreate';
+import ContactPage from '../../features/contact/page/ContactPage';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -79,6 +80,7 @@ function App() {
                     component={LeagueCreate}
                   />
                   <Route exact path='/fields/create' component={FieldCreate} />
+                  <Route exact path='/contact' component={ContactPage} />
                   {/* <PrivateRoute exact path='/profile' component={UserProfile} />
                 <PrivateRoute
                 exact

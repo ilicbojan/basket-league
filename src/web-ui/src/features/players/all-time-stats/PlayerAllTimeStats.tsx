@@ -6,7 +6,7 @@ import { S } from './PlayerAllTimeStats.style';
 
 const PlayerAllTimeStats = observer(() => {
   const rootStore = useContext(RootStoreContext);
-  const { playerAllTimeStats, loadingAllTimeStats } = rootStore.playerStore;
+  const { playerAllTimeStats } = rootStore.playerStore;
 
   return (
     <S.PlayerAllTimeStats>

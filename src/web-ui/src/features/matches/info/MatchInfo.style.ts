@@ -30,7 +30,6 @@ const MatchInfo = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     & a:first-child {
       line-height: 0;
     }

@@ -6,7 +6,7 @@ import { S } from './TeamCurrentStats.style';
 
 const TeamCurrentStats = observer(() => {
   const rootStore = useContext(RootStoreContext);
-  const { teamCurrentStats, loadingCurrentStats } = rootStore.teamStore;
+  const { teamCurrentStats } = rootStore.teamStore;
 
   return (
     <S.TeamCurrentStats>
