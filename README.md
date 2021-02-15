@@ -33,8 +33,6 @@ Web application for managing amateur 3x3 basket league. The goal of the web appl
 
 ![Demo Image](src/web-ui/public/images/diagram.png/?raw=true 'Demo Image')
 
-<br>
-
 ## 🔨 Built Using <a name="#built"></a>
 
 - [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
@@ -46,8 +44,6 @@ Web application for managing amateur 3x3 basket league. The goal of the web appl
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
-
-<br>
 
 <!-- CONTACT -->
 
