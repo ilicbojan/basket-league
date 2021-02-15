@@ -18,7 +18,7 @@
 
 ![Demo Image](src/web-ui/public/images/demo.png/?raw=true 'Demo Image')
 
-Web application for managing amateur 3x3 basket league. The goal of the web application is to track all match results, league standings and statistics. Delegate or administrator enters scores, assists and fouls, as well as all other changes to the match. Application have 3 different roles: administrator, player, referee, and delegate.
+Web application for managing amateur 3x3 basket league. The goal of the web application is to track all match results, league standings and statistics. Delegate or administrator enters scores, assists and fouls, as well as all other changes to the match. Application have 4 different roles: administrator, player, referee, and delegate.
 
 ## ⭐️ Features <a name="features"></a>
 
